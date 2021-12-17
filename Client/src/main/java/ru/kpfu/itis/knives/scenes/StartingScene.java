@@ -4,19 +4,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import ru.kpfu.itis.knives.App;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
-import ru.kpfu.itis.knives.view.WaitingVBox;
 import ru.kpfu.itis.knives.view.ProgressHBox;
+import ru.kpfu.itis.knives.view.StartingVBox;
 
-public class WaitingScene extends Scene {
+public class StartingScene extends Scene {
     // UI
     private final BorderPane mainPane;
 
     // Init
-    public WaitingScene(BorderPane pane) {
+    public StartingScene(BorderPane pane) {
         super(pane, App.getMainStage().getWidth(), App.getMainStage().getHeight());
         mainPane = pane;
         mainPane.setTop(new HeadMenuBar());
-        mainPane.setCenter(new WaitingVBox());
-        mainPane.setBottom(new ProgressHBox("Поиск соперника"));
+        mainPane.setCenter(new StartingVBox());
+        mainPane.setBottom(new ProgressHBox("Игра начинается"));
     }
 }

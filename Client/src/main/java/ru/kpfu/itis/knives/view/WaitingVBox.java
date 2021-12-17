@@ -10,9 +10,9 @@ import ru.kpfu.itis.knives.App;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.scenes.InitialScene;
 
-public class InfoVBox extends VBox {
+public class WaitingVBox extends VBox {
     // Init
-    public InfoVBox() {
+    public WaitingVBox() {
         configureVBox();
     }
 
