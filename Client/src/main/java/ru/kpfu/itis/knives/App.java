@@ -2,6 +2,7 @@ package ru.kpfu.itis.knives;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ru.kpfu.itis.knives.helpers.Constants;
@@ -23,7 +24,7 @@ public final class App extends Application {
         mainStage.setWidth(screenBounds.getWidth());
 
         primaryStage.setTitle(Constants.MAIN_NAME);
-        primaryStage.setScene(new InitialScene());
+        primaryStage.setScene(new InitialScene(new BorderPane()));
         primaryStage.show();
     }
 

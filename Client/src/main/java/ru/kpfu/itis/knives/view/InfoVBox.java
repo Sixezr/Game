@@ -8,11 +8,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import ru.kpfu.itis.knives.App;
 import ru.kpfu.itis.knives.helpers.Constants;
-import ru.kpfu.itis.knives.scenes.WaitingScene;
+import ru.kpfu.itis.knives.scenes.InitialScene;
 
-public class InitialVBox extends VBox {
+public class InfoVBox extends VBox {
     // Init
-    public InitialVBox() {
+    public InfoVBox() {
         configureVBox();
     }
 
@@ -24,14 +24,14 @@ public class InitialVBox extends VBox {
         Label mainNameLabel = new Label(Constants.MAIN_NAME);
         mainNameLabel.setFont(Font.font(64));
 
-        Label descriptionLabel = new Label("Захватите территорию своего оппонента");
+        Label descriptionLabel = new Label("Ожидание соперника...");
         descriptionLabel.setFont(Font.font(36));
 
-        Button startButton = new Button("Начать");
+        Button startButton = new Button("Отменить");
         startButton.setFont(Font.font(18));
         startButton.setOnAction(event -> {
             // TODO: add network action
-            App.getMainStage().setScene(new WaitingScene(new BorderPane()));
+            App.getMainStage().setScene(new InitialScene(new BorderPane()));
         });
 
         getChildren().addAll(mainNameLabel, descriptionLabel, startButton);
