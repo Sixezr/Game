@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import ru.kpfu.itis.knives.App;
+import ru.kpfu.itis.knives.view.GameFieldCanvas;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 
@@ -15,6 +16,7 @@ public class GameScene extends Scene {
     private final BorderPane mainPane;
     private final ProgressHBox progressHBox;
     private final Label statusLabel;
+    private final GameFieldCanvas gameFieldCanvas;
 
     // Init
     public GameScene(BorderPane pane) {
@@ -33,7 +35,8 @@ public class GameScene extends Scene {
         // TODO: add game circle to HBox and to right add messages
         HBox contentHBox = new HBox();
 
-        contentVBox.getChildren().addAll(statusLabel);
+        gameFieldCanvas = new GameFieldCanvas();
+        contentVBox.getChildren().addAll(statusLabel, gameFieldCanvas);
         mainPane.setCenter(contentVBox);
     }
 }
