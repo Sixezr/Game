@@ -9,6 +9,7 @@ public class GameFieldCanvas extends Canvas {
     // Const
     private static final double DIAMETER = 500;
     private static final double RATIO = 2.5;
+    private static final double POINT_DIAMETER = 6;
 
     // Properties
     private final GraphicsContext context;
@@ -25,13 +26,24 @@ public class GameFieldCanvas extends Canvas {
         context.strokeLine(250, 0, 250, 500);
     }
 
-    // Redraw
+    // Draw
     public void drawNewRegions(Region region) {
         context.clearRect(0, 0, DIAMETER, DIAMETER);
 
         drawCircle();
 
         // TODO: draw region bound
+    }
+
+    public void drawPoint(double x, double y, Color color) {
+        context.setFill(color);
+        context.fillOval(x, y, POINT_DIAMETER, POINT_DIAMETER);
+    }
+
+    public void drawLine(double x1, double y1, double x2, double y2, Color color) {
+        context.setStroke(color);
+        context.setLineDashes(20);
+        context.strokeLine(x1, y1, x2, y2);
     }
 
     // Private
