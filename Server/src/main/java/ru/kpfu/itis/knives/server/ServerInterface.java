@@ -1,7 +1,7 @@
 package ru.kpfu.itis.knives.server;
 
 import ru.kpfu.itis.knives.exceptions.ServerException;
-import ru.kpfu.itis.knives.listeners.ServerEventListener;
+import ru.kpfu.itis.knives.listeners.ServerMessageListener;
 import ru.kpfu.itis.knives.protocol.Message;
 
 import java.net.Socket;
@@ -18,7 +18,7 @@ public interface ServerInterface {
       * @param listener
      * @throws ServerException
      */
-    void registerListener(ServerEventListener listener) throws ServerException;
+    void registerListener(ServerMessageListener listener) throws ServerException;
 
     /**
      * Начало работы сервера, получение точек соединения с клиентами, создание Connection с каждым из них посредством вызова createConnection()

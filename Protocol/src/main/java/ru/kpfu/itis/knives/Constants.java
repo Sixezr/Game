@@ -8,4 +8,6 @@ public class Constants {
     public static final int START_MIN_Y = -100;
     public static final int START_MIN_X = -100;
     public static final int START_0 = 0;
+
+    public static final int PORT = 1111;
 }
