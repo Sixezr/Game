@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import ru.kpfu.itis.knives.App;
 import ru.kpfu.itis.knives.view.GameFieldCanvas;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
+import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 
 public class GameScene extends Scene {
@@ -19,6 +20,7 @@ public class GameScene extends Scene {
     private final ProgressHBox progressHBox;
     private final Label statusLabel;
     private final GameFieldCanvas gameFieldCanvas;
+    private final KnifeLocationCanvas knifeLocationCanvas;
     private final VBox messagesVBox;
     private final Label messageLabel;
 
@@ -51,7 +53,9 @@ public class GameScene extends Scene {
         messageLabel = new Label("Ваш ход");
         messageLabel.setFont(Font.font(36));
 
-        messagesVBox.getChildren().addAll(messageLabel);
+        knifeLocationCanvas = new KnifeLocationCanvas();
+
+        messagesVBox.getChildren().addAll(messageLabel, knifeLocationCanvas);
         contentVBox.getChildren().addAll(statusLabel, gameFieldCanvas);
         contentHBox.getChildren().addAll(contentVBox, messagesVBox);
 
@@ -63,8 +67,8 @@ public class GameScene extends Scene {
     // Private
     private void initListeners() {
         gameFieldCanvas.setOnMouseClicked(event -> {
-            System.out.println(event.getX() + " " + event.getY());
             gameFieldCanvas.drawPoint(event.getX(), event.getY(), Color.AQUA);
+            knifeLocationCanvas.drawKnifeWithIncline(35);
         });
     }
 }
