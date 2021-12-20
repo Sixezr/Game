@@ -14,6 +14,8 @@ public class KnifeLocationCanvas extends Canvas {
 
     private static final double RATIO = 2.5;
 
+    private static final String FILE_NAME = "/knife.png";
+
     // Properties
     private final GraphicsContext context;
 
@@ -28,7 +30,7 @@ public class KnifeLocationCanvas extends Canvas {
     // Draw
     public void drawKnifeWithIncline(double incline) {
         try {
-            Image image = new Image(getClass().getResourceAsStream("/knife.png"));
+            Image image = new Image(getClass().getResourceAsStream(FILE_NAME));
 
             double x = WIDTH / 2 - image.getWidth();
             double y = HEIGHT * 0.75 - image.getHeight() + Math.abs(incline / RATIO);
@@ -39,6 +41,7 @@ public class KnifeLocationCanvas extends Canvas {
             context.drawImage(image, x, y);
             context.restore();
         } catch (Exception e) {
+            // TODO: delete printStackTrace
             e.printStackTrace();
         }
     }
