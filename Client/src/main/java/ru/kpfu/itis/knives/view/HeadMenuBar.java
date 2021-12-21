@@ -3,6 +3,10 @@ package ru.kpfu.itis.knives.view;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import ru.kpfu.itis.knives.scenes.AboutScene;
+import ru.kpfu.itis.knives.scenes.RulesScene;
 
 public class HeadMenuBar extends MenuBar {
     // Init
@@ -14,20 +18,23 @@ public class HeadMenuBar extends MenuBar {
     private void configureMenuBar() {
         Label mainItemLabel = new Label("Главная");
         Menu mainItem = new Menu(null, mainItemLabel);
-        mainItemLabel.setOnMouseClicked(event -> {
-            // TODO: Add action for main
-        });
 
         Label rulesItemLabel = new Label("Правила");
         Menu rulesItem = new Menu(null, rulesItemLabel);
         rulesItemLabel.setOnMouseClicked(event -> {
-            // TODO: Add action for rules
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Правила");
+            newWindow.setScene(new RulesScene(new StackPane()));
+            newWindow.show();
         });
 
         Label aboutItemLabel = new Label("О нас");
         Menu aboutItem = new Menu(null, aboutItemLabel);
         aboutItemLabel.setOnMouseClicked(event -> {
-            // TODO: Add action for about
+            Stage newWindow = new Stage();
+            newWindow.setTitle("О нас");
+            newWindow.setScene(new AboutScene(new StackPane()));
+            newWindow.show();
         });
 
         getMenus().addAll(mainItem, rulesItem, aboutItem);
