@@ -1,10 +1,18 @@
 package ru.kpfu.itis.knives.view;
 
+import javafx.animation.FadeTransition;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
+import ru.kpfu.itis.knives.helpers.KnifeState;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class KnifeLocationCanvas extends Canvas {
@@ -23,23 +31,56 @@ public class KnifeLocationCanvas extends Canvas {
     public KnifeLocationCanvas() {
         super(WIDTH, HEIGHT);
         context = getGraphicsContext2D();
-
         drawBackground();
     }
 
     // Draw
-    public void drawKnifeWithIncline(double incline) {
+
+    /**
+     *
+     * @param incline incline of knife
+     * @param state success or failure
+     * @apiNote Run in another thread!
+     *
+     */
+    public void drawKnifeWithIncline(double incline, KnifeState state) {
         try {
+            context.clearRect(0, 0, getWidth(), getHeight());
+
+            FadeTransition animation = new FadeTransition(Duration.seconds(1), this);
+            animation.setFromValue(0);
+            animation.setToValue(1);
+            animation.setCycleCount(1);
+            animation.play();
+
+            drawBackground();
+
             Image image = new Image(getClass().getResourceAsStream(FILE_NAME));
 
-            double x = WIDTH / 2 - image.getWidth();
-            double y = HEIGHT * 0.75 - image.getHeight() + Math.abs(incline / RATIO);
+            double endX = WIDTH / 2 - image.getWidth();
+            double endY = HEIGHT * 0.75 - image.getHeight() + Math.abs(incline / RATIO);
 
             context.save();
-            rotate(incline, x + image.getWidth() / 2, y + image.getHeight() / 2);
+            rotate(incline, endX + image.getWidth() / 2, endY + image.getHeight() / 2);
 
-            context.drawImage(image, x, y);
+            context.drawImage(image, endX, endY);
+
             context.restore();
+
+            context.setFill(Color.WHITE);
+            context.setFont(Font.font(30));
+
+            Text text = new Text(state.label);
+            text.setFont(Font.font(30));
+            double wordWidth = text.getLayoutBounds().getWidth();
+
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    context.fillText(state.label, WIDTH / 2 - wordWidth / 2, 30);
+                }
+            }, 1000);
         } catch (Exception e) {
             // TODO: delete printStackTrace
             e.printStackTrace();

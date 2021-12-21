@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import ru.kpfu.itis.knives.App;
+import ru.kpfu.itis.knives.helpers.KnifeState;
 import ru.kpfu.itis.knives.view.GameFieldCanvas;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
@@ -45,7 +46,6 @@ public class GameScene extends Scene {
 
         gameFieldCanvas = new GameFieldCanvas();
 
-        // TODO: add knife animation
         messagesVBox = new VBox();
         messagesVBox.setAlignment(Pos.CENTER);
         messagesVBox.setSpacing(80);
@@ -68,7 +68,7 @@ public class GameScene extends Scene {
     private void initListeners() {
         gameFieldCanvas.setOnMouseClicked(event -> {
             gameFieldCanvas.drawPoint(event.getX(), event.getY(), Color.AQUA);
-            knifeLocationCanvas.drawKnifeWithIncline(35);
+            knifeLocationCanvas.drawKnifeWithIncline(90, KnifeState.failure);
         });
     }
 }
