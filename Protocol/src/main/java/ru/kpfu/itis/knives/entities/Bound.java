@@ -15,16 +15,13 @@ public class Bound {
 
     public Bound(boolean line, Point p1, Point p2) {
         this.line = line;
+        points.add(p1);
+        points.add(p2);
+        Collections.sort(points);
         if (line) {
-            points.add(p1);
-            points.add(p2);
-            Collections.sort(points);
             this.k = (points.get(1).getY() - points.get(0).getY()) / (points.get(1).getX() - points.get(0).getX());
             this.b = points.get(0).getY() - (this.k) * points.get(0).getX();
         } else {
-            points.add(p1);
-            points.add(p2);
-            Collections.sort(points);
             if (points.get(0).getX() < 0f) quarter = points.get(0).getY() >= 0f ? 2 : 3;
             else quarter = points.get(0).getY() >= 0f ? 1 : 4;
         }
