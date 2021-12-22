@@ -6,7 +6,7 @@ import java.util.List;
 import static ru.kpfu.itis.knives.Constants.*;
 
 public abstract class AbstractGameController implements GameControllerInterface {
-    private final GameSession session;
+    protected final GameSession session;
 
     public AbstractGameController(GameSession session) {
         this.session = session;
