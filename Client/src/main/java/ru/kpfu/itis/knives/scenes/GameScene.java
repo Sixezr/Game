@@ -7,8 +7,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import ru.kpfu.itis.knives.App;
+import ru.kpfu.itis.knives.helpers.CustomFonts;
 import ru.kpfu.itis.knives.helpers.KnifeState;
 import ru.kpfu.itis.knives.view.GameFieldCanvas;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
@@ -38,7 +38,7 @@ public class GameScene extends Scene {
         contentVBox.setAlignment(Pos.CENTER);
 
         statusLabel = new Label("Игра началась");
-        statusLabel.setFont(Font.font(30));
+        statusLabel.setFont(CustomFonts.robotoNormal30.font);
 
         HBox contentHBox = new HBox();
         contentHBox.setAlignment(Pos.CENTER);
@@ -51,7 +51,7 @@ public class GameScene extends Scene {
         messagesVBox.setSpacing(80);
 
         messageLabel = new Label("Ваш ход");
-        messageLabel.setFont(Font.font(36));
+        messageLabel.setFont(CustomFonts.robotoNormal36.font);
 
         knifeLocationCanvas = new KnifeLocationCanvas();
 
@@ -68,7 +68,7 @@ public class GameScene extends Scene {
     private void initListeners() {
         gameFieldCanvas.setOnMouseClicked(event -> {
             gameFieldCanvas.drawPoint(event.getX(), event.getY(), Color.AQUA);
-            knifeLocationCanvas.drawKnifeWithIncline(90, KnifeState.failure);
+            knifeLocationCanvas.drawKnifeWithIncline(0, KnifeState.success);
         });
     }
 }
