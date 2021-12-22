@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import ru.kpfu.itis.knives.entities.Region;
+import ru.kpfu.itis.knives.helpers.Colors;
 
 public class GameFieldCanvas extends Canvas {
     // Const
@@ -22,7 +23,7 @@ public class GameFieldCanvas extends Canvas {
         drawCircle();
 
         context.setStroke(Color.BLACK);
-        context.setLineWidth(1);
+        context.setLineWidth(2);
         context.strokeLine(250, 0, 250, 500);
     }
 
@@ -56,7 +57,7 @@ public class GameFieldCanvas extends Canvas {
     }
 
     private void drawCircle() {
-        context.setFill(Color.AZURE);
+        context.setFill(Colors.brown.color);
         context.fillOval(0, 0, DIAMETER, DIAMETER);
 
         int STROKES = 1000;

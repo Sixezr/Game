@@ -4,11 +4,11 @@ import javafx.animation.FadeTransition;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import ru.kpfu.itis.knives.helpers.CustomFonts;
+import ru.kpfu.itis.knives.helpers.Colors;
+import ru.kpfu.itis.knives.helpers.Fonts;
 import ru.kpfu.itis.knives.helpers.KnifeState;
 
 import java.util.Timer;
@@ -65,11 +65,11 @@ public class KnifeLocationCanvas extends Canvas {
 
             context.restore();
 
-            context.setFill(Color.WHITE);
-            context.setFont(CustomFonts.robotoNormal30.font);
+            context.setFill(Colors.darkBlue.color);
+            context.setFont(Fonts.robotoNormal30.font);
 
             Text text = new Text(state.label);
-            text.setFont(CustomFonts.robotoNormal30.font);
+            text.setFont(Fonts.robotoNormal30.font);
             double wordWidth = text.getLayoutBounds().getWidth();
 
             Timer timer = new Timer();
@@ -92,10 +92,10 @@ public class KnifeLocationCanvas extends Canvas {
     }
 
     private void drawBackground() {
-        context.setFill(Color.BLUE);
+        context.setFill(Colors.blue.color);
         context.fillRect(0, 0, WIDTH, HEIGHT);
 
-        context.setFill(Color.GREEN);
+        context.setFill(Colors.green.color);
         context.fillRect(0, HEIGHT * 0.75, WIDTH, HEIGHT / 4);
     }
 }

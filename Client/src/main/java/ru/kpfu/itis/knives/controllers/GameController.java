@@ -1,14 +1,14 @@
 package ru.kpfu.itis.knives.controllers;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import ru.kpfu.itis.knives.helpers.CustomFonts;
+import ru.kpfu.itis.knives.helpers.Colors;
+import ru.kpfu.itis.knives.helpers.Fonts;
 import ru.kpfu.itis.knives.helpers.KnifeState;
 import ru.kpfu.itis.knives.view.GameFieldCanvas;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
@@ -54,16 +54,17 @@ public class GameController extends AbstractController {
         contentVBox.setSpacing(64);
         contentVBox.setAlignment(Pos.CENTER);
 
-        statusLabel.setFont(CustomFonts.robotoNormal30.font);
+        statusLabel.setFont(Fonts.robotoNormal30.font);
 
         HBox contentHBox = new HBox();
+        contentHBox.setBackground(new Background(new BackgroundFill(Colors.beige.color, CornerRadii.EMPTY, Insets.EMPTY)));
         contentHBox.setAlignment(Pos.CENTER);
         contentHBox.setSpacing(200);
 
         messagesVBox.setAlignment(Pos.CENTER);
         messagesVBox.setSpacing(80);
 
-        messageLabel.setFont(CustomFonts.robotoNormal36.font);
+        messageLabel.setFont(Fonts.robotoNormal36.font);
 
         messagesVBox.getChildren().addAll(messageLabel, knifeLocationCanvas);
         contentVBox.getChildren().addAll(statusLabel, gameFieldCanvas);

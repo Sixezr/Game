@@ -1,13 +1,19 @@
 package ru.kpfu.itis.knives.view;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ru.kpfu.itis.knives.controllers.AboutController;
 import ru.kpfu.itis.knives.controllers.AbstractController;
 import ru.kpfu.itis.knives.controllers.RulesController;
-import ru.kpfu.itis.knives.helpers.CustomFonts;
+import ru.kpfu.itis.knives.helpers.Colors;
+import ru.kpfu.itis.knives.helpers.Fonts;
 
 public class HeadMenuBar extends MenuBar {
     // Init
@@ -17,12 +23,16 @@ public class HeadMenuBar extends MenuBar {
 
     // Create UI
     private void configureMenuBar() {
+        setBackground(new Background(new BackgroundFill(Colors.lightBrown.color, CornerRadii.EMPTY, Insets.EMPTY)));
+
         Label mainItemLabel = new Label("Главная");
-        mainItemLabel.setFont(CustomFonts.robotoNormal13.font);
+        mainItemLabel.setTextFill(Color.WHITE);
+        mainItemLabel.setFont(Fonts.robotoNormal13.font);
         Menu mainItem = new Menu(null, mainItemLabel);
 
         Label rulesItemLabel = new Label("Правила");
-        rulesItemLabel.setFont(CustomFonts.robotoNormal13.font);
+        rulesItemLabel.setTextFill(Color.WHITE);
+        rulesItemLabel.setFont(Fonts.robotoNormal13.font);
         Menu rulesItem = new Menu(null, rulesItemLabel);
         rulesItemLabel.setOnMouseClicked(event -> {
             Stage newWindow = new Stage();
@@ -32,7 +42,8 @@ public class HeadMenuBar extends MenuBar {
         });
 
         Label aboutItemLabel = new Label("О нас");
-        aboutItemLabel.setFont(CustomFonts.robotoNormal13.font);
+        aboutItemLabel.setTextFill(Color.WHITE);
+        aboutItemLabel.setFont(Fonts.robotoNormal13.font);
         Menu aboutItem = new Menu(null, aboutItemLabel);
         aboutItemLabel.setOnMouseClicked(event -> {
             Stage newWindow = new Stage();

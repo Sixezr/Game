@@ -28,7 +28,7 @@ public class WaitingController extends AbstractController {
     public void createScene() {
         mainPane.setTop(new HeadMenuBar());
         mainPane.setCenter(waitingVBox);
-        mainPane.setBottom(new ProgressHBox("Поиск соперника"));
+        mainPane.setBottom(new ProgressHBox("Поиск соперника..."));
 
         stage.setScene(new Scene(mainPane, stage.getWidth(), stage.getHeight()));
     }
