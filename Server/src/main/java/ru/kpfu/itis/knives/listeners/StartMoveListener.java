@@ -33,7 +33,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
 
             String errorText = null;
             errorText = isAnyError(errorText, point1, point2);
-            if(errorText == null){
+            if(errorText != null){
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_MOVE, errorText);
                 try{
                     server.sendMessage(connectionFrom, errorAnswer);
