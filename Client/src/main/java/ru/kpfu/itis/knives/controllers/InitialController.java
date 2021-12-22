@@ -18,6 +18,8 @@ public final class InitialController extends AbstractController {
         mainPane = new BorderPane();
         initialVBox = new InitialVBox();
 
+        stage.setMinWidth(750);
+        stage.setMinHeight(400);
         addActions();
     }
 

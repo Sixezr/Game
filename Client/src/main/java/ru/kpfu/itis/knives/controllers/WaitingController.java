@@ -18,6 +18,8 @@ public class WaitingController extends AbstractController {
         mainPane = new BorderPane();
         waitingVBox = new WaitingVBox();
 
+        stage.setMinWidth(600);
+        stage.setMinHeight(400);
         addActions();
     }
 

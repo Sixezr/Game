@@ -17,6 +17,9 @@ public class AboutController extends AbstractController {
     public AboutController(Stage stage) {
         super(stage);
         mainPane = new StackPane();
+
+        stage.setMinWidth(300);
+        stage.setMinHeight(275);
     }
 
     // Create scene
@@ -25,7 +28,7 @@ public class AboutController extends AbstractController {
         VBox contentBox = new VBox();
         contentBox.setAlignment(Pos.CENTER);
         contentBox.setSpacing(20);
-        contentBox.setPrefSize(300, 200);
+        contentBox.setPrefSize(300, 275);
 
         Label titleLabel = new Label("Разработчики:");
         titleLabel.setFont(CustomFonts.robotoBold36.font);

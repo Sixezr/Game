@@ -15,6 +15,9 @@ public class StartingController extends AbstractController {
     public StartingController(Stage stage) {
         super(stage);
         mainPane = new BorderPane();
+
+        stage.setMinWidth(750);
+        stage.setMinHeight(400);
     }
 
     // Create scene

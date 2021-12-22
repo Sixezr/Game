@@ -1,5 +1,6 @@
 package ru.kpfu.itis.knives.controllers;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -18,6 +19,9 @@ public class RulesController extends AbstractController {
     public RulesController(Stage stage) {
         super(stage);
         mainPane = new StackPane();
+
+        stage.setMinWidth(450);
+        stage.setMinHeight(500);
     }
 
     // Create scene
@@ -26,7 +30,8 @@ public class RulesController extends AbstractController {
         VBox contentBox = new VBox();
         contentBox.setAlignment(Pos.CENTER);
         contentBox.setSpacing(40);
-        contentBox.setPrefSize(450, 400);
+        contentBox.setPadding(new Insets(10, 20, 10, 20));
+        contentBox.setPrefSize(450, 450);
 
         Label firstRuleLabel = new Label(Constants.FIRST_RULE);
         firstRuleLabel.setFont(CustomFonts.robotoNormal15.font);

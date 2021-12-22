@@ -37,6 +37,9 @@ public class GameController extends AbstractController {
         messageLabel = new Label("Ваш ход");
         knifeLocationCanvas = new KnifeLocationCanvas();
 
+        stage.setMinWidth(1125);
+        stage.setMinHeight(700);
+
         initListeners();
     }
 
