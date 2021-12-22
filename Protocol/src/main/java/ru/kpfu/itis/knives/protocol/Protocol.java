@@ -16,6 +16,7 @@ public class Protocol {
     public static final byte ERROR_BAD_MESSAGE = 40;
     public static final byte ERROR_WRONG_MOVE = 41;
     public static final byte ERROR_WRONG_POS = 42;
+    public static final byte ERROR_SERVER = 50;
     //from client
     public static final byte CLIENT_READY = 31;
     public static final byte MOVE = 32;
