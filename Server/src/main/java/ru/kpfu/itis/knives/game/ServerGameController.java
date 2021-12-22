@@ -48,4 +48,9 @@ public class ServerGameController extends AbstractGameController implements Serv
     public boolean checkPointBelongsToRegion(Point point, Region region) {
         return false;
     }
+
+    @Override
+    public void setRandomCurrentPlayer() {
+
+    }
 }

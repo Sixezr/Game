@@ -1,10 +1,11 @@
 package ru.kpfu.itis.knives.listeners;
 
 import ru.kpfu.itis.knives.exceptions.IllegalMessageTypeException;
+import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.protocol.Message;
 import ru.kpfu.itis.knives.server.Connection;
 
-import static ru.kpfu.itis.knives.protocol.Protocol.CLIENT_READY;
+import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
 public class StartGameListener extends AbstractServerMessageListener {
 
@@ -17,9 +18,21 @@ public class StartGameListener extends AbstractServerMessageListener {
         if (message.getType() != this.getType()) {
             throw new IllegalMessageTypeException("Message type do not match to listener's one");
         }
-
-        // от клиента пришло true - с помощью буферов прочитать это, ааааааааа
-        // создать сообщение с id - connectionFrom.getPlayer().getId()
-        // server.sendMessage(connectionFrom, newMessage);
+        if((message.getData() == null) || (message.getData().length == 0)){
+            Message answer = messageGenerator.createEmptyMessage(SERVER_READY);
+            try{
+                server.sendMessage(connectionFrom, answer);
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format");
+            try{
+                server.sendMessage(connectionFrom, errorAnswer);
+            } catch (ServerException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
