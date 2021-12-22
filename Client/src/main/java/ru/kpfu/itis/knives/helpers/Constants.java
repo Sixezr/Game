@@ -3,6 +3,13 @@ package ru.kpfu.itis.knives.helpers;
 public final class Constants {
     public static final String MAIN_NAME = "Knives";
 
+    // Fonts
+    public static final String SARPANCH_REGUALR_PATH = "/Fonts/Sarpanch/Sarpanch-Regular.ttf";
+    public static final String SARPANCH_BOLD_PATH = "/Fonts/Sarpanch/Sarpanch-Bold.ttf";
+
+    public static final String ROBOTO_BOLD_PATH = "/Fonts/Roboto/Roboto-Bold.ttf";
+    public static final String ROBOTO_NORMAL_PATH = "/Fonts/Roboto/Roboto-Regular.ttf";
+
     // Authors
     public static final String FIRST_DEVELOPER = "Тяпкина Регина";
     public static final String SECOND_DEVELOPER = "Кадырова Элина";

@@ -5,9 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import ru.kpfu.itis.knives.App;
 import ru.kpfu.itis.knives.helpers.Constants;
+import ru.kpfu.itis.knives.helpers.CustomFonts;
 import ru.kpfu.itis.knives.scenes.InitialScene;
 
 public class WaitingVBox extends VBox {
@@ -22,13 +22,13 @@ public class WaitingVBox extends VBox {
         setAlignment(Pos.CENTER);
 
         Label mainNameLabel = new Label(Constants.MAIN_NAME);
-        mainNameLabel.setFont(Font.font(64));
+        mainNameLabel.setFont(CustomFonts.sarpanchBold64.font);
 
         Label descriptionLabel = new Label("Ожидание соперника...");
-        descriptionLabel.setFont(Font.font(36));
+        descriptionLabel.setFont(CustomFonts.robotoBold36.font);
 
         Button startButton = new Button("Отменить");
-        startButton.setFont(Font.font(18));
+        startButton.setFont(CustomFonts.robotoNormal18.font);
         startButton.setOnAction(event -> {
             // TODO: add network action
             App.getMainStage().setScene(new InitialScene(new BorderPane()));

@@ -5,6 +5,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import ru.kpfu.itis.knives.helpers.CustomFonts;
 import ru.kpfu.itis.knives.scenes.AboutScene;
 import ru.kpfu.itis.knives.scenes.RulesScene;
 
@@ -17,9 +18,11 @@ public class HeadMenuBar extends MenuBar {
     // Create UI
     private void configureMenuBar() {
         Label mainItemLabel = new Label("Главная");
+        mainItemLabel.setFont(CustomFonts.robotoNormal13.font);
         Menu mainItem = new Menu(null, mainItemLabel);
 
         Label rulesItemLabel = new Label("Правила");
+        rulesItemLabel.setFont(CustomFonts.robotoNormal13.font);
         Menu rulesItem = new Menu(null, rulesItemLabel);
         rulesItemLabel.setOnMouseClicked(event -> {
             Stage newWindow = new Stage();
@@ -29,6 +32,7 @@ public class HeadMenuBar extends MenuBar {
         });
 
         Label aboutItemLabel = new Label("О нас");
+        aboutItemLabel.setFont(CustomFonts.robotoNormal13.font);
         Menu aboutItem = new Menu(null, aboutItemLabel);
         aboutItemLabel.setOnMouseClicked(event -> {
             Stage newWindow = new Stage();

@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ru.kpfu.itis.knives.helpers.Constants;
+import ru.kpfu.itis.knives.scenes.GameScene;
 import ru.kpfu.itis.knives.scenes.InitialScene;
 
 public final class App extends Application {
@@ -28,7 +29,7 @@ public final class App extends Application {
             Platform.exit();
         });
         primaryStage.setTitle(Constants.MAIN_NAME);
-        primaryStage.setScene(new InitialScene(new BorderPane()));
+        primaryStage.setScene(new GameScene(new BorderPane()));
         primaryStage.show();
     }
 

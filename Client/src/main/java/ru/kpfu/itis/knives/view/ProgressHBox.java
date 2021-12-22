@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import ru.kpfu.itis.knives.helpers.CustomFonts;
 
 public class ProgressHBox extends HBox {
     // UI
@@ -18,6 +19,7 @@ public class ProgressHBox extends HBox {
     // Create UI
     private void configureHBox(String status) {
         progressLabel = new Label(status);
+        progressLabel.setFont(CustomFonts.robotoNormal13.font);
         getChildren().add(progressLabel);
 
         setPadding(new Insets(0, 0, 0, 20));

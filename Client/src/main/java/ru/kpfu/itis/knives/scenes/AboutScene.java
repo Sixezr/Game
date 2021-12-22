@@ -5,13 +5,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import ru.kpfu.itis.knives.helpers.Constants;
+import ru.kpfu.itis.knives.helpers.CustomFonts;
 
 public class AboutScene extends Scene {
-    // Const
-    private static final int FONT_SIZE = 24;
-
     // UI
     private final StackPane mainPane;
 
@@ -23,26 +20,26 @@ public class AboutScene extends Scene {
         VBox contentBox = new VBox();
         contentBox.setAlignment(Pos.TOP_CENTER);
         contentBox.setSpacing(20);
-        contentBox.setPrefSize(400, 200);
+        contentBox.setPrefSize(300, 200);
 
         Label titleLabel = new Label("Разработчики:");
-        titleLabel.setFont(Font.font(30));
+        titleLabel.setFont(CustomFonts.robotoBold36.font);
         titleLabel.setWrapText(true);
 
         Label firstDevLabel = new Label(Constants.FIRST_DEVELOPER);
-        firstDevLabel.setFont(Font.font(FONT_SIZE));
+        firstDevLabel.setFont(CustomFonts.robotoNormal24.font);
         firstDevLabel.setWrapText(true);
 
         Label secondDevLabel = new Label(Constants.SECOND_DEVELOPER);
-        secondDevLabel.setFont(Font.font(FONT_SIZE));
+        secondDevLabel.setFont(CustomFonts.robotoNormal24.font);
         secondDevLabel.setWrapText(true);
 
         Label thirdDevLabel = new Label(Constants.THIRD_DEVELOPER);
-        thirdDevLabel.setFont(Font.font(FONT_SIZE));
+        thirdDevLabel.setFont(CustomFonts.robotoNormal24.font);
         thirdDevLabel.setWrapText(true);
 
         Label fourthDevLabel = new Label(Constants.FOURTH_DEVELOPER);
-        fourthDevLabel.setFont(Font.font(FONT_SIZE));
+        fourthDevLabel.setFont(CustomFonts.robotoNormal24.font);
         fourthDevLabel.setWrapText(true);
 
         contentBox.getChildren().addAll(titleLabel, firstDevLabel, secondDevLabel, thirdDevLabel, fourthDevLabel);

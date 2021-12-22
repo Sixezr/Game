@@ -5,13 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import ru.kpfu.itis.knives.helpers.Constants;
+import ru.kpfu.itis.knives.helpers.CustomFonts;
 
 public class RulesScene extends Scene {
-    // Const
-    private static final int FONT_SIZE = 15;
-
     // UI
     private final StackPane mainPane;
 
@@ -23,22 +21,26 @@ public class RulesScene extends Scene {
         VBox contentBox = new VBox();
         contentBox.setAlignment(Pos.TOP_CENTER);
         contentBox.setSpacing(40);
-        contentBox.setPrefSize(400, 400);
+        contentBox.setPrefSize(450, 400);
 
         Label firstRuleLabel = new Label(Constants.FIRST_RULE);
-        firstRuleLabel.setFont(Font.font(FONT_SIZE));
+        firstRuleLabel.setFont(CustomFonts.robotoNormal15.font);
+        firstRuleLabel.setTextAlignment(TextAlignment.CENTER);
         firstRuleLabel.setWrapText(true);
 
         Label secondRuleLabel = new Label(Constants.SECOND_RULE);
-        secondRuleLabel.setFont(Font.font(FONT_SIZE));
+        secondRuleLabel.setFont(CustomFonts.robotoNormal15.font);
+        secondRuleLabel.setTextAlignment(TextAlignment.CENTER);
         secondRuleLabel.setWrapText(true);
 
         Label thirdRuleLabel = new Label(Constants.THIRD_RULE);
-        thirdRuleLabel.setFont(Font.font(FONT_SIZE));
+        thirdRuleLabel.setFont(CustomFonts.robotoNormal15.font);
+        thirdRuleLabel.setTextAlignment(TextAlignment.CENTER);
         thirdRuleLabel.setWrapText(true);
 
         Label fourthRuleLabel = new Label(Constants.FOURTH_RULE);
-        fourthRuleLabel.setFont(Font.font(FONT_SIZE));
+        fourthRuleLabel.setFont(CustomFonts.robotoNormal15.font);
+        fourthRuleLabel.setTextAlignment(TextAlignment.CENTER);
         fourthRuleLabel.setWrapText(true);
 
         contentBox.getChildren().addAll(firstRuleLabel, secondRuleLabel, thirdRuleLabel, fourthRuleLabel);

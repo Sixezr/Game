@@ -5,10 +5,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
+import ru.kpfu.itis.knives.helpers.CustomFonts;
 import ru.kpfu.itis.knives.helpers.KnifeState;
 
 import java.util.Timer;
@@ -37,11 +37,9 @@ public class KnifeLocationCanvas extends Canvas {
     // Draw
 
     /**
-     *
      * @param incline incline of knife
-     * @param state success or failure
+     * @param state   success or failure
      * @apiNote Run in another thread!
-     *
      */
     public void drawKnifeWithIncline(double incline, KnifeState state) {
         try {
@@ -68,10 +66,10 @@ public class KnifeLocationCanvas extends Canvas {
             context.restore();
 
             context.setFill(Color.WHITE);
-            context.setFont(Font.font(30));
+            context.setFont(CustomFonts.robotoNormal30.font);
 
             Text text = new Text(state.label);
-            text.setFont(Font.font(30));
+            text.setFont(CustomFonts.robotoNormal30.font);
             double wordWidth = text.getLayoutBounds().getWidth();
 
             Timer timer = new Timer();
