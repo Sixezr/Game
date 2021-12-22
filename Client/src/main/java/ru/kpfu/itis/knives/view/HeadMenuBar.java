@@ -23,16 +23,16 @@ public class HeadMenuBar extends MenuBar {
 
     // Create UI
     private void configureMenuBar() {
-        setBackground(new Background(new BackgroundFill(Colors.lightBrown.color, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Colors.lightBrown.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
 
         Label mainItemLabel = new Label("Главная");
         mainItemLabel.setTextFill(Color.WHITE);
-        mainItemLabel.setFont(Fonts.robotoNormal13.font);
+        mainItemLabel.setFont(Fonts.robotoNormal13.getFont());
         Menu mainItem = new Menu(null, mainItemLabel);
 
         Label rulesItemLabel = new Label("Правила");
         rulesItemLabel.setTextFill(Color.WHITE);
-        rulesItemLabel.setFont(Fonts.robotoNormal13.font);
+        rulesItemLabel.setFont(Fonts.robotoNormal13.getFont());
         Menu rulesItem = new Menu(null, rulesItemLabel);
         rulesItemLabel.setOnMouseClicked(event -> {
             Stage newWindow = new Stage();
@@ -43,7 +43,7 @@ public class HeadMenuBar extends MenuBar {
 
         Label aboutItemLabel = new Label("О нас");
         aboutItemLabel.setTextFill(Color.WHITE);
-        aboutItemLabel.setFont(Fonts.robotoNormal13.font);
+        aboutItemLabel.setFont(Fonts.robotoNormal13.getFont());
         Menu aboutItem = new Menu(null, aboutItemLabel);
         aboutItemLabel.setOnMouseClicked(event -> {
             Stage newWindow = new Stage();

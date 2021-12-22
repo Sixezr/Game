@@ -25,19 +25,19 @@ public class InitialVBox extends VBox {
 
     // Create UI
     private void configureVBox() {
-        setBackground(new Background(new BackgroundFill(Colors.beige.color, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Colors.beige.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
         setSpacing(50);
         setAlignment(Pos.CENTER);
 
         Label mainNameLabel = new Label(Constants.MAIN_NAME);
-        mainNameLabel.setFont(Fonts.sarpanchBold64.font);
+        mainNameLabel.setFont(Fonts.sarpanchBold64.getFont());
 
         Label descriptionLabel = new Label("Захватите территорию своего оппонента");
-        descriptionLabel.setFont(Fonts.robotoBold36.font);
+        descriptionLabel.setFont(Fonts.robotoBold36.getFont());
 
-        startButton.setFont(Fonts.robotoNormal18.font);
+        startButton.setFont(Fonts.robotoNormal18.getFont());
         startButton.setTextFill(Color.WHITE);
-        startButton.setBackground(new Background(new BackgroundFill(Colors.darkBrown.color, new CornerRadii(15), Insets.EMPTY)));
+        startButton.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
 
         getChildren().addAll(mainNameLabel, descriptionLabel, startButton);
     }

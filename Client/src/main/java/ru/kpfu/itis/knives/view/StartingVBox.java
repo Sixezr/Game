@@ -17,15 +17,15 @@ public class StartingVBox extends VBox {
 
     // Create UI
     private void configureVBox() {
-        setBackground(new Background(new BackgroundFill(Colors.beige.color, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Colors.beige.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
         setSpacing(50);
         setAlignment(Pos.CENTER);
 
         Label mainNameLabel = new Label(Constants.MAIN_NAME);
-        mainNameLabel.setFont(Fonts.sarpanchBold64.font);
+        mainNameLabel.setFont(Fonts.sarpanchBold64.getFont());
 
         Label descriptionLabel = new Label("Игра начинается");
-        descriptionLabel.setFont(Fonts.robotoBold36.font);
+        descriptionLabel.setFont(Fonts.robotoBold36.getFont());
 
         HBox playersHBox = new HBox();
         playersHBox.setAlignment(Pos.CENTER);
@@ -34,16 +34,16 @@ public class StartingVBox extends VBox {
         // TODO: add animation for first player label
         Label currentPlayerLabel = new Label("Вы");
         currentPlayerLabel.setPadding(new Insets(5, 20, 5, 20));
-        currentPlayerLabel.setFont(Fonts.robotoNormal26.font);
+        currentPlayerLabel.setFont(Fonts.robotoNormal26.getFont());
         currentPlayerLabel.setTextFill(Color.WHITE);
-        currentPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.color, new CornerRadii(15), Insets.EMPTY)));
+        currentPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
 
 
         Label enemyPlayerLabel = new Label("Соперник");
         enemyPlayerLabel.setPadding(new Insets(5, 20, 5, 20));
-        enemyPlayerLabel.setFont(Fonts.robotoNormal26.font);
+        enemyPlayerLabel.setFont(Fonts.robotoNormal26.getFont());
         enemyPlayerLabel.setTextFill(Color.WHITE);
-        enemyPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.color, new CornerRadii(15), Insets.EMPTY)));
+        enemyPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
 
 
         playersHBox.getChildren().addAll(currentPlayerLabel, enemyPlayerLabel);

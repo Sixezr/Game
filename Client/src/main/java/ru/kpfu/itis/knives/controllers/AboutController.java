@@ -27,29 +27,29 @@ public class AboutController extends AbstractController {
     @Override
     public void createScene() {
         VBox contentBox = new VBox();
-        contentBox.setBackground(new Background(new BackgroundFill(Colors.beige.color, CornerRadii.EMPTY, Insets.EMPTY)));
+        contentBox.setBackground(new Background(new BackgroundFill(Colors.beige.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
         contentBox.setAlignment(Pos.CENTER);
         contentBox.setSpacing(20);
         contentBox.setPrefSize(300, 275);
 
         Label titleLabel = new Label("Разработчики:");
-        titleLabel.setFont(Fonts.robotoBold36.font);
+        titleLabel.setFont(Fonts.robotoBold36.getFont());
         titleLabel.setWrapText(true);
 
         Label firstDevLabel = new Label(Constants.FIRST_DEVELOPER);
-        firstDevLabel.setFont(Fonts.robotoNormal24.font);
+        firstDevLabel.setFont(Fonts.robotoNormal24.getFont());
         firstDevLabel.setWrapText(true);
 
         Label secondDevLabel = new Label(Constants.SECOND_DEVELOPER);
-        secondDevLabel.setFont(Fonts.robotoNormal24.font);
+        secondDevLabel.setFont(Fonts.robotoNormal24.getFont());
         secondDevLabel.setWrapText(true);
 
         Label thirdDevLabel = new Label(Constants.THIRD_DEVELOPER);
-        thirdDevLabel.setFont(Fonts.robotoNormal24.font);
+        thirdDevLabel.setFont(Fonts.robotoNormal24.getFont());
         thirdDevLabel.setWrapText(true);
 
         Label fourthDevLabel = new Label(Constants.FOURTH_DEVELOPER);
-        fourthDevLabel.setFont(Fonts.robotoNormal24.font);
+        fourthDevLabel.setFont(Fonts.robotoNormal24.getFont());
         fourthDevLabel.setWrapText(true);
 
         contentBox.getChildren().addAll(titleLabel, firstDevLabel, secondDevLabel, thirdDevLabel, fourthDevLabel);

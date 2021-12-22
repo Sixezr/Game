@@ -57,7 +57,7 @@ public class GameFieldCanvas extends Canvas {
     }
 
     private void drawCircle() {
-        context.setFill(Colors.brown.color);
+        context.setFill(Colors.brown.getColor());
         context.fillOval(0, 0, DIAMETER, DIAMETER);
 
         int STROKES = 1000;

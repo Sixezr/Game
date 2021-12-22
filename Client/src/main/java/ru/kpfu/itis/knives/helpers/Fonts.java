@@ -16,9 +16,13 @@ public enum Fonts {
     robotoNormal15(Font.loadFont(Fonts.class.getResourceAsStream(Constants.ROBOTO_NORMAL_PATH), 15)),
     robotoNormal13(Font.loadFont(Fonts.class.getResourceAsStream(Constants.ROBOTO_NORMAL_PATH), 13));
 
-    public final Font font;
+    private final Font font;
 
     Fonts(Font font) {
         this.font = font;
+    }
+
+    public Font getFont() {
+        return font;
     }
 }

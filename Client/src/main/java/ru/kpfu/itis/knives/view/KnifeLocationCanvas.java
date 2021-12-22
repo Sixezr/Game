@@ -65,11 +65,11 @@ public class KnifeLocationCanvas extends Canvas {
 
             context.restore();
 
-            context.setFill(Colors.darkBlue.color);
-            context.setFont(Fonts.robotoNormal30.font);
+            context.setFill(Colors.darkBlue.getColor());
+            context.setFont(Fonts.robotoNormal30.getFont());
 
             Text text = new Text(state.label);
-            text.setFont(Fonts.robotoNormal30.font);
+            text.setFont(Fonts.robotoNormal30.getFont());
             double wordWidth = text.getLayoutBounds().getWidth();
 
             Timer timer = new Timer();
@@ -92,10 +92,10 @@ public class KnifeLocationCanvas extends Canvas {
     }
 
     private void drawBackground() {
-        context.setFill(Colors.blue.color);
+        context.setFill(Colors.blue.getColor());
         context.fillRect(0, 0, WIDTH, HEIGHT);
 
-        context.setFill(Colors.green.color);
+        context.setFill(Colors.green.getColor());
         context.fillRect(0, HEIGHT * 0.75, WIDTH, HEIGHT / 4);
     }
 }

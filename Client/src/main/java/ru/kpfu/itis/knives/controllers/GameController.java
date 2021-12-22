@@ -54,17 +54,17 @@ public class GameController extends AbstractController {
         contentVBox.setSpacing(64);
         contentVBox.setAlignment(Pos.CENTER);
 
-        statusLabel.setFont(Fonts.robotoNormal30.font);
+        statusLabel.setFont(Fonts.robotoNormal30.getFont());
 
         HBox contentHBox = new HBox();
-        contentHBox.setBackground(new Background(new BackgroundFill(Colors.beige.color, CornerRadii.EMPTY, Insets.EMPTY)));
+        contentHBox.setBackground(new Background(new BackgroundFill(Colors.beige.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
         contentHBox.setAlignment(Pos.CENTER);
         contentHBox.setSpacing(200);
 
         messagesVBox.setAlignment(Pos.CENTER);
         messagesVBox.setSpacing(80);
 
-        messageLabel.setFont(Fonts.robotoNormal36.font);
+        messageLabel.setFont(Fonts.robotoNormal36.getFont());
 
         messagesVBox.getChildren().addAll(messageLabel, knifeLocationCanvas);
         contentVBox.getChildren().addAll(statusLabel, gameFieldCanvas);

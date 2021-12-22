@@ -11,9 +11,13 @@ public enum Colors {
     darkBlue(Color.web("#689AA6")),
     darkBrown(Color.web("#543D3D"));
 
-    public final Color color;
+    private final Color color;
 
     Colors(Color color) {
         this.color = color;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

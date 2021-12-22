@@ -25,19 +25,19 @@ public class WaitingVBox extends VBox {
 
     // Create UI
     private void configureVBox() {
-        setBackground(new Background(new BackgroundFill(Colors.beige.color, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Colors.beige.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
         setSpacing(50);
         setAlignment(Pos.CENTER);
 
         Label mainNameLabel = new Label(Constants.MAIN_NAME);
-        mainNameLabel.setFont(Fonts.sarpanchBold64.font);
+        mainNameLabel.setFont(Fonts.sarpanchBold64.getFont());
 
         Label descriptionLabel = new Label("Ожидание соперника...");
-        descriptionLabel.setFont(Fonts.robotoBold36.font);
+        descriptionLabel.setFont(Fonts.robotoBold36.getFont());
 
-        cancelButton.setFont(Fonts.robotoNormal18.font);
+        cancelButton.setFont(Fonts.robotoNormal18.getFont());
         cancelButton.setTextFill(Color.WHITE);
-        cancelButton.setBackground(new Background(new BackgroundFill(Colors.darkBrown.color, new CornerRadii(15), Insets.EMPTY)));
+        cancelButton.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
 
 
         getChildren().addAll(mainNameLabel, descriptionLabel, cancelButton);

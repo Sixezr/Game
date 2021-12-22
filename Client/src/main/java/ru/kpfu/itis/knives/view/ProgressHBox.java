@@ -19,11 +19,11 @@ public class ProgressHBox extends HBox {
 
     // Create UI
     private void configureHBox(String status) {
-        setBackground(new Background(new BackgroundFill(Colors.lightBrown.color, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Colors.lightBrown.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
 
         progressLabel = new Label(status);
         progressLabel.setTextFill(Color.WHITE);
-        progressLabel.setFont(Fonts.robotoNormal13.font);
+        progressLabel.setFont(Fonts.robotoNormal13.getFont());
         getChildren().add(progressLabel);
 
         setPadding(new Insets(0, 0, 0, 20));
