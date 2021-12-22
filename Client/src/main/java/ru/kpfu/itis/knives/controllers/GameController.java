@@ -79,7 +79,7 @@ public class GameController extends AbstractController {
     private void initListeners() {
         gameFieldCanvas.setOnMouseClicked(event -> {
             gameFieldCanvas.drawPoint(event.getX(), event.getY(), Color.AQUA);
-            knifeLocationCanvas.drawKnifeWithIncline(0, KnifeState.success);
+            knifeLocationCanvas.drawKnifeWithIncline(15, KnifeState.success);
         });
     }
 }

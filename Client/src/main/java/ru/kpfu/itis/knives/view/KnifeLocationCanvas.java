@@ -20,7 +20,7 @@ public class KnifeLocationCanvas extends Canvas {
     private static final double WIDTH = 400;
     private static final double HEIGHT = 250;
 
-    private static final double RATIO = 2.5;
+    private static final double RATIO = 2.45;
 
     private static final String FILE_NAME = "/knife.png";
 
@@ -56,10 +56,10 @@ public class KnifeLocationCanvas extends Canvas {
             Image image = new Image(getClass().getResourceAsStream(FILE_NAME));
 
             double endX = WIDTH / 2 - image.getWidth();
-            double endY = HEIGHT * 0.75 - image.getHeight() + Math.abs(incline / RATIO);
+            double endY = HEIGHT * 0.75 - image.getHeight() + Math.abs((90 - incline) / RATIO);
 
             context.save();
-            rotate(incline, endX + image.getWidth() / 2, endY + image.getHeight() / 2);
+            rotate(90 - incline, endX + image.getWidth() / 2, endY + image.getHeight() / 2);
 
             context.drawImage(image, endX, endY);
 
