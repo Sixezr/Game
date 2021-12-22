@@ -6,9 +6,9 @@ import ru.kpfu.itis.knives.server.Connection;
 
 import static ru.kpfu.itis.knives.protocol.Protocol.MOVE;
 
-public class StartThrowListener extends AbstractServerMessageListener {
+public class StartMoveListener extends AbstractServerMessageListener {
 
-    public StartThrowListener(){
+    public StartMoveListener(){
         this.TYPE = MOVE;
     }
 
