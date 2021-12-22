@@ -31,8 +31,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
             Point point1 = new Point(x1, y1);
             Point point2 = new Point(x2, y2);
 
-            String errorText = null;
-            errorText = isAnyError(errorText, point1, point2);
+            String errorText = isAnyError(point1, point2);
             if(errorText != null){
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_MOVE, errorText);
                 try{
@@ -47,7 +46,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
             floats[0] = agile;
             int[] ints = new int[1];
             if(agile >= MIN_ANGLE){
-                ints[0] = gameController.getCurrentPlayer().getId();
+                ints[0] = gameController.getOpponentPlayer().getId();
                 Message answer = messageGenerator.createMessage(MOVE_RESULT_GOOD, floats, ints); //13
                 try{
                     server.sendBroadcastMessage(answer);
@@ -64,7 +63,6 @@ public class StartMoveListener extends AbstractServerMessageListener {
                     e.printStackTrace();
                 }
             }
-
         }
         else{
             Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format");
@@ -76,19 +74,19 @@ public class StartMoveListener extends AbstractServerMessageListener {
         }
     }
 
-    private String isAnyError(String errorText, Point point1, Point point2){
+    private String isAnyError(Point point1, Point point2){
         if(!gameController.checkPointIsInCircle(point1)){
-            errorText = "The player's location is outside the circle";
+            return "The player's location is outside the circle";
         }
         if(!gameController.checkPointIsInCircle(point2)){
-            errorText = "The throwing point is outside the circle";
+            return "The throwing point is outside the circle";
         }
         if(gameController.checkPointBelongsToPlayerRegion(point1, gameController.getOpponentPlayer())){
-            errorText = "The player is not on his territory";
+            return  "The player is not on his territory";
         }
         if(gameController.checkPointBelongsToPlayerRegion(point2, gameController.getCurrentPlayer())){
-            errorText = "The throwing point is not the opponent's territory";
+            return  "The throwing point is not the opponent's territory";
         }
-        return errorText;
+        return null;
     }
 }

@@ -28,17 +28,8 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
             float y = byteBuffer.getFloat(8);
             Point point = new Point(x, y);
 
-            String errorText = null;
-            boolean isAnyError = false;
-            if(!gameController.checkPointIsInCircle(point)){
-                errorText = "Chosen point is outside the circle";
-                isAnyError = true;
-            }
-            if(gameController.checkPointBelongsToPlayerRegion(point, gameController.getOpponentPlayer())){
-                errorText = "Chosen point is not on the player's territory";
-                isAnyError = true;
-            }
-            if(isAnyError){
+            String errorText = isAnyError(point);
+            if(errorText != null){
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_POS, errorText);
                 try{
                     server.sendMessage(connectionFrom, errorAnswer);
@@ -57,5 +48,15 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
                 e.printStackTrace();
             }
         }
+    }
+
+    private String isAnyError(Point point){
+        if(!gameController.checkPointIsInCircle(point)){
+            return "Chosen point is outside the circle";
+        }
+        if(gameController.checkPointBelongsToPlayerRegion(point, gameController.getOpponentPlayer())){
+            return "Chosen point is not on the player's territory";
+        }
+        return null;
     }
 }
