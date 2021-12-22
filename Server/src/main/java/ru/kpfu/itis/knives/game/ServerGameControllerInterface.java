@@ -13,4 +13,5 @@ public interface ServerGameControllerInterface {
     boolean checkRegionIsIsland(Region region);
     boolean isPlayerHasEnoughTerritory(Player player);
     boolean checkPointBelongsToRegion(Point point, Region region);
+    void setRandomCurrentPlayer();
 }

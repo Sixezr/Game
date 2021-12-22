@@ -18,6 +18,7 @@ import java.util.List;
 
 import static ru.kpfu.itis.knives.Constants.MAX_PLAYER_NUM;
 import static ru.kpfu.itis.knives.Constants.PORT;
+import static ru.kpfu.itis.knives.protocol.Protocol.GAME_START;
 import static ru.kpfu.itis.knives.server.constants.ServerStates.*;
 
 public class KnivesServer implements KnivesServerInterface {
@@ -84,10 +85,15 @@ public class KnivesServer implements KnivesServerInterface {
     public void startGame() throws ServerException {
         if (currentState != GAME_STARTED) {
             currentState = GAME_STARTED;
+            gameController.setRandomCurrentPlayer();
             for (Connection connection : connections) {
                 ConnectionThread connectionThread = new ConnectionThread(connection);
                 connectionThread.start();
                 gameController.addPlayer(connection.getPlayer());
+                int[] ids = new int[2];
+                ids[0] = connection.getPlayer().getId();
+                ids[1] = gameController.getCurrentPlayer().getId();
+                connection.sendMessage(messageGenerator.createMessage(GAME_START, ids));
             }
         } else {
             throw new ServerException("Illegal state of server.");

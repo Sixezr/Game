@@ -11,7 +11,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.*;
 public class MessageGenerator implements MessageGeneratorInterface {
 
     @Override
-    public Message generateErrorMessage(byte type, String errorMessage) {
+    public Message createErrorMessage(byte type, String errorMessage) {
         if (type == ERROR_BAD_MESSAGE || type == ERROR_WRONG_MOVE || type == ERROR_WRONG_POS || type == ERROR_SERVER) {
             return new Message(type, errorMessage.getBytes(StandardCharsets.UTF_8));
         } else {
@@ -34,7 +34,7 @@ public class MessageGenerator implements MessageGeneratorInterface {
     }
 
     @Override
-    public Message generateMessage(byte type, float[] values, int[] ids) {
+    public Message createMessage(byte type, float[] values, int[] ids) {
         Message newMessage = new Message(type);
         switch (type) {
             case MOVE_RESULT_GOOD:
@@ -52,7 +52,7 @@ public class MessageGenerator implements MessageGeneratorInterface {
     }
 
     @Override
-    public Message generateMessage(byte type, int[] ids) {
+    public Message createMessage(byte type, int[] ids) {
         Message newMessage = new Message(type);
         switch (type) {
             case GAME_START:
@@ -83,7 +83,7 @@ public class MessageGenerator implements MessageGeneratorInterface {
      * @return
      */
     @Override
-    public Message generateMessage(byte type, float[] values) {
+    public Message createMessage(byte type, float[] values) {
         return new Message(type);
     }
 }
