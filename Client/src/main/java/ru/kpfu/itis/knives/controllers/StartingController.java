@@ -1,22 +1,29 @@
-package ru.kpfu.itis.knives.scenes;
+package ru.kpfu.itis.knives.controllers;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import ru.kpfu.itis.knives.App;
+import javafx.stage.Stage;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 import ru.kpfu.itis.knives.view.StartingVBox;
 
-public class StartingScene extends Scene {
+public class StartingController extends AbstractController {
     // UI
     private final BorderPane mainPane;
 
     // Init
-    public StartingScene(BorderPane pane) {
-        super(pane, App.getMainStage().getWidth(), App.getMainStage().getHeight());
-        mainPane = pane;
+    public StartingController(Stage stage) {
+        super(stage);
+        mainPane = new BorderPane();
+    }
+
+    // Create scene
+    @Override
+    public void createScene() {
         mainPane.setTop(new HeadMenuBar());
         mainPane.setCenter(new StartingVBox());
         mainPane.setBottom(new ProgressHBox("Игра начинается"));
+
+        stage.setScene(new Scene(mainPane));
     }
 }

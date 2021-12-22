@@ -3,11 +3,11 @@ package ru.kpfu.itis.knives.view;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import ru.kpfu.itis.knives.controllers.AboutController;
+import ru.kpfu.itis.knives.controllers.AbstractController;
+import ru.kpfu.itis.knives.controllers.RulesController;
 import ru.kpfu.itis.knives.helpers.CustomFonts;
-import ru.kpfu.itis.knives.scenes.AboutScene;
-import ru.kpfu.itis.knives.scenes.RulesScene;
 
 public class HeadMenuBar extends MenuBar {
     // Init
@@ -27,8 +27,8 @@ public class HeadMenuBar extends MenuBar {
         rulesItemLabel.setOnMouseClicked(event -> {
             Stage newWindow = new Stage();
             newWindow.setTitle("Правила");
-            newWindow.setScene(new RulesScene(new StackPane()));
-            newWindow.show();
+            AbstractController controller = new RulesController(newWindow);
+            controller.createScene();
         });
 
         Label aboutItemLabel = new Label("О нас");
@@ -37,8 +37,8 @@ public class HeadMenuBar extends MenuBar {
         aboutItemLabel.setOnMouseClicked(event -> {
             Stage newWindow = new Stage();
             newWindow.setTitle("О нас");
-            newWindow.setScene(new AboutScene(new StackPane()));
-            newWindow.show();
+            AbstractController controller = new AboutController(newWindow);
+            controller.createScene();
         });
 
         getMenus().addAll(mainItem, rulesItem, aboutItem);

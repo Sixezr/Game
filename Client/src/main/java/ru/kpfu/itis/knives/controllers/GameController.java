@@ -1,4 +1,4 @@
-package ru.kpfu.itis.knives.scenes;
+package ru.kpfu.itis.knives.controllers;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import ru.kpfu.itis.knives.App;
+import javafx.stage.Stage;
 import ru.kpfu.itis.knives.helpers.CustomFonts;
 import ru.kpfu.itis.knives.helpers.KnifeState;
 import ru.kpfu.itis.knives.view.GameFieldCanvas;
@@ -15,7 +15,7 @@ import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 
-public class GameScene extends Scene {
+public class GameController extends AbstractController {
     // UI
     private final BorderPane mainPane;
     private final ProgressHBox progressHBox;
@@ -26,34 +26,41 @@ public class GameScene extends Scene {
     private final Label messageLabel;
 
     // Init
-    public GameScene(BorderPane pane) {
-        super(pane, App.getMainStage().getWidth(), App.getMainStage().getHeight());
-        mainPane = pane;
-        mainPane.setTop(new HeadMenuBar());
+    public GameController(Stage stage) {
+        super(stage);
+
+        mainPane = new BorderPane();
         progressHBox = new ProgressHBox("Игра началась");
+        statusLabel = new Label("Игра началась");
+        gameFieldCanvas = new GameFieldCanvas();
+        messagesVBox = new VBox();
+        messageLabel = new Label("Ваш ход");
+        knifeLocationCanvas = new KnifeLocationCanvas();
+
+        initListeners();
+    }
+
+    // Create scene
+    @Override
+    public void createScene() {
+        mainPane.setTop(new HeadMenuBar());
+
         mainPane.setBottom(progressHBox);
 
         VBox contentVBox = new VBox();
         contentVBox.setSpacing(64);
         contentVBox.setAlignment(Pos.CENTER);
 
-        statusLabel = new Label("Игра началась");
         statusLabel.setFont(CustomFonts.robotoNormal30.font);
 
         HBox contentHBox = new HBox();
         contentHBox.setAlignment(Pos.CENTER);
         contentHBox.setSpacing(200);
 
-        gameFieldCanvas = new GameFieldCanvas();
-
-        messagesVBox = new VBox();
         messagesVBox.setAlignment(Pos.CENTER);
         messagesVBox.setSpacing(80);
 
-        messageLabel = new Label("Ваш ход");
         messageLabel.setFont(CustomFonts.robotoNormal36.font);
-
-        knifeLocationCanvas = new KnifeLocationCanvas();
 
         messagesVBox.getChildren().addAll(messageLabel, knifeLocationCanvas);
         contentVBox.getChildren().addAll(statusLabel, gameFieldCanvas);
@@ -61,7 +68,7 @@ public class GameScene extends Scene {
 
         mainPane.setCenter(contentHBox);
 
-        initListeners();
+        stage.setScene(new Scene(mainPane));
     }
 
     // Private

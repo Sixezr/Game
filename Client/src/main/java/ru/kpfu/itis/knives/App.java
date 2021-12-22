@@ -3,12 +3,11 @@ package ru.kpfu.itis.knives;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import ru.kpfu.itis.knives.controllers.AbstractController;
+import ru.kpfu.itis.knives.controllers.InitialController;
 import ru.kpfu.itis.knives.helpers.Constants;
-import ru.kpfu.itis.knives.scenes.GameScene;
-import ru.kpfu.itis.knives.scenes.InitialScene;
 
 public final class App extends Application {
     private static Stage mainStage;
@@ -28,8 +27,10 @@ public final class App extends Application {
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();
         });
-        primaryStage.setTitle(Constants.MAIN_NAME);
-        primaryStage.setScene(new GameScene(new BorderPane()));
+        mainStage.setTitle(Constants.MAIN_NAME);
+
+        AbstractController initialController = new InitialController(mainStage);
+        initialController.createScene();
         primaryStage.show();
     }
 

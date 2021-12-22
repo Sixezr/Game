@@ -3,16 +3,17 @@ package ru.kpfu.itis.knives.view;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import ru.kpfu.itis.knives.App;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.helpers.CustomFonts;
-import ru.kpfu.itis.knives.scenes.InitialScene;
 
 public class WaitingVBox extends VBox {
+    // UI
+    private final Button cancelButton;
+
     // Init
     public WaitingVBox() {
+        cancelButton = new Button("Отменить");
         configureVBox();
     }
 
@@ -27,13 +28,14 @@ public class WaitingVBox extends VBox {
         Label descriptionLabel = new Label("Ожидание соперника...");
         descriptionLabel.setFont(CustomFonts.robotoBold36.font);
 
-        Button startButton = new Button("Отменить");
-        startButton.setFont(CustomFonts.robotoNormal18.font);
-        startButton.setOnAction(event -> {
-            // TODO: add network action
-            App.getMainStage().setScene(new InitialScene(new BorderPane()));
-        });
+        cancelButton.setFont(CustomFonts.robotoNormal18.font);
 
-        getChildren().addAll(mainNameLabel, descriptionLabel, startButton);
+        getChildren().addAll(mainNameLabel, descriptionLabel, cancelButton);
+    }
+
+    // Getters
+
+    public Button getCancelButton() {
+        return cancelButton;
     }
 }

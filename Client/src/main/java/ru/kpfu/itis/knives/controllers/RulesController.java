@@ -1,4 +1,4 @@
-package ru.kpfu.itis.knives.scenes;
+package ru.kpfu.itis.knives.controllers;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -6,20 +6,25 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.helpers.CustomFonts;
 
-public class RulesScene extends Scene {
+public class RulesController extends AbstractController {
     // UI
     private final StackPane mainPane;
 
     // Init
-    public RulesScene(StackPane pane) {
-        super(pane);
-        mainPane = pane;
+    public RulesController(Stage stage) {
+        super(stage);
+        mainPane = new StackPane();
+    }
 
+    // Create scene
+    @Override
+    public void createScene() {
         VBox contentBox = new VBox();
-        contentBox.setAlignment(Pos.TOP_CENTER);
+        contentBox.setAlignment(Pos.CENTER);
         contentBox.setSpacing(40);
         contentBox.setPrefSize(450, 400);
 
@@ -47,5 +52,8 @@ public class RulesScene extends Scene {
 
         mainPane.getChildren().addAll(contentBox);
         StackPane.setAlignment(contentBox, Pos.CENTER);
+
+        stage.setScene(new Scene(mainPane));
+        stage.show();
     }
 }
