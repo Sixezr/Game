@@ -5,6 +5,8 @@ import ru.kpfu.itis.knives.entities.Player;
 import ru.kpfu.itis.knives.exceptions.ConnectionException;
 import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.game.ServerGameController;
+import ru.kpfu.itis.knives.listeners.MessageGenerator;
+import ru.kpfu.itis.knives.listeners.MessageGeneratorInterface;
 import ru.kpfu.itis.knives.listeners.ServerMessageListener;
 import ru.kpfu.itis.knives.protocol.Message;
 
@@ -25,6 +27,7 @@ public class KnivesServer implements KnivesServerInterface {
     private List<Connection> connections;
     private GameSession gameSession;
     private ServerGameController gameController;
+    private MessageGeneratorInterface messageGenerator;
 
     public KnivesServer() {
         initServer();
@@ -42,11 +45,12 @@ public class KnivesServer implements KnivesServerInterface {
         connections = new ArrayList<>();
         gameSession = new GameSession();
         gameController = new ServerGameController(gameSession);
+        messageGenerator = new MessageGenerator();
     }
 
     @Override
     public void registerListener(ServerMessageListener listener) throws ServerException {
-        listener.init(this, gameController);
+        listener.init(this, gameController, messageGenerator);
         listeners.add(listener);
     }
 
