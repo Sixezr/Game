@@ -5,10 +5,13 @@ import ru.kpfu.itis.knives.entities.*;
 import java.util.List;
 import java.util.Random;
 
-import static ru.kpfu.itis.knives.Constants.MIN_SQUARE;
+import static ru.kpfu.itis.knives.Constants.*;
 
 public class ServerGameController extends AbstractGameController implements ServerGameControllerInterface {
     private static final float DELTA = (float) 1e-3;
+    private static final float MIN_ANGLE = 0.0f;
+    private static final float MAX_ANGLE = 90.0f;
+    private static final int MAX_ID = 1_000_000_000;
 
     public ServerGameController(GameSession gameSession) {
         super(gameSession);
@@ -16,7 +19,7 @@ public class ServerGameController extends AbstractGameController implements Serv
 
     @Override
     public int getRandomPlayerId() {
-        return (new Random().nextInt());
+        return Math.abs(new Random().nextInt(MAX_ID));
     }
 
     @Override
@@ -38,18 +41,15 @@ public class ServerGameController extends AbstractGameController implements Serv
 
     @Override
     public float getRandomKnifeFallAngle() {
-        return 0;
+        return (float) (Math.random() * (MAX_ANGLE - MIN_ANGLE)) + MIN_ANGLE;
     }
 
     @Override
     public boolean checkPointIsInCircle(Point point) {
-        List<Player> players = session.getPlayers();
-        for (Player player : players) {
-            if (session.getPlayerRegion(player).hasPoint(point)) {
-                return true;
-            }
-        }
-        return false;
+        float r = START_MAX_X - START_0;
+        float x = point.getX();
+        float y = point.getY();
+        return (x * x + y * y < r * r);
     }
 
     @Override
@@ -76,6 +76,8 @@ public class ServerGameController extends AbstractGameController implements Serv
 
     @Override
     public void setRandomCurrentPlayer() {
-
+        int MAX = 1;
+        int MIN = 0;
+        session.setCurrentPlayer(session.getPlayers().get((int) (Math.random() * (MAX - MIN + 1) + MIN)));
     }
 }
