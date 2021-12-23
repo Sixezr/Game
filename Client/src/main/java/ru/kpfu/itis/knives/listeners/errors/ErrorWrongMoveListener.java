@@ -16,7 +16,7 @@ public class ErrorWrongMoveListener extends AbstractClientMessageListener {
         if (message.getType() == this.getType()) {
             String information = new String(message.getData());
             client.setNotice(information);
-            client.move();
+
         }
     }
 }

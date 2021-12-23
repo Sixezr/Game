@@ -24,7 +24,7 @@ public class MoveResultListener extends AbstractClientMessageListener {
             Point point = new Point(byteBuffer.getFloat(), byteBuffer.getFloat());
             byteBuffer.clear();
             client.setMove(moveID);
-            client.move();
+
         }
     }
 }

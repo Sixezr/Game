@@ -23,7 +23,6 @@ public class MoveResultBadListener extends AbstractClientMessageListener {
             byteBuffer.clear();
             client.paintAngle(tangle);
             client.setMove(moveID);
-            client.move();
         }
     }
 }

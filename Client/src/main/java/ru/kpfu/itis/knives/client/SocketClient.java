@@ -2,6 +2,7 @@ package ru.kpfu.itis.knives.client;
 
 import ru.kpfu.itis.knives.controllers.AbstractController;
 import ru.kpfu.itis.knives.entities.GameControllerInterface;
+import ru.kpfu.itis.knives.entities.GameSession;
 import ru.kpfu.itis.knives.entities.Player;
 import ru.kpfu.itis.knives.entities.Point;
 import ru.kpfu.itis.knives.generators.MessageGenerator;
@@ -49,5 +50,5 @@ public interface SocketClient {
 
     List<ClientMessageListener> getListeners();
 
-
+    GameSession getSession();
 }

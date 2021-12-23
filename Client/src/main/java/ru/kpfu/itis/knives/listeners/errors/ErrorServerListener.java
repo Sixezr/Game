@@ -16,7 +16,7 @@ public class ErrorServerListener extends AbstractClientMessageListener {
         if (message.getType() == this.getType()) {
             String information = new String(message.getData());
             client.setNotice(information);
-            client.repeat();
+
         }
     }
 }

@@ -22,6 +22,7 @@ public class SocketClientImpl implements SocketClient {
     private MessageGenerator messageGenerator;
     private Player player;
     private AbstractController controller;
+    private GameSession session;
 
     private List<ClientMessageListener> listeners = new ArrayList<>();
 
@@ -29,7 +30,7 @@ public class SocketClientImpl implements SocketClient {
         try {
             this.connection = new ClientMessageHandlerImpl(this, new Socket(host, port));
             connection.readMessage();
-            GameSession session = new GameSession();
+            session = new GameSession();
             regionsController = new RegionController(session);
             messageGenerator = new MessageGeneratorImpl();
         } catch (IOException e) {
@@ -156,5 +157,9 @@ public class SocketClientImpl implements SocketClient {
 
     public void setListeners(List<ClientMessageListener> listeners) {
         this.listeners = listeners;
+    }
+
+    public GameSession getSession() {
+        return session;
     }
 }

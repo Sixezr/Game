@@ -26,7 +26,7 @@ public class MoveResultGoodListener extends AbstractClientMessageListener {
             byteBuffer.clear();
             client.paintAngle(tangle);
             if (client.getID() == moveID) {
-                client.choiceRegion();
+
             }
         }
     }
