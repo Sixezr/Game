@@ -6,9 +6,15 @@ import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.protocol.Message;
 import ru.kpfu.itis.knives.server.Connection;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static ru.kpfu.itis.knives.Constants.MAX_PLAYER_NUM;
 import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
 public class StartGameListener extends AbstractServerMessageListener {
+
+    private Map<Connection, Integer> countPlayersMap = new HashMap<>();
 
     public StartGameListener() {
         this.TYPE = CLIENT_READY;
@@ -23,8 +29,15 @@ public class StartGameListener extends AbstractServerMessageListener {
             try{
                 Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
                 server.sendMessage(connectionFrom, answer);
+                if(!countPlayersMap.containsKey(connectionFrom)){
+                    countPlayersMap.put(connectionFrom, 1);
+                }
             } catch (MessageGenerationException | ServerException e){
                 e.printStackTrace();
+            }
+            if(countPlayersMap.size() == MAX_PLAYER_NUM){
+                server.startGame();
+                countPlayersMap.clear();
             }
         }
         else{
