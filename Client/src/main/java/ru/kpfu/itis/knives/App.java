@@ -6,7 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ru.kpfu.itis.knives.controllers.AbstractController;
-import ru.kpfu.itis.knives.controllers.InitialController;
+import ru.kpfu.itis.knives.controllers.GameController;
 import ru.kpfu.itis.knives.helpers.Constants;
 
 public final class App extends Application {
@@ -26,7 +26,7 @@ public final class App extends Application {
         });
         primaryStage.setTitle(Constants.MAIN_NAME);
 
-        AbstractController initialController = new InitialController(primaryStage);
+        AbstractController initialController = new GameController(primaryStage);
         initialController.createScene();
         primaryStage.show();
     }

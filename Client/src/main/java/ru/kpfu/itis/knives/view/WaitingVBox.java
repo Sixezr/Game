@@ -13,7 +13,7 @@ import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.helpers.Fonts;
 
-public class WaitingVBox extends VBox {
+public final class WaitingVBox extends VBox {
     // UI
     private final Button cancelButton;
 

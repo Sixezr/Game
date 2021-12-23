@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Fonts;
 
-public class ProgressHBox extends HBox {
+public final class ProgressHBox extends HBox {
     // UI
     private Label progressLabel;
 

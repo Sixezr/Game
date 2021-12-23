@@ -15,7 +15,7 @@ import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 
-public class GameController extends AbstractController {
+public final class GameController extends AbstractController {
     // UI
     private final BorderPane mainPane;
     private final ProgressHBox progressHBox;
@@ -25,9 +25,14 @@ public class GameController extends AbstractController {
     private final VBox messagesVBox;
     private final Label messageLabel;
 
+    // Properties
+    private final AlertController alertController;
+
     // Init
     public GameController(Stage stage) {
         super(stage);
+
+        alertController = new AlertController();
 
         mainPane = new BorderPane();
         progressHBox = new ProgressHBox("Игра началась");

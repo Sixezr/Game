@@ -9,7 +9,7 @@ import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.helpers.Fonts;
 
-public class StartingVBox extends VBox {
+public final class StartingVBox extends VBox {
     // Init
     public StartingVBox() {
         configureVBox();

@@ -15,7 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class KnifeLocationCanvas extends Canvas {
+public final class KnifeLocationCanvas extends Canvas {
     // Const
     private static final double WIDTH = 400;
     private static final double HEIGHT = 250;

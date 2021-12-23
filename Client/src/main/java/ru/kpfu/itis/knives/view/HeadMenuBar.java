@@ -15,7 +15,7 @@ import ru.kpfu.itis.knives.controllers.RulesController;
 import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Fonts;
 
-public class HeadMenuBar extends MenuBar {
+public final class HeadMenuBar extends MenuBar {
     // Init
     public HeadMenuBar() {
         configureMenuBar();
