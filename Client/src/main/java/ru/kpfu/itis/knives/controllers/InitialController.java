@@ -31,6 +31,7 @@ public final class InitialController extends AbstractController {
         mainPane.setBottom(new ProgressHBox("Начните игру"));
 
         stage.setScene(new Scene(mainPane));
+        animate(mainPane);
     }
 
     // Private

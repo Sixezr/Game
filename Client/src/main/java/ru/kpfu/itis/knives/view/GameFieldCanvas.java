@@ -3,6 +3,8 @@ package ru.kpfu.itis.knives.view;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import ru.kpfu.itis.knives.entities.Bound;
+import ru.kpfu.itis.knives.entities.Point;
 import ru.kpfu.itis.knives.entities.Region;
 import ru.kpfu.itis.knives.helpers.Colors;
 
@@ -25,6 +27,7 @@ public final class GameFieldCanvas extends Canvas {
         context.setStroke(Color.BLACK);
         context.setLineWidth(2);
         context.strokeLine(250, 0, 250, 500);
+        context.restore();
     }
 
     // Draw
@@ -33,18 +36,30 @@ public final class GameFieldCanvas extends Canvas {
 
         drawCircle();
 
-        // TODO: draw region bound
+        context.setLineWidth(2);
+        for (Bound bound : region.getBounds()) {
+            if (!bound.isLine()) {
+                continue;
+            }
+            Point firstPoint = bound.getPoints().get(0);
+            Point secondPoint = bound.getPoints().get(1);
+            context.strokeLine(convertPointCoordinate(firstPoint.getX()), convertPointCoordinate(firstPoint.getY()),
+                    convertPointCoordinate(secondPoint.getX()), convertPointCoordinate(secondPoint.getY()));
+        }
+        context.restore();
     }
 
     public void drawPoint(double x, double y, Color color) {
         context.setFill(color);
         context.fillOval(x, y, POINT_DIAMETER, POINT_DIAMETER);
+        context.restore();
     }
 
     public void drawLine(double x1, double y1, double x2, double y2, Color color) {
         context.setStroke(color);
         context.setLineDashes(20);
         context.strokeLine(x1, y1, x2, y2);
+        context.restore();
     }
 
     // Private
@@ -63,7 +78,7 @@ public final class GameFieldCanvas extends Canvas {
         int STROKES = 1000;
         double angleIncr = 360.0 / STROKES;
 
-        context.setLineWidth(1);
+        context.setLineWidth(2);
         double prevX = DIAMETER / 2;
         double prevY = 0;
         double angle = angleIncr;
@@ -75,5 +90,6 @@ public final class GameFieldCanvas extends Canvas {
             prevX = x;
             prevY = y;
         }
+        context.restore();
     }
 }
