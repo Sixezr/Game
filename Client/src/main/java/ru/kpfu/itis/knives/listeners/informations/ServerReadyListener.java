@@ -8,7 +8,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.SERVER_READY;
 
 public class ServerReadyListener extends AbstractClientMessageListener {
 
-    protected ServerReadyListener() {
+    public ServerReadyListener() {
         super(SERVER_READY);
     }
 

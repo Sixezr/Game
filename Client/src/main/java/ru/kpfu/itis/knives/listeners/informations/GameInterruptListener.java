@@ -9,7 +9,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.GAME_INTERRUPT;
 
 public class GameInterruptListener extends AbstractClientMessageListener {
 
-    protected GameInterruptListener() {
+    public GameInterruptListener() {
         super(GAME_INTERRUPT);
     }
 

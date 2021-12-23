@@ -7,14 +7,14 @@ import java.util.*;
 public class Region {
     private static final float DELTA = (float) 1e-2;
 
-    private boolean owner;
+    private Player owner;
     private List<Bound> bounds;
     private float square;
     private boolean island;
     private float minX;
     private float maxX;
 
-    public Region(boolean owner, List<Bound> bounds) throws WrongRegionBoundsException {
+    public Region(Player owner, List<Bound> bounds) throws WrongRegionBoundsException {
         this.owner = owner;
         if (bounds.size() < 2) {
             throw new WrongRegionBoundsException("Неверное количество границ.");
@@ -285,11 +285,11 @@ public class Region {
         return result;
     }
 
-    public boolean isTrueOwner() {
+    public Player isTrueOwner() {
         return owner;
     }
 
-    public void setOwner(boolean owner) {
+    public void setOwner(Player owner) {
         this.owner = owner;
     }
 

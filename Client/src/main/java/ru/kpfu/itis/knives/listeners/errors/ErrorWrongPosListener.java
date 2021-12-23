@@ -8,7 +8,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.ERROR_WRONG_POS;
 
 public class ErrorWrongPosListener extends AbstractClientMessageListener {
 
-    protected ErrorWrongPosListener() {
+    public ErrorWrongPosListener() {
         super(ERROR_WRONG_POS);
     }
 

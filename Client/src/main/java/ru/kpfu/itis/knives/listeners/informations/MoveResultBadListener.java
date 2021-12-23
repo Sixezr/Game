@@ -9,7 +9,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.MOVE_RESULT_BAD;
 
 public class MoveResultBadListener extends AbstractClientMessageListener {
 
-    protected MoveResultBadListener() {
+    public MoveResultBadListener() {
         super(MOVE_RESULT_BAD);
     }
 
@@ -21,7 +21,7 @@ public class MoveResultBadListener extends AbstractClientMessageListener {
             float tangle = byteBuffer.getFloat();
             int moveID = byteBuffer.getInt();
             byteBuffer.clear();
-            client.paintTangle(tangle);
+            client.paintAngle(tangle);
             client.setMove(moveID);
             client.move();
         }

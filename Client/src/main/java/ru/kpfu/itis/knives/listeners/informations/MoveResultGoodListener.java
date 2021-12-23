@@ -10,7 +10,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.MOVE_RESULT_GOOD;
 
 public class MoveResultGoodListener extends AbstractClientMessageListener {
 
-    protected MoveResultGoodListener() {
+    public MoveResultGoodListener() {
         super(MOVE_RESULT_GOOD);
     }
 
@@ -24,8 +24,7 @@ public class MoveResultGoodListener extends AbstractClientMessageListener {
             Point first = new Point(byteBuffer.getFloat(), byteBuffer.getFloat());
             Point second = new Point(byteBuffer.getFloat(), byteBuffer.getFloat());
             byteBuffer.clear();
-            // TODO отрисовка
-            client.paintTangle(tangle);
+            client.paintAngle(tangle);
             if (client.getID() == moveID) {
                 client.choiceRegion();
             }

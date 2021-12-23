@@ -17,7 +17,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
 
     @Override
     public Message move(int id, float x1, float y1, float x2, float y2) {
-        byteBuffer = ByteBuffer.allocate(8 * 5);
+        byteBuffer = ByteBuffer.allocate(4 * 5);
         byteBuffer.putInt(id).putFloat(x1).putFloat(y1).putFloat(x2).putFloat(y2);
         byte[] information = byteBuffer.array();
         byteBuffer.clear();
@@ -26,7 +26,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
 
     @Override
     public Message movePosition(int id, float x1, float y1) {
-        byteBuffer = ByteBuffer.allocate(8 * 3);
+        byteBuffer = ByteBuffer.allocate(4 * 3);
         byteBuffer.putInt(id).putFloat(x1).putFloat(y1);
         byte[] information = byteBuffer.array();
         byteBuffer.clear();
@@ -35,7 +35,7 @@ public class MessageGeneratorImpl implements MessageGenerator {
 
     @Override
     public Message clientLeft(int id) {
-        byteBuffer = ByteBuffer.allocate(8);
+        byteBuffer = ByteBuffer.allocate(4);
         byteBuffer.putInt(id);
         byte[] information = byteBuffer.array();
         byteBuffer.clear();

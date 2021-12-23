@@ -11,7 +11,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.MOVE_RESULT_GOOD;
 
 public class MoveResultListener extends AbstractClientMessageListener {
 
-    protected MoveResultListener() {
+    public MoveResultListener() {
         super(MOVE_RESULT);
     }
 
@@ -23,7 +23,6 @@ public class MoveResultListener extends AbstractClientMessageListener {
             int moveID = byteBuffer.getInt();
             Point point = new Point(byteBuffer.getFloat(), byteBuffer.getFloat());
             byteBuffer.clear();
-            // TODO отрисовка
             client.setMove(moveID);
             client.move();
         }

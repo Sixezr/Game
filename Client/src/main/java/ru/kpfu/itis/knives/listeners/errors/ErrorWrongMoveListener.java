@@ -7,7 +7,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.ERROR_WRONG_MOVE;
 
 public class ErrorWrongMoveListener extends AbstractClientMessageListener {
 
-    protected ErrorWrongMoveListener() {
+    public ErrorWrongMoveListener() {
         super(ERROR_WRONG_MOVE);
     }
 

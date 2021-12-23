@@ -9,7 +9,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.GAME_START;
 
 public class GameStartListener extends AbstractClientMessageListener {
 
-    protected GameStartListener() {
+    public GameStartListener() {
         super(GAME_START);
     }
 
@@ -19,9 +19,10 @@ public class GameStartListener extends AbstractClientMessageListener {
             this.byteBuffer = ByteBuffer.allocate(message.getData().length);
             this.byteBuffer.put(message.getData());
             int clientID = byteBuffer.getInt();
+            int opponentID = byteBuffer.getInt();
             int moveID = byteBuffer.getInt();
             this.byteBuffer.clear();
-            client.initSession(clientID, moveID);
+            client.initSession(clientID, opponentID, moveID);
             client.move();
         }
     }

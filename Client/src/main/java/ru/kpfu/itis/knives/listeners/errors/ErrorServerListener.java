@@ -7,7 +7,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.ERROR_SERVER;
 
 public class ErrorServerListener extends AbstractClientMessageListener {
 
-    protected ErrorServerListener() {
+    public ErrorServerListener() {
         super(ERROR_SERVER);
     }
 

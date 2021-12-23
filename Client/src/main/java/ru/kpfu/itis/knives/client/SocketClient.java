@@ -1,14 +1,18 @@
 package ru.kpfu.itis.knives.client;
 
-public interface SocketClient {
+import ru.kpfu.itis.knives.listeners.ClientMessageListener;
+import ru.kpfu.itis.knives.protocol.Message;
 
-    void initSession(int anInt, int anInt1);
+public interface SocketClient {
+    void ready();
+
+    void initSession(int thisId, int opponentId, int currentId);
 
     void move();
 
     void end(int winnerID);
 
-    void paintTangle(float tangle);
+    void paintAngle(float angle);
 
     void setMove(int moveID);
 
@@ -22,5 +26,9 @@ public interface SocketClient {
 
     void left(int leaverID);
 
-    void ready();
+    void sendMessage(Message message);
+
+    void acceptMessage(Message message);
+
+    void registerListener(ClientMessageListener listener);
 }
