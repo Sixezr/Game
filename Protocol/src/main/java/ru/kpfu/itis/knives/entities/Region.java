@@ -245,9 +245,9 @@ public class Region {
     }
 
     public void calcAll() {
+        calcXBounds();
         calcSquare();
         calcIsland();
-        calcXBounds();
     }
 
     private Pair getPair(Pair thisPair, List<Pair> lastPairs) {
@@ -271,7 +271,10 @@ public class Region {
         List<Pair> result = new ArrayList<>();
         List<Float> listY = new ArrayList<>();
         for (Bound bound : bounds) {
-            if (bound.hasX(x)) {
+            if (bound.hasX(x) &&
+                    (!bound.isLine()  ||
+                            (Math.abs(bound.getK() - Float.MAX_VALUE) > 1e-3 &&
+                                    Math.abs(bound.getK() - Float.MIN_VALUE) > 1e-3))) {
                 listY.add(bound.getY(x));
             }
         }
