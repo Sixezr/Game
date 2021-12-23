@@ -7,6 +7,8 @@ import static ru.kpfu.itis.knives.Constants.*;
 
 public abstract class AbstractGameController implements GameControllerInterface {
     protected final GameSession session;
+    protected List<Region> opponentRegionParts;
+    protected boolean isDivided = false;
 
     public AbstractGameController(GameSession session) {
         this.session = session;
@@ -47,5 +49,46 @@ public abstract class AbstractGameController implements GameControllerInterface 
         bounds.add(line);
 
         return new Region(player, bounds);
+    }
+
+    @Override
+    public void divideOpponentRegion(Point currentUserPoint, Point knifeFallPoint) {
+        Region opponentRegion = session.getPlayerRegion(getOpponentPlayer());
+        opponentRegionParts = opponentRegion.divide(new Bound(false, currentUserPoint, knifeFallPoint));
+        isDivided = true;
+    }
+
+    @Override
+    public void recalculateRegions(Point opponentChoice) {
+        if (isDivided) {
+            Region currentUserRegion = session.getPlayerRegion(getCurrentPlayer());
+            for (Region opponentPart : opponentRegionParts) {
+                if (opponentPart.hasPoint(opponentChoice)) {
+                    session.updatePlayerRegionPair(getOpponentPlayer(), opponentPart);
+                    opponentRegionParts.remove(opponentPart);
+
+                    currentUserRegion.union(opponentRegionParts.get(0));
+                    session.updatePlayerRegionPair(getCurrentPlayer(), currentUserRegion);
+                }
+            }
+        }
+        isDivided = false;
+    }
+
+    @Override
+    public Player getCurrentPlayer() {
+        return session.getCurrentPlayer();
+    }
+
+    @Override
+    public Player getOpponentPlayer() {
+        List<Player> players = session.getPlayers();
+        players.remove(getCurrentPlayer());
+        return players.get(0);
+    }
+
+    @Override
+    public void setNewCurrentPlayer(Player player) {
+        session.setCurrentPlayer(player);
     }
 }
