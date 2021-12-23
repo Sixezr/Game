@@ -44,7 +44,6 @@ public final class WaitingVBox extends VBox {
     }
 
     // Getters
-
     public Button getCancelButton() {
         return cancelButton;
     }
