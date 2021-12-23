@@ -2,7 +2,6 @@ package ru.kpfu.itis.knives.game;
 
 import ru.kpfu.itis.knives.entities.*;
 
-import java.util.List;
 import java.util.Random;
 
 import static ru.kpfu.itis.knives.Constants.*;
@@ -23,23 +22,6 @@ public class ServerGameController extends AbstractGameController implements Serv
     }
 
     @Override
-    public Player getCurrentPlayer() {
-        return session.getCurrentPlayer();
-    }
-
-    @Override
-    public Player getOpponentPlayer() {
-        List<Player> players = session.getPlayers();
-        players.remove(getCurrentPlayer());
-        return players.get(0);
-    }
-
-    @Override
-    public void setNewCurrentPlayer(Player player) {
-        session.setCurrentPlayer(player);
-    }
-
-    @Override
     public float getRandomKnifeFallAngle() {
         return (float) (Math.random() * (MAX_ANGLE - MIN_ANGLE)) + MIN_ANGLE;
     }
@@ -50,11 +32,6 @@ public class ServerGameController extends AbstractGameController implements Serv
         float x = point.getX();
         float y = point.getY();
         return (x * x + y * y < r * r);
-    }
-
-    @Override
-    public void recalculateRegions(Point currentUserPoint, Point knifeFallPoint) {
-
     }
 
     @Override
