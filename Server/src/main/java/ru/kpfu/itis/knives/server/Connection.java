@@ -9,6 +9,7 @@ import ru.kpfu.itis.knives.streams.ProtocolOutputStream;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Objects;
 
 public class Connection implements Runnable {
     private ServerGameSession session;
@@ -56,5 +57,18 @@ public class Connection implements Runnable {
 
     public Player getPlayer() {
         return player;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Connection that = (Connection) o;
+        return Objects.equals(clientSocket, that.clientSocket) && Objects.equals(player, that.player);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(clientSocket, player);
     }
 }

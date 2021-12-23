@@ -5,20 +5,18 @@ import ru.kpfu.itis.knives.exceptions.MessageGenerationException;
 import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.protocol.Message;
 import ru.kpfu.itis.knives.server.Connection;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 
 import static ru.kpfu.itis.knives.Constants.MAX_PLAYER_NUM;
 import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
 public class StartGameListener extends AbstractMessageListener {
 
-    private Map<Connection, Integer> countPlayersMap;
+    private HashSet<Connection> connectionHashSet;
 
     public StartGameListener() {
         this.TYPE = CLIENT_READY;
-        countPlayersMap = new HashMap<>();
+        connectionHashSet = new HashSet<>();
     } //31
 
     @Override
@@ -30,15 +28,15 @@ public class StartGameListener extends AbstractMessageListener {
             try{
                 Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
                 session.sendMessage(connectionFrom, answer);
-                if(!countPlayersMap.containsKey(connectionFrom)){
-                    countPlayersMap.put(connectionFrom, 1);
+                if(!connectionHashSet.contains(connectionFrom)){
+                    connectionHashSet.add(connectionFrom);
                 }
             } catch (MessageGenerationException | ServerException e){
                 e.printStackTrace();
             }
-            if(countPlayersMap.size() == MAX_PLAYER_NUM){
+            if(connectionHashSet.size() == MAX_PLAYER_NUM){
                 session.startGame();
-                countPlayersMap.clear();
+                connectionHashSet.clear();
             }
         }
         else{
