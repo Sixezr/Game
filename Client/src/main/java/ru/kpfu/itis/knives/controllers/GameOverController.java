@@ -34,6 +34,7 @@ public class GameOverController extends AbstractController {
         mainPane.setBottom(new ProgressHBox("Игра окончена"));
 
         stage.setScene(new Scene(mainPane));
+        animate(mainPane);
     }
 
     // Private

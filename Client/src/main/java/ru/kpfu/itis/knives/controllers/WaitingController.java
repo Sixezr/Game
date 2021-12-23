@@ -31,6 +31,7 @@ public final class WaitingController extends AbstractController {
         mainPane.setBottom(new ProgressHBox("Поиск соперника..."));
 
         stage.setScene(new Scene(mainPane, stage.getWidth(), stage.getHeight()));
+        animate(mainPane);
     }
 
     // Private

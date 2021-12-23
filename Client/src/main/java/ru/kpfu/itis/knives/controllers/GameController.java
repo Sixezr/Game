@@ -81,6 +81,7 @@ public final class GameController extends AbstractController {
         mainPane.setCenter(contentHBox);
 
         stage.setScene(new Scene(mainPane));
+        animate(mainPane);
     }
 
     // Private

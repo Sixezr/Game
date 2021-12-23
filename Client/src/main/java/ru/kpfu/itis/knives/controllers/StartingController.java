@@ -32,5 +32,6 @@ public final class StartingController extends AbstractController {
         mainPane.setBottom(new ProgressHBox("Игра начинается"));
 
         stage.setScene(new Scene(mainPane));
+        animate(mainPane);
     }
 }
