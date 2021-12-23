@@ -16,8 +16,12 @@ import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Fonts;
 
 public final class HeadMenuBar extends MenuBar {
+    // UI
+    private final Label mainItemLabel;
+
     // Init
     public HeadMenuBar() {
+        mainItemLabel = new Label("Главная");
         configureMenuBar();
     }
 
@@ -25,7 +29,6 @@ public final class HeadMenuBar extends MenuBar {
     private void configureMenuBar() {
         setBackground(new Background(new BackgroundFill(Colors.lightBrown.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Label mainItemLabel = new Label("Главная");
         mainItemLabel.setTextFill(Color.WHITE);
         mainItemLabel.setFont(Fonts.robotoNormal13.getFont());
         Menu mainItem = new Menu(null, mainItemLabel);
@@ -54,5 +57,10 @@ public final class HeadMenuBar extends MenuBar {
 
         getMenus().addAll(mainItem, rulesItem, aboutItem);
         setMinHeight(20);
+    }
+
+    // Getters
+    public Label getMainItemLabel() {
+        return mainItemLabel;
     }
 }
