@@ -2,10 +2,10 @@ package ru.kpfu.itis.knives.listeners;
 
 import ru.kpfu.itis.knives.entities.Point;
 import ru.kpfu.itis.knives.exceptions.IllegalMessageTypeException;
+import ru.kpfu.itis.knives.exceptions.MessageGenerationException;
 import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.protocol.Message;
 import ru.kpfu.itis.knives.server.Connection;
-
 import java.nio.ByteBuffer;
 
 import static ru.kpfu.itis.knives.protocol.Protocol.*;
@@ -30,21 +30,40 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
 
             String errorText = isAnyError(point);
             if(errorText != null){
-                Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_POS, errorText);
                 try{
+                    Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_POS, errorText); //42
                     server.sendMessage(connectionFrom, errorAnswer);
-                } catch (ServerException e) {
+                } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
                 }
             }
 
-
+            int[] ints = new int[1];
+            if(gameController.checkPlayerRegionIsIsland(gameController.getCurrentPlayer()) ||
+                    !gameController.isPlayerHasEnoughTerritory(gameController.getCurrentPlayer())){
+                try{
+                    ints[0] = gameController.getOpponentPlayer().getId();
+                    Message answer = messageGenerator.createMessage(GAME_END, ints); //12
+                    server.sendBroadcastMessage(answer);
+                } catch (MessageGenerationException | ServerException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                try{
+                    ints[0] = gameController.getOpponentPlayer().getId();
+                    Message answer = messageGenerator.createMessage(MOVE_RESULT, ints); //15
+                    server.sendBroadcastMessage(answer);
+                } catch (MessageGenerationException | ServerException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         else{
-            Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format");
             try{
+                Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
                 server.sendMessage(connectionFrom, errorAnswer);
-            } catch (ServerException e) {
+            } catch (MessageGenerationException | ServerException e) {
                 e.printStackTrace();
             }
         }
