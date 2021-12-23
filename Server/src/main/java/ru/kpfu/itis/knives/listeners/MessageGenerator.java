@@ -73,10 +73,10 @@ public class MessageGenerator implements MessageGeneratorInterface {
         Message newMessage = new Message(type);
         switch (type) {
             case GAME_START:
-                if (ids.length != 2) {
+                if (ids.length != 3) {
                     throw new MessageGenerationException("Message of this type must contain 2 integer values");
                 } else {
-                    newMessage.setData(ByteBuffer.allocate(8).putInt(ids[0]).putInt(ids[1]).array());
+                    newMessage.setData(ByteBuffer.allocate(12).putInt(ids[0]).putInt(ids[1]).putInt(ids[2]).array());
                 }
                 break;
             case CLIENT_LEFT:

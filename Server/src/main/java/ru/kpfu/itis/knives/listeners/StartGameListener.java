@@ -28,9 +28,7 @@ public class StartGameListener extends AbstractMessageListener {
             try{
                 Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
                 session.sendMessage(connectionFrom, answer);
-                if(!connectionHashSet.contains(connectionFrom)){
-                    connectionHashSet.add(connectionFrom);
-                }
+                connectionHashSet.add(connectionFrom);
             } catch (MessageGenerationException | ServerException e){
                 e.printStackTrace();
             }

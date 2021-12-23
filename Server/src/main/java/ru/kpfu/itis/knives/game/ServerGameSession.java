@@ -78,9 +78,10 @@ public class ServerGameSession extends GameSession implements Runnable {
             }
             gameController.setRandomCurrentPlayer();
             for (Connection connection : connections) {
-                int[] ids = new int[2];
+                int[] ids = new int[3];
                 ids[0] = connection.getPlayer().getId();
-                ids[1] = gameController.getCurrentPlayer().getId();
+                ids[1] = gameController.getOpponentPlayer().getId();
+                ids[2] = gameController.getCurrentPlayer().getId();
                 connection.sendMessage(messageGenerator.createMessage(GAME_START, ids));
             }
         } else {
