@@ -12,7 +12,7 @@ public class StartGameListener extends AbstractServerMessageListener {
 
     public StartGameListener() {
         this.TYPE = CLIENT_READY;
-    }
+    } //31
 
     @Override
     public void handleMessage(Connection connectionFrom, Message message) {
@@ -21,7 +21,7 @@ public class StartGameListener extends AbstractServerMessageListener {
         }
         if((message.getData() == null) || (message.getData().length == 0)){
             try{
-                Message answer = messageGenerator.createEmptyMessage(SERVER_READY);
+                Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
                 server.sendMessage(connectionFrom, answer);
             } catch (MessageGenerationException | ServerException e){
                 e.printStackTrace();
@@ -29,7 +29,7 @@ public class StartGameListener extends AbstractServerMessageListener {
         }
         else{
             try{
-                Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format");
+                Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
                 server.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
                 e.printStackTrace();

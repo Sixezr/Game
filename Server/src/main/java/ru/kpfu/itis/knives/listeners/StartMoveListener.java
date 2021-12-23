@@ -15,7 +15,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
 
     public StartMoveListener(){
         this.TYPE = MOVE;
-    }
+    } //32
 
     @Override
     public void handleMessage(Connection connectionFrom, Message message) {
@@ -35,7 +35,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
             String errorText = isAnyError(point1, point2);
             if(errorText != null){
                 try{
-                    Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_MOVE, errorText);
+                    Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_MOVE, errorText); //41
                     server.sendMessage(connectionFrom, errorAnswer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
@@ -43,12 +43,16 @@ public class StartMoveListener extends AbstractServerMessageListener {
             }
 
             float agile = gameController.getRandomKnifeFallAngle();
-            float[] floats = new float[1];
-            floats[0] = agile;
             int[] ints = new int[1];
             if(agile >= MIN_ANGLE){
                 try{
                     ints[0] = gameController.getOpponentPlayer().getId();
+                    float[] floats = new float[5];
+                    floats[0] = agile;
+                    floats[1] = x1;
+                    floats[2] = y1;
+                    floats[3] = x2;
+                    floats[4] = y2;
                     Message answer = messageGenerator.createMessage(MOVE_RESULT_GOOD, floats, ints); //13
                     server.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
@@ -58,6 +62,8 @@ public class StartMoveListener extends AbstractServerMessageListener {
             else{
                 try{
                     ints[0] = gameController.getOpponentPlayer().getId();
+                    float[] floats = new float[1];
+                    floats[0] = agile;
                     Message answer = messageGenerator.createMessage(MOVE_RESULT_BAD, floats, ints); //14
                     server.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
@@ -67,7 +73,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
         }
         else{
             try{
-                Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format");
+                Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
                 server.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
                 e.printStackTrace();

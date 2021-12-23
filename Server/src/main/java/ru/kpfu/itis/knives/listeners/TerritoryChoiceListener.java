@@ -14,7 +14,7 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
 
     public TerritoryChoiceListener(){
         this.TYPE = MOVE_POSITION;
-    }
+    } //33
 
     @Override
     public void handleMessage(Connection connectionFrom, Message message) {
@@ -52,7 +52,10 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
             else{
                 try{
                     ints[0] = gameController.getOpponentPlayer().getId();
-                    Message answer = messageGenerator.createMessage(MOVE_RESULT, ints); //15
+                    float[] floats = new float[2];
+                    floats[0] = x;
+                    floats[1] = y;
+                    Message answer = messageGenerator.createMessage(MOVE_RESULT, floats, ints); //15
                     server.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();

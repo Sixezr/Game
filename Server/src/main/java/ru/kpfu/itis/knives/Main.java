@@ -1,6 +1,7 @@
 package ru.kpfu.itis.knives;
 
 import ru.kpfu.itis.knives.exceptions.ServerException;
+import ru.kpfu.itis.knives.listeners.ClientLeftListener;
 import ru.kpfu.itis.knives.listeners.StartGameListener;
 import ru.kpfu.itis.knives.listeners.StartMoveListener;
 import ru.kpfu.itis.knives.listeners.TerritoryChoiceListener;
@@ -14,6 +15,7 @@ public class Main {
             knivesServer.registerListener(new StartGameListener());
             knivesServer.registerListener(new StartMoveListener());
             knivesServer.registerListener(new TerritoryChoiceListener());
+            knivesServer.registerListener(new ClientLeftListener());
 
             knivesServer.startServer();
         } catch (ServerException e) {
