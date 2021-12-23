@@ -1,5 +1,7 @@
 package ru.kpfu.itis.knives.entities;
 
+import java.util.List;
+
 public interface GameControllerInterface {
     Region createStartRegion(Player player, boolean isLeft);
     void addPlayer(Player player);
@@ -10,4 +12,7 @@ public interface GameControllerInterface {
     Player getCurrentPlayer();
     Player getOpponentPlayer();
     void setNewCurrentPlayer(Player player);
+    GameSession getSession();
+    List<Region> getOpponentRegionParts();
+    boolean isDivided();
 }

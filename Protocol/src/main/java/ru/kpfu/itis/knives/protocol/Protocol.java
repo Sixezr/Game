@@ -26,4 +26,5 @@ public class Protocol {
 
     public static final int PAYLOAD_LENGTH = 2;
     public static final int MAX_MESSAGE_LENGTH = 1000;
+    public static final int PORT = 666;
 }

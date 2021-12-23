@@ -104,4 +104,24 @@ public abstract class AbstractGameController implements GameControllerInterface 
     public boolean checkPointBelongsToPlayerRegion(Point point, Player player) {
         return session.getPlayerRegion(player).hasPoint(point);
     }
+
+    public GameSession getSession() {
+        return session;
+    }
+
+    public List<Region> getOpponentRegionParts() {
+        return opponentRegionParts;
+    }
+
+    public void setOpponentRegionParts(List<Region> opponentRegionParts) {
+        this.opponentRegionParts = opponentRegionParts;
+    }
+
+    public boolean isDivided() {
+        return isDivided;
+    }
+
+    public void setDivided(boolean divided) {
+        isDivided = divided;
+    }
 }
