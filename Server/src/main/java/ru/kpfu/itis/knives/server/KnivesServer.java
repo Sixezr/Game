@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static ru.kpfu.itis.knives.Constants.MAX_PLAYER_NUM;
-import static ru.kpfu.itis.knives.Constants.PORT;
+import static ru.kpfu.itis.knives.protocol.Protocol.PORT;
 
 public class KnivesServer implements ServerInterface {
     private ServerSocket serverSocket;
