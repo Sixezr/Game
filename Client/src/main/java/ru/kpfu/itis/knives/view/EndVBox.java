@@ -2,6 +2,7 @@ package ru.kpfu.itis.knives.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -9,13 +10,18 @@ import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.helpers.Fonts;
 
-public final class StartingVBox extends VBox {
+public class EndVBox extends VBox {
+    // UI
+    private final Button okButton;
+
     // Properties
-    private final boolean isCurrentPlayerFirst;
+    private final boolean isCurrentPlayerWon;
 
     // Init
-    public StartingVBox(boolean isCurrentPlayerFirst) {
-        this.isCurrentPlayerFirst = isCurrentPlayerFirst;
+    public EndVBox(boolean isCurrentPlayerWon) {
+        okButton = new Button("Окей");
+        this.isCurrentPlayerWon = isCurrentPlayerWon;
+
         configureVBox();
     }
 
@@ -28,19 +34,12 @@ public final class StartingVBox extends VBox {
         Label mainNameLabel = new Label(Constants.MAIN_NAME);
         mainNameLabel.setFont(Fonts.sarpanchBold64.getFont());
 
-        Label descriptionLabel = new Label("Игра начинается");
+        Label descriptionLabel = new Label("Результат:");
         descriptionLabel.setFont(Fonts.robotoBold36.getFont());
 
         HBox playersHBox = new HBox();
         playersHBox.setAlignment(Pos.CENTER);
         playersHBox.setSpacing(200);
-
-        Label currentPlayerLabel = new Label("Вы");
-        currentPlayerLabel.setMinWidth(150);
-        currentPlayerLabel.setPadding(new Insets(5, 55, 5, 55));
-        currentPlayerLabel.setFont(Fonts.robotoNormal26.getFont());
-        currentPlayerLabel.setTextFill(Color.WHITE);
-        currentPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
 
         Label enemyPlayerLabel = new Label("Соперник");
         enemyPlayerLabel.setMinWidth(150);
@@ -49,11 +48,28 @@ public final class StartingVBox extends VBox {
         enemyPlayerLabel.setTextFill(Color.WHITE);
         enemyPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
 
-        Label winnerLabel = isCurrentPlayerFirst ? currentPlayerLabel : enemyPlayerLabel;
+        Label currentPlayerLabel = new Label("Вы");
+        currentPlayerLabel.setMinWidth(150);
+        currentPlayerLabel.setPadding(new Insets(5, 55, 5, 55));
+        currentPlayerLabel.setFont(Fonts.robotoNormal26.getFont());
+        currentPlayerLabel.setTextFill(Color.WHITE);
+        currentPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
+
+        Label winnerLabel = isCurrentPlayerWon ? currentPlayerLabel : enemyPlayerLabel;
         winnerLabel.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, new CornerRadii(15), new BorderWidths(4))));
 
         playersHBox.getChildren().addAll(currentPlayerLabel, enemyPlayerLabel);
 
-        getChildren().addAll(mainNameLabel, descriptionLabel, playersHBox);
+        okButton.setPadding(new Insets(5, 20, 5, 20));
+        okButton.setFont(Fonts.robotoNormal18.getFont());
+        okButton.setTextFill(Color.WHITE);
+        okButton.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
+
+        getChildren().addAll(mainNameLabel, descriptionLabel, playersHBox, okButton);
+    }
+
+    // Getters
+    public Button getOkButton() {
+        return okButton;
     }
 }

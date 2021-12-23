@@ -15,7 +15,7 @@ import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 
-public class GameController extends AbstractController {
+public final class GameController extends AbstractController {
     // UI
     private final BorderPane mainPane;
     private final ProgressHBox progressHBox;
@@ -24,10 +24,16 @@ public class GameController extends AbstractController {
     private final KnifeLocationCanvas knifeLocationCanvas;
     private final VBox messagesVBox;
     private final Label messageLabel;
+    private final HeadMenuBar headMenuBar;
+
+    // Properties
+    private final AlertController alertController;
 
     // Init
     public GameController(Stage stage) {
         super(stage);
+
+        alertController = new AlertController();
 
         mainPane = new BorderPane();
         progressHBox = new ProgressHBox("Игра началась");
@@ -36,17 +42,19 @@ public class GameController extends AbstractController {
         messagesVBox = new VBox();
         messageLabel = new Label("Ваш ход");
         knifeLocationCanvas = new KnifeLocationCanvas();
+        headMenuBar = new HeadMenuBar();
 
         stage.setMinWidth(1125);
         stage.setMinHeight(700);
 
         initListeners();
+        addActions();
     }
 
     // Create scene
     @Override
     public void createScene() {
-        mainPane.setTop(new HeadMenuBar());
+        mainPane.setTop(headMenuBar);
 
         mainPane.setBottom(progressHBox);
 
@@ -80,6 +88,16 @@ public class GameController extends AbstractController {
         gameFieldCanvas.setOnMouseClicked(event -> {
             gameFieldCanvas.drawPoint(event.getX(), event.getY(), Color.AQUA);
             knifeLocationCanvas.drawKnifeWithIncline(15, KnifeState.success);
+        });
+    }
+
+    private void addActions() {
+        headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
+            alertController.createExitAlert(() -> {
+                // TODO: add exit from room in server
+                AbstractController initialController = new InitialController(stage);
+                initialController.createScene();
+            });
         });
     }
 }

@@ -15,7 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class KnifeLocationCanvas extends Canvas {
+public final class KnifeLocationCanvas extends Canvas {
     // Const
     private static final double WIDTH = 400;
     private static final double HEIGHT = 250;
@@ -42,47 +42,42 @@ public class KnifeLocationCanvas extends Canvas {
      * @apiNote Run in another thread!
      */
     public void drawKnifeWithIncline(double incline, KnifeState state) {
-        try {
-            context.clearRect(0, 0, getWidth(), getHeight());
+        context.clearRect(0, 0, getWidth(), getHeight());
 
-            FadeTransition animation = new FadeTransition(Duration.seconds(1), this);
-            animation.setFromValue(0);
-            animation.setToValue(1);
-            animation.setCycleCount(1);
-            animation.play();
+        FadeTransition animation = new FadeTransition(Duration.seconds(1), this);
+        animation.setFromValue(0);
+        animation.setToValue(1);
+        animation.setCycleCount(1);
+        animation.play();
 
-            drawBackground();
+        drawBackground();
 
-            Image image = new Image(getClass().getResourceAsStream(FILE_NAME));
+        Image image = new Image(getClass().getResourceAsStream(FILE_NAME));
 
-            double endX = WIDTH / 2 - image.getWidth();
-            double endY = HEIGHT * 0.75 - image.getHeight() + Math.abs((90 - incline) / RATIO);
+        double endX = WIDTH / 2 - image.getWidth();
+        double endY = HEIGHT * 0.75 - image.getHeight() + Math.abs((90 - incline) / RATIO);
 
-            context.save();
-            rotate(90 - incline, endX + image.getWidth() / 2, endY + image.getHeight() / 2);
+        context.save();
+        rotate(90 - incline, endX + image.getWidth() / 2, endY + image.getHeight() / 2);
 
-            context.drawImage(image, endX, endY);
+        context.drawImage(image, endX, endY);
 
-            context.restore();
+        context.restore();
 
-            context.setFill(Colors.darkBlue.getColor());
-            context.setFont(Fonts.robotoNormal30.getFont());
+        context.setFill(Colors.darkBlue.getColor());
+        context.setFont(Fonts.robotoNormal30.getFont());
 
-            Text text = new Text(state.label);
-            text.setFont(Fonts.robotoNormal30.getFont());
-            double wordWidth = text.getLayoutBounds().getWidth();
+        Text text = new Text(state.label);
+        text.setFont(Fonts.robotoNormal30.getFont());
+        double wordWidth = text.getLayoutBounds().getWidth();
 
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    context.fillText(state.label, WIDTH / 2 - wordWidth / 2, 30);
-                }
-            }, 1000);
-        } catch (Exception e) {
-            // TODO: delete printStackTrace
-            e.printStackTrace();
-        }
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                context.fillText(state.label, WIDTH / 2 - wordWidth / 2, 30);
+            }
+        }, 1000);
     }
 
     // Private

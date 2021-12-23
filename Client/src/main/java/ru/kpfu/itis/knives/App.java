@@ -22,6 +22,7 @@ public final class App extends Application {
         primaryStage.setWidth(screenBounds.getWidth());
 
         primaryStage.setOnCloseRequest(event -> {
+            // TODO: exit from room on server, if there is
             Platform.exit();
         });
         primaryStage.setTitle(Constants.MAIN_NAME);

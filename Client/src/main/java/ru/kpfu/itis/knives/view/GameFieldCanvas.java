@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import ru.kpfu.itis.knives.entities.Region;
 import ru.kpfu.itis.knives.helpers.Colors;
 
-public class GameFieldCanvas extends Canvas {
+public final class GameFieldCanvas extends Canvas {
     // Const
     private static final double DIAMETER = 500;
     private static final double RATIO = 2.5;

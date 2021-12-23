@@ -10,7 +10,7 @@ import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.helpers.Fonts;
 
-public class AboutController extends AbstractController {
+public final class AboutController extends AbstractController {
     // UI
     private final StackPane mainPane;
 

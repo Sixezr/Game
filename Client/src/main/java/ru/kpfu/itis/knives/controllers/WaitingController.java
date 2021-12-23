@@ -7,7 +7,7 @@ import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 import ru.kpfu.itis.knives.view.WaitingVBox;
 
-public class WaitingController extends AbstractController {
+public final class WaitingController extends AbstractController {
     // UI
     private final BorderPane mainPane;
     private final WaitingVBox waitingVBox;
