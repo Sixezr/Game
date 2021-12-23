@@ -4,12 +4,15 @@ import javafx.animation.FadeTransition;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ru.kpfu.itis.knives.client.SocketClient;
 
 public abstract class AbstractController {
     protected final Stage stage;
+    protected final SocketClient socketClient;
 
-    protected AbstractController(Stage stage) {
+    protected AbstractController(Stage stage, SocketClient socketClient) {
         this.stage = stage;
+        this.socketClient = socketClient;
     }
 
     public abstract void createScene();

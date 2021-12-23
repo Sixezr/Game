@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Fonts;
 import ru.kpfu.itis.knives.helpers.KnifeState;
@@ -30,8 +31,8 @@ public final class GameController extends AbstractController {
     private final AlertController alertController;
 
     // Init
-    public GameController(Stage stage) {
-        super(stage);
+    public GameController(Stage stage, SocketClient socketClient) {
+        super(stage, socketClient);
 
         alertController = new AlertController();
 
@@ -96,7 +97,7 @@ public final class GameController extends AbstractController {
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
             alertController.createExitAlert(() -> {
                 // TODO: add exit from room in server
-                AbstractController initialController = new InitialController(stage);
+                AbstractController initialController = new InitialController(stage, socketClient);
                 initialController.createScene();
             });
         });

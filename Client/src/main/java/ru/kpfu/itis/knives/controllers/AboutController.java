@@ -16,7 +16,7 @@ public final class AboutController extends AbstractController {
 
     // Init
     public AboutController(Stage stage) {
-        super(stage);
+        super(stage, null);
         mainPane = new StackPane();
 
         stage.setMinWidth(300);

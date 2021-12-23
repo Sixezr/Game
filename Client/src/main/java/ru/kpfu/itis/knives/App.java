@@ -28,7 +28,7 @@ public final class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        SocketClient socketClient;
+        SocketClient socketClient = null;
         try {
             socketClient = new SocketClientImpl(InetAddress.getByName(ru.kpfu.itis.knives.Constants.HOST), Protocol.PORT);
             initListeners(socketClient);
@@ -47,7 +47,7 @@ public final class App extends Application {
         primaryStage.setTitle(Constants.MAIN_NAME);
 
         // todo update abstract controller constructor to pass socket client
-        AbstractController initialController = new InitialController(primaryStage);
+        AbstractController initialController = new InitialController(primaryStage, socketClient);
         initialController.createScene();
         primaryStage.show();
     }

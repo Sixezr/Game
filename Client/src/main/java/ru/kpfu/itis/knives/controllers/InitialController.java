@@ -3,6 +3,7 @@ package ru.kpfu.itis.knives.controllers;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.InitialVBox;
 import ru.kpfu.itis.knives.view.ProgressHBox;
@@ -13,8 +14,8 @@ public final class InitialController extends AbstractController {
     private final InitialVBox initialVBox;
 
     // Init
-    public InitialController(Stage stage) {
-        super(stage);
+    public InitialController(Stage stage, SocketClient socketClient) {
+        super(stage, socketClient);
         mainPane = new BorderPane();
         initialVBox = new InitialVBox();
 
@@ -38,8 +39,8 @@ public final class InitialController extends AbstractController {
     private void addActions() {
         initialVBox.getStartButton().setOnAction(event -> {
             // TODO: Network actions
-            AbstractController waitinController = new WaitingController(stage);
-            waitinController.createScene();
+            AbstractController waitingController = new WaitingController(stage, socketClient);
+            waitingController.createScene();
         });
     }
 }

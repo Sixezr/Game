@@ -3,6 +3,7 @@ package ru.kpfu.itis.knives.controllers;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.view.EndVBox;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.ProgressHBox;
@@ -14,8 +15,8 @@ public class GameOverController extends AbstractController {
     private final HeadMenuBar headMenuBar;
 
     // Init
-    public GameOverController(Stage stage, boolean isCurrentPlayerWon) {
-        super(stage);
+    public GameOverController(Stage stage, SocketClient socketClient, boolean isCurrentPlayerWon) {
+        super(stage, socketClient);
         mainPane = new BorderPane();
         endVBox = new EndVBox(isCurrentPlayerWon);
         headMenuBar = new HeadMenuBar();
@@ -40,12 +41,12 @@ public class GameOverController extends AbstractController {
     // Private
     private void addActions() {
         endVBox.getOkButton().setOnAction(event -> {
-            AbstractController initialController = new InitialController(stage);
+            AbstractController initialController = new InitialController(stage, socketClient);
             initialController.createScene();
         });
 
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
-            AbstractController initialController = new InitialController(stage);
+            AbstractController initialController = new InitialController(stage, socketClient);
             initialController.createScene();
         });
     }

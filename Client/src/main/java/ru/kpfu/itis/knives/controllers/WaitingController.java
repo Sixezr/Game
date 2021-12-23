@@ -3,6 +3,7 @@ package ru.kpfu.itis.knives.controllers;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 import ru.kpfu.itis.knives.view.WaitingVBox;
@@ -14,8 +15,8 @@ public final class WaitingController extends AbstractController {
     private final HeadMenuBar headMenuBar;
 
     // Init
-    public WaitingController(Stage stage) {
-        super(stage);
+    public WaitingController(Stage stage, SocketClient socketClient) {
+        super(stage, socketClient);
         mainPane = new BorderPane();
         waitingVBox = new WaitingVBox();
         headMenuBar = new HeadMenuBar();
@@ -40,13 +41,13 @@ public final class WaitingController extends AbstractController {
     private void addActions() {
         waitingVBox.getCancelButton().setOnAction(event -> {
             // TODO: Network actions
-            AbstractController initialController = new InitialController(stage);
+            AbstractController initialController = new InitialController(stage, socketClient);
             initialController.createScene();
         });
 
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
             // TODO: Network actions
-            AbstractController initialController = new InitialController(stage);
+            AbstractController initialController = new InitialController(stage, socketClient);
             initialController.createScene();
         });
     }

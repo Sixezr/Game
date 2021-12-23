@@ -17,7 +17,7 @@ public final class RulesController extends AbstractController {
 
     // Init
     public RulesController(Stage stage) {
-        super(stage);
+        super(stage, null);
         mainPane = new StackPane();
 
         stage.setMinWidth(450);
