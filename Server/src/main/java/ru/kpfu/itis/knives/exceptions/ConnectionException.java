@@ -1,7 +1,6 @@
 package ru.kpfu.itis.knives.exceptions;
 
-public class ConnectionException extends RuntimeException
-{
+public class ConnectionException extends RuntimeException {
     public ConnectionException() {
     }
 

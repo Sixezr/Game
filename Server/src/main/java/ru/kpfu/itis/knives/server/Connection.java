@@ -38,17 +38,18 @@ public class Connection implements Runnable {
                 session.acceptMessage(this, message);
             }
         } catch (IOException e) {
-            // пока неизвестно что делать в другом потоке и неизвестно нормально ли этот поток будет работать
+            throw new ConnectionException(e);
         }
     }
 
     public void sendMessage(Message message) throws ConnectionException {
-        // todo : another thread maybe
-        try {
-            outputStream.writeMessage(message);
-        } catch (IOException e) {
-            throw new ConnectionException(e);
-        }
+        Thread newThread = new Thread( () -> {
+            try {
+                outputStream.writeMessage(message);
+            } catch (IOException e) {
+                throw new ConnectionException(e);
+            }
+        });
     }
 
     public void setPlayer(Player player) {

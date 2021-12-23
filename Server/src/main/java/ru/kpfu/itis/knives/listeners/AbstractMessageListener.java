@@ -12,6 +12,10 @@ public abstract class AbstractMessageListener implements MessageListener {
     protected ServerGameControllerInterface gameController;
     protected MessageGeneratorInterface messageGenerator;
 
+    public AbstractMessageListener(int type) {
+        this.TYPE = type;
+    }
+
     @Override
     public void init(ServerInterface knivesServer) {
         this.server = knivesServer;

@@ -14,7 +14,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.*;
 public class StartMoveListener extends AbstractMessageListener {
 
     public StartMoveListener(){
-        this.TYPE = MOVE;
+        super(MOVE);
     } //32
 
     @Override

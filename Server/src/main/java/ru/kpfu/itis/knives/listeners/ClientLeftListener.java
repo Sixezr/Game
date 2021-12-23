@@ -12,7 +12,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.*;
 public class ClientLeftListener extends AbstractMessageListener {
 
     public ClientLeftListener(){
-        this.TYPE = CLIENT_LEFT; //34
+        super(CLIENT_LEFT); //34
     }
 
     @Override

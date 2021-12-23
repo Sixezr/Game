@@ -13,7 +13,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.*;
 public class TerritoryChoiceListener extends AbstractMessageListener {
 
     public TerritoryChoiceListener(){
-        this.TYPE = MOVE_POSITION;
+        super(MOVE_POSITION);
     } //33
 
     @Override

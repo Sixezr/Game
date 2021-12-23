@@ -15,7 +15,7 @@ public class StartGameListener extends AbstractMessageListener {
     private HashSet<Connection> connectionHashSet;
 
     public StartGameListener() {
-        this.TYPE = CLIENT_READY;
+        super(CLIENT_READY);
         connectionHashSet = new HashSet<>();
     } //31
 
