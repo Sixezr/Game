@@ -19,10 +19,15 @@ public class Bound {
         points.add(p2);
         Collections.sort(points);
         if (line) {
-            this.k = (points.get(1).getY() - points.get(0).getY()) / (points.get(1).getX() - points.get(0).getX());
-            this.b = points.get(0).getY() - (this.k) * points.get(0).getX();
+            if (points.get(1).getX() - points.get(0).getX() != 0) {
+                this.k = (points.get(1).getY() - points.get(0).getY()) / (points.get(1).getX() - points.get(0).getX());
+                this.b = points.get(0).getY() - (this.k) * points.get(0).getX();
+            } else {
+                this.k = points.get(1).getY() - points.get(0).getY() >= 0 ? Float.MAX_VALUE : Float.MIN_VALUE;
+                this.b = 0;
+            }
         } else {
-            if (points.get(0).getX() < 0f) quarter = points.get(0).getY() >= 0f ? 2 : 3;
+            if (points.get(0).getX() < 0f) quarter = points.get(1).getY() >= 0f ? 2 : 3;
             else quarter = points.get(0).getY() >= 0f ? 1 : 4;
         }
     }
