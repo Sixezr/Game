@@ -14,10 +14,11 @@ import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
 public class StartGameListener extends AbstractServerMessageListener {
 
-    private Map<Connection, Integer> countPlayersMap = new HashMap<>();
+    private Map<Connection, Integer> countPlayersMap;
 
     public StartGameListener() {
         this.TYPE = CLIENT_READY;
+        countPlayersMap = new HashMap<>();
     } //31
 
     @Override
