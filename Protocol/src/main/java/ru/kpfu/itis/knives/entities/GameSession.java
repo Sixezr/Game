@@ -17,6 +17,10 @@ public class GameSession {
         playerRegionMap.put(player, region);
     }
 
+    public void updatePlayerRegionPair(Player player, Region region) {
+        playerRegionMap.replace(player, region);
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
