@@ -10,8 +10,12 @@ import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.helpers.Fonts;
 
 public final class StartingVBox extends VBox {
+    // Properties
+    private final boolean isCurrentPlayerFirst;
+
     // Init
-    public StartingVBox() {
+    public StartingVBox(boolean isCurrentPlayerFirst) {
+        this.isCurrentPlayerFirst = isCurrentPlayerFirst;
         configureVBox();
     }
 
@@ -31,13 +35,11 @@ public final class StartingVBox extends VBox {
         playersHBox.setAlignment(Pos.CENTER);
         playersHBox.setSpacing(200);
 
-        // TODO: add animation for first player label
         Label currentPlayerLabel = new Label("Вы");
         currentPlayerLabel.setPadding(new Insets(5, 20, 5, 20));
         currentPlayerLabel.setFont(Fonts.robotoNormal26.getFont());
         currentPlayerLabel.setTextFill(Color.WHITE);
         currentPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
-
 
         Label enemyPlayerLabel = new Label("Соперник");
         enemyPlayerLabel.setPadding(new Insets(5, 20, 5, 20));
@@ -45,6 +47,8 @@ public final class StartingVBox extends VBox {
         enemyPlayerLabel.setTextFill(Color.WHITE);
         enemyPlayerLabel.setBackground(new Background(new BackgroundFill(Colors.darkBrown.getColor(), new CornerRadii(15), Insets.EMPTY)));
 
+        Label animateLabel = isCurrentPlayerFirst ? currentPlayerLabel : enemyPlayerLabel;
+        animateLabel.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, new CornerRadii(15), new BorderWidths(4))));
 
         playersHBox.getChildren().addAll(currentPlayerLabel, enemyPlayerLabel);
 

@@ -11,10 +11,14 @@ public final class StartingController extends AbstractController {
     // UI
     private final BorderPane mainPane;
 
+    // Properties
+    private final boolean isCurrentPlayerFirst;
+
     // Init
-    public StartingController(Stage stage) {
+    public StartingController(Stage stage, boolean isCurrentPlayerFirst) {
         super(stage);
         mainPane = new BorderPane();
+        this.isCurrentPlayerFirst = isCurrentPlayerFirst;
 
         stage.setMinWidth(750);
         stage.setMinHeight(400);
@@ -24,7 +28,7 @@ public final class StartingController extends AbstractController {
     @Override
     public void createScene() {
         mainPane.setTop(new HeadMenuBar());
-        mainPane.setCenter(new StartingVBox());
+        mainPane.setCenter(new StartingVBox(isCurrentPlayerFirst));
         mainPane.setBottom(new ProgressHBox("Игра начинается"));
 
         stage.setScene(new Scene(mainPane));
