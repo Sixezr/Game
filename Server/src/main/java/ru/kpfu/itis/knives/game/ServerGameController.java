@@ -53,25 +53,26 @@ public class ServerGameController extends AbstractGameController implements Serv
     }
 
     @Override
+    public void recalculateRegions(Point currentUserPoint, Point knifeFallPoint) {
+
+    }
+
+    @Override
     public boolean checkPointBelongsToPlayerRegion(Point point, Player player) {
         // todo: maybe some checks
         return session.getPlayerRegion(player).hasPoint(point);
     }
 
     @Override
-    public boolean checkRegionIsIsland(Region region) {
-        return region.isIsland();
+    public boolean checkPlayerRegionIsIsland(Player player) {
+        return false;
     }
+
 
     @Override
     public boolean isPlayerHasEnoughTerritory(Player player) {
         // todo: THINK BETTER
         return session.getPlayerRegion(player).getSquare() > MIN_SQUARE;
-    }
-
-    @Override
-    public boolean checkPointBelongsToRegion(Point point, Region region) {
-        return region.hasPoint(point);
     }
 
     @Override
