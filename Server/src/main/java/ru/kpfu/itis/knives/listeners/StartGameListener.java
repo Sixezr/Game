@@ -12,7 +12,7 @@ import java.util.Map;
 import static ru.kpfu.itis.knives.Constants.MAX_PLAYER_NUM;
 import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
-public class StartGameListener extends AbstractServerMessageListener {
+public class StartGameListener extends AbstractMessageListener {
 
     private Map<Connection, Integer> countPlayersMap;
 
@@ -29,7 +29,7 @@ public class StartGameListener extends AbstractServerMessageListener {
         if((message.getData() == null) || (message.getData().length == 0)){
             try{
                 Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
-                server.sendMessage(connectionFrom, answer);
+                session.sendMessage(connectionFrom, answer);
                 if(!countPlayersMap.containsKey(connectionFrom)){
                     countPlayersMap.put(connectionFrom, 1);
                 }
@@ -37,17 +37,24 @@ public class StartGameListener extends AbstractServerMessageListener {
                 e.printStackTrace();
             }
             if(countPlayersMap.size() == MAX_PLAYER_NUM){
-                server.startGame();
+                session.startGame();
                 countPlayersMap.clear();
             }
         }
         else{
             try{
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
-                server.sendMessage(connectionFrom, errorAnswer);
+                session.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public MessageListener getNewInstance() {
+        StartGameListener newInstance = new StartGameListener();
+        newInstance.init(server);
+        return newInstance;
     }
 }

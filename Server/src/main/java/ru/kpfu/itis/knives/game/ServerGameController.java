@@ -27,28 +27,26 @@ public class ServerGameController extends AbstractGameController implements Serv
     }
 
     @Override
-    public boolean checkPointIsInCircle(Point point) {
+    public boolean isPointInCircle(Point point) {
         float r = START_MAX_X - START_0;
         float x = point.getX();
         float y = point.getY();
-        return (x * x + y * y < r * r);
+        return (!(x * x + y * y < r * r));
     }
 
     @Override
     public boolean checkPointBelongsToPlayerRegion(Point point, Player player) {
-        // todo: maybe some checks
         return session.getPlayerRegion(player).hasPoint(point);
     }
 
     @Override
     public boolean checkPlayerRegionIsIsland(Player player) {
-        return false;
+        return session.getPlayerRegion(player).isIsland();
     }
 
 
     @Override
     public boolean isPlayerHasEnoughTerritory(Player player) {
-        // todo: THINK BETTER
         return session.getPlayerRegion(player).getSquare() > MIN_SQUARE;
     }
 
@@ -57,5 +55,16 @@ public class ServerGameController extends AbstractGameController implements Serv
         int MAX = 1;
         int MIN = 0;
         session.setCurrentPlayer(session.getPlayers().get((int) (Math.random() * (MAX - MIN + 1) + MIN)));
+    }
+
+    @Override
+    public void invalidateGameSession() {
+        session.invalidate();
+    }
+
+    @Override
+    public void createNewGameSession() {
+        session.invalidate();
+        session.init();
     }
 }

@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
 import static ru.kpfu.itis.knives.Constants.MIN_ANGLE;
 import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
-public class StartMoveListener extends AbstractServerMessageListener {
+public class StartMoveListener extends AbstractMessageListener {
 
     public StartMoveListener(){
         this.TYPE = MOVE;
@@ -36,7 +36,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
             if(errorText != null){
                 try{
                     Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_MOVE, errorText); //41
-                    server.sendMessage(connectionFrom, errorAnswer);
+                    session.sendMessage(connectionFrom, errorAnswer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
                 }
@@ -54,7 +54,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
                     floats[3] = x2;
                     floats[4] = y2;
                     Message answer = messageGenerator.createMessage(MOVE_RESULT_GOOD, floats, ints); //13
-                    server.sendBroadcastMessage(answer);
+                    session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
                 }
@@ -65,7 +65,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
                     float[] floats = new float[1];
                     floats[0] = agile;
                     Message answer = messageGenerator.createMessage(MOVE_RESULT_BAD, floats, ints); //14
-                    server.sendBroadcastMessage(answer);
+                    session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
                 }
@@ -74,7 +74,7 @@ public class StartMoveListener extends AbstractServerMessageListener {
         else{
             try{
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
-                server.sendMessage(connectionFrom, errorAnswer);
+                session.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
                 e.printStackTrace();
             }
@@ -82,10 +82,10 @@ public class StartMoveListener extends AbstractServerMessageListener {
     }
 
     private String isAnyError(Point point1, Point point2){
-        if(!gameController.checkPointIsInCircle(point1)){
+        if(gameController.isPointInCircle(point1)){
             return "The player's location is outside the circle";
         }
-        if(!gameController.checkPointIsInCircle(point2)){
+        if(gameController.isPointInCircle(point2)){
             return "The throwing point is outside the circle";
         }
         if(gameController.checkPointBelongsToPlayerRegion(point1, gameController.getOpponentPlayer())){
@@ -95,5 +95,12 @@ public class StartMoveListener extends AbstractServerMessageListener {
             return "The throwing point is not the opponent's territory";
         }
         return null;
+    }
+
+    @Override
+    public MessageListener getNewInstance() {
+        StartMoveListener newInstance = new StartMoveListener();
+        newInstance.init(server);
+        return newInstance;
     }
 }

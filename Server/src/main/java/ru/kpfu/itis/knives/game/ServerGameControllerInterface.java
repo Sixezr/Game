@@ -7,9 +7,11 @@ import ru.kpfu.itis.knives.entities.Point;
 public interface ServerGameControllerInterface extends GameControllerInterface {
     int getRandomPlayerId();
     float getRandomKnifeFallAngle();
-    boolean checkPointIsInCircle(Point point);
+    boolean isPointInCircle(Point point);
     boolean checkPointBelongsToPlayerRegion(Point point, Player player);
     boolean checkPlayerRegionIsIsland(Player player);
     boolean isPlayerHasEnoughTerritory(Player player);
     void setRandomCurrentPlayer();
+    void invalidateGameSession();
+    void createNewGameSession();
 }

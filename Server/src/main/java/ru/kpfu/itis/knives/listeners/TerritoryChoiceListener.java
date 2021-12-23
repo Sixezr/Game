@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 
 import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
-public class TerritoryChoiceListener extends AbstractServerMessageListener{
+public class TerritoryChoiceListener extends AbstractMessageListener {
 
     public TerritoryChoiceListener(){
         this.TYPE = MOVE_POSITION;
@@ -32,7 +32,7 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
             if(errorText != null){
                 try{
                     Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_POS, errorText); //42
-                    server.sendMessage(connectionFrom, errorAnswer);
+                    session.sendMessage(connectionFrom, errorAnswer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
                 }
@@ -44,7 +44,7 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
                 try{
                     ints[0] = gameController.getOpponentPlayer().getId();
                     Message answer = messageGenerator.createMessage(GAME_END, ints); //12
-                    server.sendBroadcastMessage(answer);
+                    session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
                 }
@@ -56,7 +56,7 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
                     floats[0] = x;
                     floats[1] = y;
                     Message answer = messageGenerator.createMessage(MOVE_RESULT, floats, ints); //15
-                    server.sendBroadcastMessage(answer);
+                    session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
                 }
@@ -65,7 +65,7 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
         else{
             try{
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
-                server.sendMessage(connectionFrom, errorAnswer);
+                session.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
                 e.printStackTrace();
             }
@@ -73,12 +73,19 @@ public class TerritoryChoiceListener extends AbstractServerMessageListener{
     }
 
     private String isAnyError(Point point){
-        if(!gameController.checkPointIsInCircle(point)){
+        if(gameController.isPointInCircle(point)){
             return "Chosen point is outside the circle";
         }
         if(gameController.checkPointBelongsToPlayerRegion(point, gameController.getOpponentPlayer())){
             return "Chosen point is not on the player's territory";
         }
         return null;
+    }
+
+    @Override
+    public MessageListener getNewInstance() {
+        TerritoryChoiceListener newInstance = new TerritoryChoiceListener();
+        newInstance.init(server);
+        return newInstance;
     }
 }

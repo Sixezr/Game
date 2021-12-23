@@ -41,6 +41,15 @@ public class GameSession {
         return playerRegionMap.size();
     }
 
+    public void invalidate() {
+        playerRegionMap.clear();
+        currentPlayer = null;
+    }
+
+    public void init() {
+        id = new Random().nextInt();
+    }
+
     @Override
     public boolean equals(Object o) {
         // вообще, тут можно сессии только по id сравнивать, но эта логика нам ни к чему... зачем я пишу тут комментарии....
