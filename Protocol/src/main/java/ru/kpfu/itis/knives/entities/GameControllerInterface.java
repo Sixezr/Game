@@ -3,5 +3,9 @@ package ru.kpfu.itis.knives.entities;
 public interface GameControllerInterface {
     Region createStartRegion(Player player, boolean isLeft);
     void addPlayer(Player player);
-    // ещё нужен общий метод для пересчёта границ но я пока хз как это делать
+    void divideOpponentRegion(Point currentUserPoint, Point knifeFallPoint);
+    void recalculateRegions(Point opponentChoice);
+    Player getCurrentPlayer();
+    Player getOpponentPlayer();
+    void setNewCurrentPlayer(Player player);
 }
