@@ -91,4 +91,17 @@ public abstract class AbstractGameController implements GameControllerInterface 
     public void setNewCurrentPlayer(Player player) {
         session.setCurrentPlayer(player);
     }
+
+    @Override
+    public boolean isPointInCircle(Point point) {
+        float r = START_MAX_X - START_0;
+        float x = point.getX();
+        float y = point.getY();
+        return (!(x * x + y * y < r * r));
+    }
+
+    @Override
+    public boolean checkPointBelongsToPlayerRegion(Point point, Player player) {
+        return session.getPlayerRegion(player).hasPoint(point);
+    }
 }
