@@ -15,7 +15,6 @@ public abstract class AbstractGameController implements GameControllerInterface 
     }
 
     public AbstractGameController() {
-
     }
 
     @Override
@@ -107,6 +106,10 @@ public abstract class AbstractGameController implements GameControllerInterface 
     @Override
     public boolean checkPointBelongsToPlayerRegion(Point point, Player player) {
         return session.getPlayerRegion(player).hasPoint(point);
+    }
+
+    public void setSession(GameSession session) {
+        this.session = session;
     }
 
     public GameSession getSession() {
