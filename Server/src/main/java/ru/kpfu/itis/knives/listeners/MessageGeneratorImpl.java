@@ -77,7 +77,6 @@ public class MessageGeneratorImpl implements MessageGenerator {
                     throw new MessageGenerationException("Message of this type must contain 3 integer values");
                 } else {
                     newMessage.setData(ByteBuffer.allocate(12).putInt(ids[0]).putInt(ids[1]).putInt(ids[2]).array());
-                    System.out.println("New GAME_START(11) message generated: " + newMessage + "\n");
                 }
                 break;
             case CLIENT_LEFT:

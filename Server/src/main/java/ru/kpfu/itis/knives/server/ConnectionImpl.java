@@ -42,8 +42,6 @@ public class ConnectionImpl implements Connection {
         Message message;
         try {
             while ((message = inputStream.readMessage()) != null) {
-                System.out.println("\n Got new message from player with id= " + player.getId());
-                System.out.println(message + "\n");
                 if (!isReady) {
                     // before got accepted to game session-room
                     server.acceptMessage(this, message);
@@ -63,7 +61,6 @@ public class ConnectionImpl implements Connection {
             try {
                 outputStream.writeMessage(message);
                 outputStream.flush();
-                System.out.println("\nMessage to client " + player.getId() + " was sent\n");
             } catch (IOException e) {
                 throw new ConnectionException(e);
             }
