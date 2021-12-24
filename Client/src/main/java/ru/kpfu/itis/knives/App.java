@@ -40,8 +40,11 @@ public final class App extends Application {
         primaryStage.setHeight(screenBounds.getHeight());
         primaryStage.setWidth(screenBounds.getWidth());
 
+        SocketClient finalSocketClient = socketClient;
         primaryStage.setOnCloseRequest(event -> {
-            // TODO: exit from room on server, if there is
+            if (finalSocketClient != null && finalSocketClient.getPlayer() != null) {
+                finalSocketClient.left(finalSocketClient.getPlayer().getId());
+            }
             Platform.exit();
         });
         primaryStage.setTitle(Constants.MAIN_NAME);

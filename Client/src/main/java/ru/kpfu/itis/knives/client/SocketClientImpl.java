@@ -1,6 +1,7 @@
 package ru.kpfu.itis.knives.client;
 
 import ru.kpfu.itis.knives.controllers.AbstractController;
+import ru.kpfu.itis.knives.controllers.GameOverController;
 import ru.kpfu.itis.knives.controllers.StartingController;
 import ru.kpfu.itis.knives.entities.GameControllerInterface;
 import ru.kpfu.itis.knives.entities.GameSession;
@@ -76,7 +77,8 @@ public class SocketClientImpl implements SocketClient {
 
     @Override
     public void end(int winnerID) {
-
+        AbstractController gameOverController = new GameOverController(controller.getStage(), controller.getSocketClient(), getPlayer().getId() == winnerID);
+        gameOverController.createScene();
     }
 
     @Override

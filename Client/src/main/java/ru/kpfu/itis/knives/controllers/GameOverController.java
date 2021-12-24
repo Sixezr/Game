@@ -42,11 +42,13 @@ public class GameOverController extends AbstractController {
     private void addActions() {
         endVBox.getOkButton().setOnAction(event -> {
             AbstractController initialController = new InitialController(stage, socketClient);
+            socketClient.setController(initialController);
             initialController.createScene();
         });
 
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
             AbstractController initialController = new InitialController(stage, socketClient);
+            socketClient.setController(initialController);
             initialController.createScene();
         });
     }
