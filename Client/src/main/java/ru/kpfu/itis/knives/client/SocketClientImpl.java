@@ -117,6 +117,12 @@ public class SocketClientImpl implements SocketClient {
 
     @Override
     public void left(int leaverID) {
+        for(Player p : session.getPlayers()) {
+            if (p.getId() == leaverID) {
+                messageGenerator.clientLeft(leaverID);
+                break;
+            }
+        }
     }
 
     @Override
