@@ -12,22 +12,28 @@ import java.net.Socket;
 import java.util.Objects;
 
 public class Connection implements Runnable {
+    private ServerInterface server;
     private ServerGameSession session;
     private Socket clientSocket;
     private Player player;
     private ProtocolOutputStream outputStream;
     private ProtocolInputStream inputStream;
+    private boolean isReady;
 
-    public Connection(Socket clientSocket, ServerGameSession session) throws ConnectionException {
+    public Connection(ServerInterface server, Socket clientSocket) throws ConnectionException {
+        this.server = server;
         this.clientSocket = clientSocket;
-        this.session = session;
-
+        isReady = false;
         try {
             inputStream = new ProtocolInputStream(clientSocket.getInputStream());
             outputStream = new ProtocolOutputStream(clientSocket.getOutputStream());
         } catch (IOException ex) {
             throw new ConnectionException(ex);
         }
+    }
+
+    public void setSession(ServerGameSession session) {
+        this.session = session;
     }
 
     @Override
@@ -37,7 +43,11 @@ public class Connection implements Runnable {
             while ((message = inputStream.readMessage()) != null) {
                 System.out.println("\n GOT NEW MESSAGE: ");
                 System.out.println(message.toString() + "\n");
-                session.acceptMessage(this, message);
+                if (!isReady) {
+                    server.acceptMessage(this, message);
+                } else {
+                    session.acceptMessage(this, message);
+                }
             }
         } catch (IOException e) {
             throw new ConnectionException(e);
@@ -46,7 +56,6 @@ public class Connection implements Runnable {
 
     public void sendMessage(Message message) throws ConnectionException {
         System.out.println("SENDING: ");
-//        sender.sendMessageToClient(message);
         Thread newThread = new Thread( () -> {
             try {
                 outputStream.writeMessage(message);
@@ -65,6 +74,14 @@ public class Connection implements Runnable {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public boolean isReady() {
+        return isReady;
+    }
+
+    public void setReady(boolean ready) {
+        isReady = ready;
     }
 
     @Override

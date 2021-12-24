@@ -6,12 +6,16 @@ import java.util.List;
 import static ru.kpfu.itis.knives.Constants.*;
 
 public abstract class AbstractGameController implements GameControllerInterface {
-    protected final GameSession session;
+    protected GameSession session;
     protected List<Region> opponentRegionParts;
     protected boolean isDivided = false;
 
     public AbstractGameController(GameSession session) {
         this.session = session;
+    }
+
+    public AbstractGameController() {
+
     }
 
     @Override

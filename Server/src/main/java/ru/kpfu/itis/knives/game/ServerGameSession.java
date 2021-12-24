@@ -29,11 +29,11 @@ public class ServerGameSession extends GameSession implements Runnable {
     private ServerGameControllerInterface gameController;
     private MessageGeneratorInterface messageGenerator;
 
-    public ServerGameSession(ServerInterface server, Socket client1, Socket client2) {
+    public ServerGameSession(ServerInterface server, Connection client1, Connection client2) {
         this.server = server;
         initSession();
-        connections.add(createConnection(client1));
-        connections.add(createConnection(client2));
+        connections.add(client1);
+        connections.add(client2);
     }
 
     private void initSession() {
@@ -117,14 +117,6 @@ public class ServerGameSession extends GameSession implements Runnable {
             throw new ServerException("Illegal state.");
         }
         server.removeSession(this);
-    }
-
-    public Connection createConnection(Socket clientSocket) throws ServerException {
-        Connection connection = new Connection(clientSocket, this);
-        Player player = new Player(gameController.getRandomPlayerId());
-        connection.setPlayer(player);
-
-        return connection;
     }
 
     public void sendMessage(Connection connection, Message message) throws ServerException {

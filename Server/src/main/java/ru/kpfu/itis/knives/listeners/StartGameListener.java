@@ -5,7 +5,10 @@ import ru.kpfu.itis.knives.exceptions.MessageGenerationException;
 import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.protocol.Message;
 import ru.kpfu.itis.knives.server.Connection;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import static ru.kpfu.itis.knives.Constants.MAX_PLAYER_NUM;
 import static ru.kpfu.itis.knives.protocol.Protocol.*;
@@ -29,11 +32,13 @@ public class StartGameListener extends AbstractMessageListener {
                 System.out.println("1 client accepted");
                 Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
                 session.sendMessage(connectionFrom, answer);
+                connectionFrom.setReady(true);
                 connectionHashSet.add(connectionFrom);
             } catch (MessageGenerationException | ServerException e){
                 e.printStackTrace();
             }
             if(connectionHashSet.size() == MAX_PLAYER_NUM){
+                server.initSession(new ArrayList<>(connectionHashSet));
                 session.startGame();
                 connectionHashSet.clear();
             }

@@ -17,6 +17,10 @@ public class ServerGameController extends AbstractGameController implements Serv
         super(gameSession);
     }
 
+    public ServerGameController() {
+        super();
+    }
+
     @Override
     public int getRandomPlayerId() {
         return Math.abs(new Random().nextInt(MAX_ID));
