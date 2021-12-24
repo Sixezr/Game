@@ -8,6 +8,9 @@ import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 import ru.kpfu.itis.knives.view.StartingVBox;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public final class StartingController extends AbstractController {
     // UI
     private final BorderPane mainPane;
@@ -34,5 +37,15 @@ public final class StartingController extends AbstractController {
 
         stage.setScene(new Scene(mainPane));
         animate(mainPane);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                AbstractController gameController = new GameController(stage, socketClient);
+                socketClient.setController(gameController);
+                gameController.createScene();
+            }
+        }, 3000);
     }
 }

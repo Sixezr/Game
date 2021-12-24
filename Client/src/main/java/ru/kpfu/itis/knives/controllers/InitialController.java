@@ -38,8 +38,9 @@ public final class InitialController extends AbstractController {
     // Private
     private void addActions() {
         initialVBox.getStartButton().setOnAction(event -> {
-            // TODO: Network actions
+            socketClient.ready();
             AbstractController waitingController = new WaitingController(stage, socketClient);
+            socketClient.setController(waitingController);
             waitingController.createScene();
         });
     }

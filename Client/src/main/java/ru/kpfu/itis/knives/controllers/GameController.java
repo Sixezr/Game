@@ -96,8 +96,9 @@ public final class GameController extends AbstractController {
     private void addActions() {
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
             alertController.createExitAlert(() -> {
-                // TODO: add exit from room in server
                 AbstractController initialController = new InitialController(stage, socketClient);
+                socketClient.setController(initialController);
+                socketClient.left(socketClient.getPlayer().getId());
                 initialController.createScene();
             });
         });

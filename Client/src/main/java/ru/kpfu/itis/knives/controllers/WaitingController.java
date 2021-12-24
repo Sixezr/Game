@@ -40,13 +40,11 @@ public final class WaitingController extends AbstractController {
     // Private
     private void addActions() {
         waitingVBox.getCancelButton().setOnAction(event -> {
-            // TODO: Network actions
             AbstractController initialController = new InitialController(stage, socketClient);
             initialController.createScene();
         });
 
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
-            // TODO: Network actions
             AbstractController initialController = new InitialController(stage, socketClient);
             initialController.createScene();
         });

@@ -23,4 +23,12 @@ public abstract class AbstractController {
         transition.setToValue(1);
         transition.play();
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public SocketClient getSocketClient() {
+        return socketClient;
+    }
 }

@@ -1,6 +1,7 @@
 package ru.kpfu.itis.knives.client;
 
 import ru.kpfu.itis.knives.controllers.AbstractController;
+import ru.kpfu.itis.knives.controllers.StartingController;
 import ru.kpfu.itis.knives.entities.GameControllerInterface;
 import ru.kpfu.itis.knives.entities.GameSession;
 import ru.kpfu.itis.knives.entities.Player;
@@ -48,7 +49,9 @@ public class SocketClientImpl implements SocketClient {
         player = new Player(thisId);
         regionsController.addPlayer(player);
         regionsController.addPlayer(new Player());
-        // нарисовать круг и 2 территории
+
+        AbstractController startingController = new StartingController(controller.getStage(), controller.getSocketClient(), thisId == currentId);
+        startingController.createScene();
     }
 
     @Override
