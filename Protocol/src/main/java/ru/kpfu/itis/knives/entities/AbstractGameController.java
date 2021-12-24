@@ -6,12 +6,15 @@ import java.util.List;
 import static ru.kpfu.itis.knives.Constants.*;
 
 public abstract class AbstractGameController implements GameControllerInterface {
-    protected final GameSession session;
+    protected GameSession session;
     protected List<Region> opponentRegionParts;
     protected boolean isDivided = false;
 
     public AbstractGameController(GameSession session) {
         this.session = session;
+    }
+
+    public AbstractGameController() {
     }
 
     @Override
@@ -103,6 +106,10 @@ public abstract class AbstractGameController implements GameControllerInterface 
     @Override
     public boolean checkPointBelongsToPlayerRegion(Point point, Player player) {
         return session.getPlayerRegion(player).hasPoint(point);
+    }
+
+    public void setSession(GameSession session) {
+        this.session = session;
     }
 
     public GameSession getSession() {
