@@ -3,6 +3,7 @@ package ru.kpfu.itis.knives.listeners;
 import ru.kpfu.itis.knives.entities.Point;
 import ru.kpfu.itis.knives.exceptions.IllegalMessageTypeException;
 import ru.kpfu.itis.knives.exceptions.MessageGenerationException;
+import ru.kpfu.itis.knives.exceptions.MessageListenerException;
 import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.protocol.Message;
 import ru.kpfu.itis.knives.server.Connection;
@@ -13,7 +14,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
 public class StartMoveListener extends AbstractMessageListener {
 
-    public StartMoveListener(){
+    public StartMoveListener() {
         super(MOVE);
     } //32
 
@@ -33,69 +34,69 @@ public class StartMoveListener extends AbstractMessageListener {
             Point point2 = new Point(x2, y2);
 
             String errorText = isAnyError(point1, point2);
-            if(errorText != null){
+            if (errorText != null){
                 try{
                     System.out.println("Move accepted. WRONG MOVE: " + errorText);
                     Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_MOVE, errorText); //41
                     session.sendMessage(connectionFrom, errorAnswer);
                 } catch (MessageGenerationException | ServerException e) {
-                    e.printStackTrace();
+                    throw new MessageListenerException(e);
                 }
             }
 
-            float agile = gameController.getRandomKnifeFallAngle();
+            float angle = gameController.getRandomKnifeFallAngle();
             int[] ints = new int[1];
-            if(agile >= MIN_ANGLE){
+            if (angle >= MIN_ANGLE){
                 try{
                     ints[0] = gameController.getOpponentPlayer().getId();
                     float[] floats = new float[5];
-                    floats[0] = agile;
+                    floats[0] = angle;
                     floats[1] = x1;
                     floats[2] = y1;
                     floats[3] = x2;
                     floats[4] = y2;
                     Message answer = messageGenerator.createMessage(MOVE_RESULT_GOOD, floats, ints); //13
-                    System.out.println("Move accepted; angle = " + agile + "; \n (" + x1 + ", " + y1 +")  (" + x2 + ", " + y2 + ");");
+                    System.out.println("Move accepted; angle = " + angle + "; \n (" + x1 + ", " + y1 +")  (" + x2 + ", " + y2 + ");");
                     session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
-                    e.printStackTrace();
+                    throw new MessageListenerException(e);
                 }
             }
-            else{
-                try{
+            else {
+                try {
                     ints[0] = gameController.getOpponentPlayer().getId();
                     gameController.setNewCurrentPlayer(gameController.getOpponentPlayer());
                     float[] floats = new float[1];
-                    floats[0] = agile;
-                    System.out.println("Move accepted: angle = " + agile);
+                    floats[0] = angle;
+                    System.out.println("Move accepted: angle = " + angle);
                     Message answer = messageGenerator.createMessage(MOVE_RESULT_BAD, floats, ints); //14
                     session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
-                    e.printStackTrace();
+                    throw new MessageListenerException(e);
                 }
             }
         }
-        else{
-            try{
+        else {
+            try {
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "You can't perform this action"); //40
                 session.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
-                e.printStackTrace();
+                throw new MessageListenerException(e);
             }
         }
     }
 
     private String isAnyError(Point point1, Point point2){
-        if(gameController.isPointInCircle(point1)){
+        if (gameController.isPointInCircle(point1)){
             return "The player's location is outside the circle";
         }
-        if(gameController.isPointInCircle(point2)){
+        if (gameController.isPointInCircle(point2)){
             return "The throwing point is outside the circle";
         }
-        if(gameController.checkPointBelongsToPlayerRegion(point1, gameController.getOpponentPlayer())){
+        if (gameController.checkPointBelongsToPlayerRegion(point1, gameController.getOpponentPlayer())){
             return "The player is not on his territory";
         }
-        if(gameController.checkPointBelongsToPlayerRegion(point2, gameController.getCurrentPlayer())){
+        if (gameController.checkPointBelongsToPlayerRegion(point2, gameController.getCurrentPlayer())){
             return "The throwing point is not the opponent's territory";
         }
         return null;

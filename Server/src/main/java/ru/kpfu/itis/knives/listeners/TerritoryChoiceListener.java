@@ -3,6 +3,7 @@ package ru.kpfu.itis.knives.listeners;
 import ru.kpfu.itis.knives.entities.Point;
 import ru.kpfu.itis.knives.exceptions.IllegalMessageTypeException;
 import ru.kpfu.itis.knives.exceptions.MessageGenerationException;
+import ru.kpfu.itis.knives.exceptions.MessageListenerException;
 import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.protocol.Message;
 import ru.kpfu.itis.knives.server.Connection;
@@ -21,6 +22,7 @@ public class TerritoryChoiceListener extends AbstractMessageListener {
         if (message.getType() != this.getType()) {
             throw new IllegalMessageTypeException("Message type do not match to listener's one");
         }
+
         ByteBuffer byteBuffer = ByteBuffer.wrap(message.getData());
         int clientId = byteBuffer.getInt(0);
         if(clientId == gameController.getCurrentPlayer().getId()){
@@ -34,7 +36,7 @@ public class TerritoryChoiceListener extends AbstractMessageListener {
                     Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_POS, errorText); //42
                     session.sendMessage(connectionFrom, errorAnswer);
                 } catch (MessageGenerationException | ServerException e) {
-                    e.printStackTrace();
+                    throw new MessageListenerException(e);
                 }
             }
 
@@ -44,7 +46,7 @@ public class TerritoryChoiceListener extends AbstractMessageListener {
                 try{
                     session.endGame();
                 } catch (MessageGenerationException | ServerException e) {
-                    e.printStackTrace();
+                    throw new MessageListenerException(e);
                 }
             }
             else{
@@ -57,25 +59,25 @@ public class TerritoryChoiceListener extends AbstractMessageListener {
                     Message answer = messageGenerator.createMessage(MOVE_RESULT, floats, ints); //15
                     session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
-                    e.printStackTrace();
+                    throw new MessageListenerException(e);
                 }
             }
         }
-        else{
-            try{
+        else {
+            try {
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
                 session.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
-                e.printStackTrace();
+                throw new MessageListenerException(e);
             }
         }
     }
 
     private String isAnyError(Point point){
-        if(gameController.isPointInCircle(point)){
+        if (gameController.isPointInCircle(point)){
             return "Chosen point is outside the circle";
         }
-        if(gameController.checkPointBelongsToPlayerRegion(point, gameController.getOpponentPlayer())){
+        if (gameController.checkPointBelongsToPlayerRegion(point, gameController.getOpponentPlayer())){
             return "Chosen point is not on the player's territory";
         }
         return null;

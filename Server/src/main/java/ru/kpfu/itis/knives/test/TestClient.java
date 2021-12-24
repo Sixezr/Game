@@ -10,8 +10,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 
-import static ru.kpfu.itis.knives.protocol.Protocol.CLIENT_READY;
-import static ru.kpfu.itis.knives.protocol.Protocol.GAME_START;
+import static ru.kpfu.itis.knives.protocol.Protocol.*;
 
 public class TestClient {
     private Socket socket;
@@ -93,7 +92,7 @@ public class TestClient {
     }
 
     public Message send34Message() throws IOException {
-        Message newMessage = new Message(CLIENT_READY);
+        Message newMessage = new Message(CLIENT_LEFT);
         newMessage.setData(ByteBuffer.allocate(4).putInt(id).array());
         outputStream.writeMessage(newMessage);
         outputStream.flush();
@@ -109,6 +108,4 @@ public class TestClient {
             e.printStackTrace();
         }
     }
-
-
 }
