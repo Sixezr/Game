@@ -45,6 +45,7 @@ public final class InitialController extends AbstractController {
     private void addActions() {
         initialVBox.getStartButton().setOnAction(event -> {
             socketClient.ready();
+            System.out.println("готово");
             AbstractController waitingController = new WaitingController(stage, socketClient);
             socketClient.setController(waitingController);
             waitingController.createScene();

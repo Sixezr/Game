@@ -45,7 +45,7 @@ public class ConnectionImpl implements Connection {
                 if (!isReady) {
                     // before got accepted to game session-room
                     server.acceptMessage(this, message);
-                } else {
+                } else if (session != null) {
                     // game session created
                     session.acceptMessage(this, message);
                 }

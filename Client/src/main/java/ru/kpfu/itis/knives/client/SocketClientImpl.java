@@ -46,7 +46,6 @@ public class SocketClientImpl implements SocketClient {
         player = new Player(thisId);
         regionsController.addPlayer(player);
         regionsController.addPlayer(new Player());
-
         AbstractController startingController = new StartingController(controller.getStage(), controller.getSocketClient(), thisId == currentId);
         startingController.createScene();
     }

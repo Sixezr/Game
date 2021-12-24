@@ -18,9 +18,10 @@ public class GameStartListener extends AbstractClientMessageListener {
         if (message.getType() == this.getType()) {
             this.byteBuffer = ByteBuffer.allocate(message.getData().length);
             this.byteBuffer.put(message.getData());
-            int clientID = byteBuffer.getInt();
-            int opponentID = byteBuffer.getInt();
-            int moveID = byteBuffer.getInt();
+            System.out.println(message);
+            int clientID = byteBuffer.getInt(0);
+            int opponentID = byteBuffer.getInt(4);
+            int moveID = byteBuffer.getInt(8);
             this.byteBuffer.clear();
             client.initSession(clientID, opponentID, moveID);
         }
