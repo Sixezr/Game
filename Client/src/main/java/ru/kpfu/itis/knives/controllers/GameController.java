@@ -103,4 +103,25 @@ public final class GameController extends AbstractController {
             });
         });
     }
+
+    // Getters
+    public Label getStatusLabel() {
+        return statusLabel;
+    }
+
+    public GameFieldCanvas getGameFieldCanvas() {
+        return gameFieldCanvas;
+    }
+
+    public KnifeLocationCanvas getKnifeLocationCanvas() {
+        return knifeLocationCanvas;
+    }
+
+    public Label getMessageLabel() {
+        return messageLabel;
+    }
+
+    public ProgressHBox getProgressHBox() {
+        return progressHBox;
+    }
 }
