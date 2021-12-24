@@ -85,6 +85,11 @@ public final class GameController extends AbstractController {
         animate(mainPane);
     }
 
+    @Override
+    public KnifeLocationCanvas getKnifeLocationCanvas() {
+        return knifeLocationCanvas;
+    }
+
     // Private
     private void initListeners() {
         gameFieldCanvas.setOnMouseClicked(event -> {

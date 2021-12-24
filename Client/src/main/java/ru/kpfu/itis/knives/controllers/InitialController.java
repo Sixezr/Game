@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.InitialVBox;
+import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 
 public final class InitialController extends AbstractController {
@@ -33,6 +34,11 @@ public final class InitialController extends AbstractController {
 
         stage.setScene(new Scene(mainPane));
         animate(mainPane);
+    }
+
+    @Override
+    public KnifeLocationCanvas getKnifeLocationCanvas() {
+        return new KnifeLocationCanvas();
     }
 
     // Private

@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.view.EndVBox;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
+import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 
 public class GameOverController extends AbstractController {
@@ -36,6 +37,11 @@ public class GameOverController extends AbstractController {
 
         stage.setScene(new Scene(mainPane));
         animate(mainPane);
+    }
+
+    @Override
+    public KnifeLocationCanvas getKnifeLocationCanvas() {
+        return null;
     }
 
     // Private

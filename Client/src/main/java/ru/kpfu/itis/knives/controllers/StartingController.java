@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
+import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 import ru.kpfu.itis.knives.view.StartingVBox;
 
@@ -47,5 +48,10 @@ public final class StartingController extends AbstractController {
                 gameController.createScene();
             }
         }, 3000);
+    }
+
+    @Override
+    public KnifeLocationCanvas getKnifeLocationCanvas() {
+        return new KnifeLocationCanvas();
     }
 }
