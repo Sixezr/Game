@@ -27,7 +27,7 @@ public class ClientMessageHandlerImpl implements ClientMessagesHandler {
 
     @Override
     public void readMessage() {
-        Thread newThread = new Thread(() -> {
+        new Thread(() -> {
                 while (true) {
                     try {
                         Message message;
@@ -39,12 +39,12 @@ public class ClientMessageHandlerImpl implements ClientMessagesHandler {
                     e.printStackTrace();
                 }
                 }
-        });
+        }).start();
     }
 
     @Override
     public void sendMessage(Message message) {
-        Thread newThread = new Thread(() -> {
+        new Thread(() -> {
             try {
                 outputStream.writeMessage(message);
                 outputStream.flush();
@@ -52,6 +52,6 @@ public class ClientMessageHandlerImpl implements ClientMessagesHandler {
                 // todo exceptions handling
                 e.printStackTrace();
             }
-        });
+        }).start();
     }
 }
