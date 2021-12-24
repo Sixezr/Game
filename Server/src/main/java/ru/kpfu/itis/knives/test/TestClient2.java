@@ -7,13 +7,10 @@ import java.io.IOException;
 
 public class TestClient2 {
 
-
     public static void main(String[] args) {
         try {
             TestClient client2 = new TestClient(Protocol.PORT);
-            Message answer = client2.send31Message();
-
-            System.out.println(answer.toString());
+            client2.send31Message();
         } catch (IOException e) {
             e.printStackTrace();
         }

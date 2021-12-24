@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 
 import static ru.kpfu.itis.knives.protocol.Protocol.CLIENT_READY;
+import static ru.kpfu.itis.knives.protocol.Protocol.GAME_START;
 
 public class TestClient {
     private Socket socket;
@@ -27,8 +28,8 @@ public class TestClient {
     }
 
     private void readMessages() {
+        System.out.println("Client is starting to listen to server's messages...");
         Thread newThread = new Thread(() -> {
-            System.out.println("STARTING TO LISTEN TO SERVER");
             Message message;
             while (true) {
                 try {
@@ -36,14 +37,14 @@ public class TestClient {
                         System.out.println("\n NEW MESSAGE FROM SERVER:");
                         System.out.println(message);
                         msgCount++;
-                        if (msgCount == 2) {
+
+                        if (message.getType() == GAME_START) {
                             ByteBuffer byteBuffer = ByteBuffer.wrap(message.getData());
                             setId(byteBuffer.getInt(0));
                             System.out.println("MY ID = " + getId());
                             send32Message(67.67f, 6.76f, 78.9f, 45f);
-                        } else {
-                            System.out.println("SERVER ANSWERED = " + message.toString());
                         }
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -103,8 +104,7 @@ public class TestClient {
     public static void main(String[] args) {
         try {
             TestClient client = new TestClient(Protocol.PORT);
-            Message answer = client.send31Message();
-            System.out.println(answer.toString());
+            client.send31Message();
         } catch (IOException e) {
             e.printStackTrace();
         }

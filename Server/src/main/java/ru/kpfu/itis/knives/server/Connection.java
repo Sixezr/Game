@@ -41,8 +41,8 @@ public class Connection implements Runnable {
         Message message;
         try {
             while ((message = inputStream.readMessage()) != null) {
-                System.out.println("\n GOT NEW MESSAGE: ");
-                System.out.println(message.toString() + "\n");
+                System.out.println("\n Got new message from player with id= " + player.getId());
+                System.out.println(message + "\n");
                 if (!isReady) {
                     server.acceptMessage(this, message);
                 } else {
@@ -55,12 +55,11 @@ public class Connection implements Runnable {
     }
 
     public void sendMessage(Message message) throws ConnectionException {
-        System.out.println("SENDING: ");
         Thread newThread = new Thread( () -> {
             try {
                 outputStream.writeMessage(message);
                 outputStream.flush();
-                System.out.println("MESSAGE WAS SEnT!!!!!!!!!!!!!");
+                System.out.println("\nMessage to client " + player.getId() + " was sent\n");
             } catch (IOException e) {
                 throw new ConnectionException(e);
             }

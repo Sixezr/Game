@@ -8,7 +8,6 @@ import ru.kpfu.itis.knives.server.Connection;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.stream.Collectors;
 
 import static ru.kpfu.itis.knives.Constants.MAX_PLAYER_NUM;
 import static ru.kpfu.itis.knives.protocol.Protocol.*;
@@ -20,6 +19,7 @@ public class StartGameListener extends AbstractMessageListener {
     public StartGameListener() {
         super(CLIENT_READY);
         connectionHashSet = new HashSet<>();
+        messageGenerator = new MessageGenerator();
     } //31
 
     @Override
@@ -29,16 +29,16 @@ public class StartGameListener extends AbstractMessageListener {
         }
         if((message.getData() == null) || (message.getData().length == 0)){
             try{
-                System.out.println("1 client accepted");
+                System.out.println("Player " + connectionFrom.getPlayer().getId() + " is ready to start game;");
                 Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
-                session.sendMessage(connectionFrom, answer);
+                server.sendMessage(connectionFrom, answer);
                 connectionFrom.setReady(true);
                 connectionHashSet.add(connectionFrom);
             } catch (MessageGenerationException | ServerException e){
                 e.printStackTrace();
             }
-            if(connectionHashSet.size() == MAX_PLAYER_NUM){
-                server.initSession(new ArrayList<>(connectionHashSet));
+            if (connectionHashSet.size() == MAX_PLAYER_NUM) {
+                this.session = server.initSession(new ArrayList<>(connectionHashSet));
                 session.startGame();
                 connectionHashSet.clear();
             }
@@ -46,7 +46,7 @@ public class StartGameListener extends AbstractMessageListener {
         else{
             try{
                 Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
-                session.sendMessage(connectionFrom, errorAnswer);
+                server.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
                 e.printStackTrace();
             }

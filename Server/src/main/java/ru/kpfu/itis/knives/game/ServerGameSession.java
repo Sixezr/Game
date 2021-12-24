@@ -8,7 +8,6 @@ import ru.kpfu.itis.knives.listeners.MessageGeneratorInterface;
 import ru.kpfu.itis.knives.listeners.MessageListener;
 import ru.kpfu.itis.knives.protocol.Message;
 import ru.kpfu.itis.knives.server.Connection;
-import ru.kpfu.itis.knives.server.ConnectionSession;
 import ru.kpfu.itis.knives.server.ServerInterface;
 
 import java.util.ArrayList;
@@ -51,19 +50,6 @@ public class ServerGameSession extends GameSession{
             listener.setMessageGenerator(messageGenerator);
         }
     }
-//
-//    @Override
-//    public void run() {
-//        for (Connection connection : connections) {
-//            ConnectionSession connectionSession = new ConnectionSession(connection);
-//            try {
-//                connectionSession.start();
-//            } catch (ConnectionException ex) {
-//                removeConnection(connection);
-//                server.removeSession(this);
-//            }
-//        }
-//    }
 
     public void acceptMessage(Connection connectionFrom, Message message) {
         for (MessageListener listener : listeners) {
@@ -86,8 +72,6 @@ public class ServerGameSession extends GameSession{
                 ids[0] = connection.getPlayer().getId();
                 ids[1] = gameController.getAnotherPlayer(ids[0]).getId();
                 ids[2] = gameController.getCurrentPlayer().getId();
-                System.out.println(Arrays.toString(ids));
-                System.out.println("\n SENDING START GAME MESSAGES");
                 connection.sendMessage(messageGenerator.createMessage(GAME_START, ids));
             }
         } else {

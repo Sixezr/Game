@@ -61,10 +61,7 @@ public class Message {
         String delimiter = " ";
         String newLine = System.getProperty("line.separator");
 
-        stringBuilder.append("First bytes: ");
-        for (int i = 0; i < Protocol.START_BYTES_LENGTH; i++) {
-            stringBuilder.append(START_BYTES[i]);
-        }
+        stringBuilder.append("\t Message : ");
         stringBuilder.append(newLine);
         stringBuilder.append("Type = ").append(this.getType()).append(newLine);
         stringBuilder.append("Data Length = ").append(this.getDataLength()).append(newLine);

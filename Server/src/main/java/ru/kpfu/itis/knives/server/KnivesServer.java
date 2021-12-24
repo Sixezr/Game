@@ -28,6 +28,7 @@ public class KnivesServer implements ServerInterface {
     public KnivesServer(int port) {
         this.port = port;
         initServer();
+        System.out.println("Server initialized.");
     }
 
     @Override
@@ -51,10 +52,12 @@ public class KnivesServer implements ServerInterface {
 
     @Override
     public void startServer() throws ServerException {
+        System.out.println("Server is listening to clients...");
         while (true) {
             try {
                 Socket client = serverSocket.accept();
                 clients.add(createConnection(client));
+                System.out.println("New connection created.");
             } catch (IOException e) {
                 throw new ServerException(e);
             }
