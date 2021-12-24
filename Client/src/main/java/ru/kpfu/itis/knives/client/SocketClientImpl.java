@@ -1,12 +1,10 @@
 package ru.kpfu.itis.knives.client;
 
-import ru.kpfu.itis.knives.controllers.AbstractController;
-import ru.kpfu.itis.knives.entities.GameControllerInterface;
-import ru.kpfu.itis.knives.entities.GameSession;
-import ru.kpfu.itis.knives.entities.Player;
-import ru.kpfu.itis.knives.entities.Point;
+import ru.kpfu.itis.knives.controllers.*;
+import ru.kpfu.itis.knives.entities.*;
 import ru.kpfu.itis.knives.generators.MessageGenerator;
 import ru.kpfu.itis.knives.generators.MessageGeneratorImpl;
+import ru.kpfu.itis.knives.helpers.KnifeState;
 import ru.kpfu.itis.knives.listeners.ClientMessageListener;
 import ru.kpfu.itis.knives.protocol.Message;
 
@@ -20,9 +18,9 @@ public class SocketClientImpl implements SocketClient {
     private ClientMessagesHandler connection;
     private GameControllerInterface regionsController;
     private MessageGenerator messageGenerator;
+    private GameSession session;
     private Player player;
     private AbstractController controller;
-    private GameSession session;
 
     private List<ClientMessageListener> listeners = new ArrayList<>();
 
@@ -48,7 +46,9 @@ public class SocketClientImpl implements SocketClient {
         player = new Player(thisId);
         regionsController.addPlayer(player);
         regionsController.addPlayer(new Player());
-        // нарисовать круг и 2 территории
+
+        AbstractController startingController = new StartingController(controller.getStage(), controller.getSocketClient(), thisId == currentId);
+        startingController.createScene();
     }
 
     @Override
@@ -68,42 +68,61 @@ public class SocketClientImpl implements SocketClient {
 
     @Override
     public void move(Point from, Point to) {
-
+        Player currentPlayer = regionsController.getCurrentPlayer();
+        Player opponentPlayer = regionsController.getOpponentPlayer();
+        if(regionsController.checkPointBelongsToPlayerRegion(from, currentPlayer) &&
+        regionsController.checkPointBelongsToPlayerRegion(to, opponentPlayer)) {
+            regionsController.divideOpponentRegion(from, to);
+        }
     }
 
     @Override
     public void end(int winnerID) {
-
+        AbstractController gameOverController = new GameOverController(controller.getStage(), controller.getSocketClient(), getPlayer().getId() == winnerID);
+        gameOverController.createScene();
     }
 
     @Override
     public void paintAngle(float angle) {
-
+        GameController gameController = (GameController) controller;
+        KnifeState state = angle >= 30 ? KnifeState.success : KnifeState.failure;
+        gameController.getKnifeLocationCanvas().drawKnifeWithIncline(angle, state);
     }
 
     @Override
     public void setMove(int moveID) {
-
+        for(Player player : session.getPlayers()) {
+            if (player.getId() == moveID) {
+                regionsController.setNewCurrentPlayer(player);
+                break;
+            }
+        }
     }
 
     @Override
     public void setNotice(String information) {
-
+        AlertController alert = new AlertController();
+        alert.createErrorAlert("Something wrong:", information);
     }
 
     @Override
     public void choiceRegion(Point point) {
-
+        regionsController.recalculateRegions(point);
     }
 
     @Override
     public int getID() {
-        return 0;
+        return player.getId();
     }
 
     @Override
     public void left(int leaverID) {
-
+        for(Player p : session.getPlayers()) {
+            if (p.getId() == leaverID) {
+                messageGenerator.clientLeft(leaverID);
+                break;
+            }
+        }
     }
 
     @Override

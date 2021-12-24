@@ -17,7 +17,6 @@ public class ErrorBadMessageListener extends AbstractClientMessageListener {
         if (message.getType() == this.getType()) {
             String information = new String(message.getData());
             client.setNotice(information);
-
         }
     }
 }

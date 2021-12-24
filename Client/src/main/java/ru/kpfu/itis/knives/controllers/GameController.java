@@ -85,6 +85,11 @@ public final class GameController extends AbstractController {
         animate(mainPane);
     }
 
+    @Override
+    public KnifeLocationCanvas getKnifeLocationCanvas() {
+        return knifeLocationCanvas;
+    }
+
     // Private
     private void initListeners() {
         gameFieldCanvas.setOnMouseClicked(event -> {
@@ -93,13 +98,28 @@ public final class GameController extends AbstractController {
         });
     }
 
+    private double convertPointCoordinate(double point) {
+        if (point == 500f / 2) {
+            return 0;
+        } else if (point < 500f / 2) {
+            return -point / 2.5;
+        } else {
+            return point / 2.5;
+        }
+    }
+
     private void addActions() {
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
             alertController.createExitAlert(() -> {
-                // TODO: add exit from room in server
                 AbstractController initialController = new InitialController(stage, socketClient);
+                socketClient.setController(initialController);
+                socketClient.left(socketClient.getPlayer().getId());
                 initialController.createScene();
             });
         });
+    }
+
+    public GameFieldCanvas getGameFieldCanvas() {
+        return gameFieldCanvas;
     }
 }

@@ -40,6 +40,8 @@ public interface SocketClient {
 
     AbstractController getController();
 
+    void setController(AbstractController controller);
+
     ClientMessagesHandler getConnection();
 
     GameControllerInterface getRegionsController();

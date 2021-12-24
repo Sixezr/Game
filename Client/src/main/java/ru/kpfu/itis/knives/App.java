@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.client.SocketClientImpl;
 import ru.kpfu.itis.knives.controllers.AbstractController;
-import ru.kpfu.itis.knives.controllers.GameController;
 import ru.kpfu.itis.knives.controllers.InitialController;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.listeners.errors.ErrorBadMessageListener;
@@ -47,8 +46,7 @@ public final class App extends Application {
         });
         primaryStage.setTitle(Constants.MAIN_NAME);
 
-        // todo update abstract controller constructor to pass socket client
-        AbstractController initialController = new GameController(primaryStage, socketClient);
+        AbstractController initialController = new InitialController(primaryStage, socketClient);
         initialController.createScene();
         primaryStage.show();
     }

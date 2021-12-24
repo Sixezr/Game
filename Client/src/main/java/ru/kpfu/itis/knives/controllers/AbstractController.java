@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ru.kpfu.itis.knives.client.SocketClient;
+import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 
 public abstract class AbstractController {
     protected final Stage stage;
@@ -23,4 +24,14 @@ public abstract class AbstractController {
         transition.setToValue(1);
         transition.play();
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public SocketClient getSocketClient() {
+        return socketClient;
+    }
+
+    public abstract KnifeLocationCanvas getKnifeLocationCanvas();
 }

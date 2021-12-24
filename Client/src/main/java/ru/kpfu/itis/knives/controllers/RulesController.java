@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Constants;
 import ru.kpfu.itis.knives.helpers.Fonts;
+import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 
 public final class RulesController extends AbstractController {
     // UI
@@ -61,5 +62,10 @@ public final class RulesController extends AbstractController {
 
         stage.setScene(new Scene(mainPane));
         stage.show();
+    }
+
+    @Override
+    public KnifeLocationCanvas getKnifeLocationCanvas() {
+        return new KnifeLocationCanvas();
     }
 }

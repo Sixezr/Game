@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ru.kpfu.itis.knives.client.SocketClient;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
+import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
 import ru.kpfu.itis.knives.view.WaitingVBox;
 
@@ -37,16 +38,19 @@ public final class WaitingController extends AbstractController {
         animate(mainPane);
     }
 
+    @Override
+    public KnifeLocationCanvas getKnifeLocationCanvas() {
+        return new KnifeLocationCanvas();
+    }
+
     // Private
     private void addActions() {
         waitingVBox.getCancelButton().setOnAction(event -> {
-            // TODO: Network actions
             AbstractController initialController = new InitialController(stage, socketClient);
             initialController.createScene();
         });
 
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
-            // TODO: Network actions
             AbstractController initialController = new InitialController(stage, socketClient);
             initialController.createScene();
         });

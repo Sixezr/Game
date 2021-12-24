@@ -23,7 +23,6 @@ public class GameStartListener extends AbstractClientMessageListener {
             int moveID = byteBuffer.getInt();
             this.byteBuffer.clear();
             client.initSession(clientID, opponentID, moveID);
-
         }
     }
 }

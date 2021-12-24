@@ -18,10 +18,10 @@ public class MoveResultBadListener extends AbstractClientMessageListener {
         if (message.getType() == this.getType()) {
             this.byteBuffer = ByteBuffer.allocate(message.getData().length);
             this.byteBuffer.put(message.getData());
-            float tangle = byteBuffer.getFloat();
+            float angle = byteBuffer.getFloat();
             int moveID = byteBuffer.getInt();
             byteBuffer.clear();
-            client.paintAngle(tangle);
+            client.paintAngle(angle);
             client.setMove(moveID);
         }
     }
