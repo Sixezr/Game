@@ -49,7 +49,7 @@ public class ClientLeftListener extends AbstractMessageListener {
                     e.printStackTrace();
                 }
                 session.interruptGame();
-                session.removeConnection(connectionFrom);
+                server.removeConnection(connectionFrom);
                 session.endGame();
             }
         }

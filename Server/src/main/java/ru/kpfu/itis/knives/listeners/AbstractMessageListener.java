@@ -1,23 +1,22 @@
 package ru.kpfu.itis.knives.listeners;
 
-import ru.kpfu.itis.knives.game.ServerGameControllerInterface;
+import ru.kpfu.itis.knives.game.ServerGameController;
 import ru.kpfu.itis.knives.game.ServerGameSession;
-import ru.kpfu.itis.knives.server.ServerInterface;
+import ru.kpfu.itis.knives.server.Server;
 
 public abstract class AbstractMessageListener implements MessageListener {
     protected int TYPE;
-    protected ServerInterface server;
-
+    protected Server server;
     protected ServerGameSession session;
-    protected ServerGameControllerInterface gameController;
-    protected MessageGeneratorInterface messageGenerator;
+    protected ServerGameController gameController;
+    protected MessageGenerator messageGenerator;
 
     public AbstractMessageListener(int type) {
         this.TYPE = type;
     }
 
     @Override
-    public void init(ServerInterface knivesServer) {
+    public void init(Server knivesServer) {
         this.server = knivesServer;
     }
 
@@ -27,12 +26,12 @@ public abstract class AbstractMessageListener implements MessageListener {
     }
 
     @Override
-    public void setGameController(ServerGameControllerInterface gameController) {
+    public void setGameController(ServerGameController gameController) {
         this.gameController = gameController;
     }
 
     @Override
-    public void setMessageGenerator(MessageGeneratorInterface messageGenerator) {
+    public void setMessageGenerator(MessageGenerator messageGenerator) {
         this.messageGenerator = messageGenerator;
     }
 

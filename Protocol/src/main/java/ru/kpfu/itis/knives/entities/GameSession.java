@@ -2,7 +2,7 @@ package ru.kpfu.itis.knives.entities;
 
 import java.util.*;
 
-public class GameSession {
+public class GameSession implements GameSessionInterface {
     private int id;
     private final Map<Player, Region> playerRegionMap;
     private Player currentPlayer;
