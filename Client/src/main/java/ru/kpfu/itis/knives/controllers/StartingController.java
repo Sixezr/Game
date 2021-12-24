@@ -1,5 +1,6 @@
 package ru.kpfu.itis.knives.controllers;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -43,9 +44,11 @@ public final class StartingController extends AbstractController {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                AbstractController gameController = new GameController(stage, socketClient);
-                socketClient.setController(gameController);
-                gameController.createScene();
+                Platform.runLater(() -> {
+                    AbstractController gameController = new GameController(stage, socketClient);
+                    socketClient.setController(gameController);
+                    gameController.createScene();
+                });
             }
         }, 3000);
     }

@@ -32,7 +32,7 @@ public class StartGameListener extends AbstractMessageListener {
 
         if ((message.getData() == null) || (message.getData().length == 0)) {
             try{
-                System.out.println("Player " + connectionFrom.getPlayer().getId() + " is ready to start game;");
+                //System.out.println("Player " + connectionFrom.getPlayer().getId() + " is ready to start game;");
                 Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
                 server.sendMessage(connectionFrom, answer);
                 connectionFrom.setReady(true);
@@ -43,6 +43,7 @@ public class StartGameListener extends AbstractMessageListener {
             if (connections.size() == MAX_PLAYER_NUM) {
                 this.session = server.initSession(new ArrayList<>(connections));
                 session.startGame();
+                System.out.println("Сессия игры инициализирована");
                 connections.clear();
             }
         }

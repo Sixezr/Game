@@ -1,5 +1,6 @@
 package ru.kpfu.itis.knives.client;
 
+import javafx.application.Platform;
 import ru.kpfu.itis.knives.controllers.*;
 import ru.kpfu.itis.knives.entities.*;
 import ru.kpfu.itis.knives.generators.MessageGenerator;
@@ -45,9 +46,12 @@ public class SocketClientImpl implements SocketClient {
     public void initSession(int thisId, int opponentId, int currentId) {
         player = new Player(thisId);
         regionsController.addPlayer(player);
-        regionsController.addPlayer(new Player());
-        AbstractController startingController = new StartingController(controller.getStage(), controller.getSocketClient(), thisId == currentId);
-        startingController.createScene();
+        regionsController.addPlayer(new Player(opponentId));
+        System.out.println("inited");
+        Platform.runLater(() -> {
+            AbstractController startingController = new StartingController(controller.getStage(), controller.getSocketClient(), thisId == currentId);
+            startingController.createScene();
+        });
     }
 
     @Override
@@ -72,6 +76,7 @@ public class SocketClientImpl implements SocketClient {
         if(regionsController.checkPointBelongsToPlayerRegion(from, currentPlayer) &&
         regionsController.checkPointBelongsToPlayerRegion(to, opponentPlayer)) {
             regionsController.divideOpponentRegion(from, to);
+            sendMessage(messageGenerator.move(currentPlayer.getId(), from.getX(), from.getY(), to.getX(), to.getY()));
         }
     }
 

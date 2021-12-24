@@ -37,7 +37,7 @@ public class ClientMessageHandlerImpl implements ClientMessagesHandler {
                     } catch (IOException e) {
                     // todo exceptions handling
                     e.printStackTrace();
-                }
+                    }
                 }
         }).start();
     }

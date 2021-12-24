@@ -73,6 +73,8 @@ public class ServerGameSessionImpl extends GameSession implements ServerGameSess
                 gameController.addPlayer(connectionImpl.getPlayer());
             }
             gameController.setRandomCurrentPlayer();
+            System.out.println(gameController.getSession().getPlayerRegion(gameController.getCurrentPlayer()));
+            System.out.println(gameController.getSession().getPlayerRegion(gameController.getOpponentPlayer()));
             for (Connection connectionImpl : connections) {
                 int[] ids = new int[3];
                 ids[0] = connectionImpl.getPlayer().getId();

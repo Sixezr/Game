@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ru.kpfu.itis.knives.client.SocketClient;
+import ru.kpfu.itis.knives.entities.Point;
 import ru.kpfu.itis.knives.helpers.Colors;
 import ru.kpfu.itis.knives.helpers.Fonts;
 import ru.kpfu.itis.knives.helpers.KnifeState;
@@ -15,6 +16,9 @@ import ru.kpfu.itis.knives.view.GameFieldCanvas;
 import ru.kpfu.itis.knives.view.HeadMenuBar;
 import ru.kpfu.itis.knives.view.KnifeLocationCanvas;
 import ru.kpfu.itis.knives.view.ProgressHBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class GameController extends AbstractController {
     // UI
@@ -26,6 +30,7 @@ public final class GameController extends AbstractController {
     private final VBox messagesVBox;
     private final Label messageLabel;
     private final HeadMenuBar headMenuBar;
+    private final List<Point> points = new ArrayList<>();
 
     // Properties
     private final AlertController alertController;
@@ -94,6 +99,12 @@ public final class GameController extends AbstractController {
     private void initListeners() {
         gameFieldCanvas.setOnMouseClicked(event -> {
             gameFieldCanvas.drawPoint(event.getX(), event.getY(), Color.AQUA);
+            points.add(new Point((float)event.getX(), (float)event.getY()));
+
+            if (points.size() == 2) {
+                socketClient.move(points.get(0), points.get(1));
+                points.clear();
+            }
             knifeLocationCanvas.drawKnifeWithIncline(15, KnifeState.success);
         });
     }
