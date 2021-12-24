@@ -1,6 +1,7 @@
 package ru.kpfu.itis.knives.listeners;
 
 import ru.kpfu.itis.knives.client.SocketClient;
+import ru.kpfu.itis.knives.controllers.AbstractController;
 import ru.kpfu.itis.knives.generators.MessageGenerator;
 
 import java.nio.ByteBuffer;

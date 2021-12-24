@@ -93,6 +93,16 @@ public final class GameController extends AbstractController {
         });
     }
 
+    private double convertPointCoordinate(double point) {
+        if (point == 500f / 2) {
+            return 0;
+        } else if (point < 500f / 2) {
+            return -point / 2.5;
+        } else {
+            return point / 2.5;
+        }
+    }
+
     private void addActions() {
         headMenuBar.getMainItemLabel().setOnMouseClicked(event -> {
             alertController.createExitAlert(() -> {
@@ -102,5 +112,9 @@ public final class GameController extends AbstractController {
                 initialController.createScene();
             });
         });
+    }
+
+    public GameFieldCanvas getGameFieldCanvas() {
+        return gameFieldCanvas;
     }
 }

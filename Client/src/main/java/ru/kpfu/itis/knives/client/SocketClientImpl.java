@@ -1,11 +1,9 @@
 package ru.kpfu.itis.knives.client;
 
 import ru.kpfu.itis.knives.controllers.AbstractController;
+import ru.kpfu.itis.knives.controllers.AlertController;
 import ru.kpfu.itis.knives.controllers.StartingController;
-import ru.kpfu.itis.knives.entities.GameControllerInterface;
-import ru.kpfu.itis.knives.entities.GameSession;
-import ru.kpfu.itis.knives.entities.Player;
-import ru.kpfu.itis.knives.entities.Point;
+import ru.kpfu.itis.knives.entities.*;
 import ru.kpfu.itis.knives.generators.MessageGenerator;
 import ru.kpfu.itis.knives.generators.MessageGeneratorImpl;
 import ru.kpfu.itis.knives.listeners.ClientMessageListener;
@@ -21,9 +19,9 @@ public class SocketClientImpl implements SocketClient {
     private ClientMessagesHandler connection;
     private GameControllerInterface regionsController;
     private MessageGenerator messageGenerator;
+    private GameSession session;
     private Player player;
     private AbstractController controller;
-    private GameSession session;
 
     private List<ClientMessageListener> listeners = new ArrayList<>();
 
@@ -71,7 +69,12 @@ public class SocketClientImpl implements SocketClient {
 
     @Override
     public void move(Point from, Point to) {
-
+        Player currentPlayer = regionsController.getCurrentPlayer();
+        Player opponentPlayer = regionsController.getOpponentPlayer();
+        if(regionsController.checkPointBelongsToPlayerRegion(from, currentPlayer) &&
+        regionsController.checkPointBelongsToPlayerRegion(to, opponentPlayer)) {
+            regionsController.divideOpponentRegion(from, to);
+        }
     }
 
     @Override
@@ -86,27 +89,32 @@ public class SocketClientImpl implements SocketClient {
 
     @Override
     public void setMove(int moveID) {
-
+        for(Player player : session.getPlayers()) {
+            if (player.getId() == moveID) {
+                regionsController.setNewCurrentPlayer(player);
+                break;
+            }
+        }
     }
 
     @Override
     public void setNotice(String information) {
-
+        AlertController alert = new AlertController();
+        alert.createErrorAlert("Something wrong:", information);
     }
 
     @Override
     public void choiceRegion(Point point) {
-
+        regionsController.recalculateRegions(point);
     }
 
     @Override
     public int getID() {
-        return 0;
+        return player.getId();
     }
 
     @Override
     public void left(int leaverID) {
-
     }
 
     @Override
