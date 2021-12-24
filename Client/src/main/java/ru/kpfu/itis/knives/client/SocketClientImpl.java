@@ -1,11 +1,10 @@
 package ru.kpfu.itis.knives.client;
 
-import ru.kpfu.itis.knives.controllers.AbstractController;
-import ru.kpfu.itis.knives.controllers.AlertController;
-import ru.kpfu.itis.knives.controllers.StartingController;
+import ru.kpfu.itis.knives.controllers.*;
 import ru.kpfu.itis.knives.entities.*;
 import ru.kpfu.itis.knives.generators.MessageGenerator;
 import ru.kpfu.itis.knives.generators.MessageGeneratorImpl;
+import ru.kpfu.itis.knives.helpers.KnifeState;
 import ru.kpfu.itis.knives.listeners.ClientMessageListener;
 import ru.kpfu.itis.knives.protocol.Message;
 
@@ -79,12 +78,15 @@ public class SocketClientImpl implements SocketClient {
 
     @Override
     public void end(int winnerID) {
-
+        AbstractController gameOverController = new GameOverController(controller.getStage(), controller.getSocketClient(), getPlayer().getId() == winnerID);
+        gameOverController.createScene();
     }
 
     @Override
     public void paintAngle(float angle) {
-
+        GameController gameController = (GameController) controller;
+        KnifeState state = angle >= 30 ? KnifeState.success : KnifeState.failure;
+        gameController.getKnifeLocationCanvas().drawKnifeWithIncline(angle, state);
     }
 
     @Override
