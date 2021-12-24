@@ -1,7 +1,6 @@
 package ru.kpfu.itis.knives.game;
 
 import ru.kpfu.itis.knives.entities.GameSession;
-import ru.kpfu.itis.knives.entities.Player;
 import ru.kpfu.itis.knives.exceptions.ConnectionException;
 import ru.kpfu.itis.knives.exceptions.ServerException;
 import ru.kpfu.itis.knives.listeners.MessageGenerator;
@@ -12,7 +11,6 @@ import ru.kpfu.itis.knives.server.Connection;
 import ru.kpfu.itis.knives.server.ConnectionSession;
 import ru.kpfu.itis.knives.server.ServerInterface;
 
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +19,7 @@ import static ru.kpfu.itis.knives.protocol.Protocol.GAME_END;
 import static ru.kpfu.itis.knives.protocol.Protocol.GAME_START;
 import static ru.kpfu.itis.knives.server.constants.SessionStates.*;
 
-public class ServerGameSession extends GameSession implements Runnable {
+public class ServerGameSession extends GameSession{
     private int currentState;
     private ServerInterface server;
     private List<MessageListener> listeners;
@@ -53,19 +51,19 @@ public class ServerGameSession extends GameSession implements Runnable {
             listener.setMessageGenerator(messageGenerator);
         }
     }
-
-    @Override
-    public void run() {
-        for (Connection connection : connections) {
-            ConnectionSession connectionSession = new ConnectionSession(connection);
-            try {
-                connectionSession.start();
-            } catch (ConnectionException ex) {
-                removeConnection(connection);
-                server.removeSession(this);
-            }
-        }
-    }
+//
+//    @Override
+//    public void run() {
+//        for (Connection connection : connections) {
+//            ConnectionSession connectionSession = new ConnectionSession(connection);
+//            try {
+//                connectionSession.start();
+//            } catch (ConnectionException ex) {
+//                removeConnection(connection);
+//                server.removeSession(this);
+//            }
+//        }
+//    }
 
     public void acceptMessage(Connection connectionFrom, Message message) {
         for (MessageListener listener : listeners) {
