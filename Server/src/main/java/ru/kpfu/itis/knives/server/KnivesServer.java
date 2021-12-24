@@ -5,29 +5,31 @@ import ru.kpfu.itis.knives.game.ServerGameSession;
 import ru.kpfu.itis.knives.listeners.MessageListener;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 import static ru.kpfu.itis.knives.Constants.MAX_PLAYER_NUM;
-import static ru.kpfu.itis.knives.protocol.Protocol.PORT;
 
 public class KnivesServer implements ServerInterface {
     private ServerSocket serverSocket;
+    private final int port;
 
     private List<MessageListener> listeners;
     private List<ServerGameSession> sessions;
     private List<Socket> clients;
 
-    public KnivesServer() {
+    public KnivesServer(int port) {
+        this.port = port;
         initServer();
     }
 
     @Override
     public void initServer() throws ServerException {
         try {
-            this.serverSocket = new ServerSocket(PORT);
+            this.serverSocket = new ServerSocket(port);
         } catch (IOException e) {
             throw new ServerException(e);
         }
@@ -53,6 +55,7 @@ public class KnivesServer implements ServerInterface {
                     throw new ServerException(e);
                 }
             }
+            System.out.println("2 clients connected");
             ServerGameSession gameSession = new ServerGameSession(this, clients.get(0), clients.get(1));
             gameSession.initListeners(listeners);
             sessions.add(gameSession);

@@ -35,6 +35,7 @@ public class StartMoveListener extends AbstractMessageListener {
             String errorText = isAnyError(point1, point2);
             if(errorText != null){
                 try{
+                    System.out.println("Move accepted. WRONG MOVE: " + errorText);
                     Message errorAnswer = messageGenerator.createErrorMessage(ERROR_WRONG_MOVE, errorText); //41
                     session.sendMessage(connectionFrom, errorAnswer);
                 } catch (MessageGenerationException | ServerException e) {
@@ -54,6 +55,7 @@ public class StartMoveListener extends AbstractMessageListener {
                     floats[3] = x2;
                     floats[4] = y2;
                     Message answer = messageGenerator.createMessage(MOVE_RESULT_GOOD, floats, ints); //13
+                    System.out.println("Move accepted; angle = " + agile + "; \n (" + x1 + ", " + y1 +")  (" + x2 + ", " + y2 + ");");
                     session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
@@ -62,8 +64,10 @@ public class StartMoveListener extends AbstractMessageListener {
             else{
                 try{
                     ints[0] = gameController.getOpponentPlayer().getId();
+                    gameController.setNewCurrentPlayer(gameController.getOpponentPlayer());
                     float[] floats = new float[1];
                     floats[0] = agile;
+                    System.out.println("Move accepted: angle = " + agile);
                     Message answer = messageGenerator.createMessage(MOVE_RESULT_BAD, floats, ints); //14
                     session.sendBroadcastMessage(answer);
                 } catch (MessageGenerationException | ServerException e) {
@@ -73,7 +77,7 @@ public class StartMoveListener extends AbstractMessageListener {
         }
         else{
             try{
-                Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "Invalid message format"); //40
+                Message errorAnswer = messageGenerator.createErrorMessage(ERROR_BAD_MESSAGE, "You can't perform this action"); //40
                 session.sendMessage(connectionFrom, errorAnswer);
             } catch (MessageGenerationException | ServerException e) {
                 e.printStackTrace();

@@ -13,6 +13,7 @@ public class ProtocolOutputStream extends OutputStream {
     }
 
     public void writeMessage(Message message) throws IOException {
+        System.out.println("TRYING TO SEND INSIDE OF OUTPUT STReAM");
         byte type = message.getType();
         byte[] data = message.getData();
         int length = message.getDataLength();

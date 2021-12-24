@@ -20,6 +20,7 @@ public class ProtocolInputStream extends InputStream {
         if ((type = inputStream.read()) == -1) {
             return null;
         }
+        System.out.println("stream byte = " + type);
         length = (inputStream.read() << 8) + inputStream.read();
         buffer = new byte[length];
         inputStream.read(buffer);

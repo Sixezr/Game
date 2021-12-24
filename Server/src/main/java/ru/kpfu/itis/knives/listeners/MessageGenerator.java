@@ -91,8 +91,9 @@ public class MessageGenerator implements MessageGeneratorInterface {
             default:
                 throw new MessageGenerationException();
         }
+        System.out.println("MESSAGE GENERATED : " + newMessage);
         return newMessage;
-    }
+     }
 
     /**
      * No such messages supported by our protocol, to be honest..........

@@ -42,9 +42,7 @@ public class TerritoryChoiceListener extends AbstractMessageListener {
             if(gameController.checkPlayerRegionIsIsland(gameController.getCurrentPlayer()) ||
                     !gameController.isPlayerHasEnoughTerritory(gameController.getCurrentPlayer())){
                 try{
-                    ints[0] = gameController.getOpponentPlayer().getId();
-                    Message answer = messageGenerator.createMessage(GAME_END, ints); //12
-                    session.sendBroadcastMessage(answer);
+                    session.endGame();
                 } catch (MessageGenerationException | ServerException e) {
                     e.printStackTrace();
                 }
@@ -52,6 +50,7 @@ public class TerritoryChoiceListener extends AbstractMessageListener {
             else{
                 try{
                     ints[0] = gameController.getOpponentPlayer().getId();
+                    gameController.setNewCurrentPlayer(gameController.getOpponentPlayer());
                     float[] floats = new float[2];
                     floats[0] = x;
                     floats[1] = y;

@@ -35,6 +35,8 @@ public class Connection implements Runnable {
         Message message;
         try {
             while ((message = inputStream.readMessage()) != null) {
+                System.out.println("\n GOT NEW MESSAGE: ");
+                System.out.println(message.toString() + "\n");
                 session.acceptMessage(this, message);
             }
         } catch (IOException e) {
@@ -43,13 +45,18 @@ public class Connection implements Runnable {
     }
 
     public void sendMessage(Message message) throws ConnectionException {
+        System.out.println("SENDING: ");
+//        sender.sendMessageToClient(message);
         Thread newThread = new Thread( () -> {
             try {
                 outputStream.writeMessage(message);
+                outputStream.flush();
+                System.out.println("MESSAGE WAS SEnT!!!!!!!!!!!!!");
             } catch (IOException e) {
                 throw new ConnectionException(e);
             }
         });
+        newThread.start();
     }
 
     public void setPlayer(Player player) {

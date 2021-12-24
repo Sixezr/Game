@@ -14,6 +14,7 @@ import ru.kpfu.itis.knives.server.ServerInterface;
 
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static ru.kpfu.itis.knives.protocol.Protocol.GAME_END;
@@ -57,7 +58,12 @@ public class ServerGameSession extends GameSession implements Runnable {
     public void run() {
         for (Connection connection : connections) {
             ConnectionSession connectionSession = new ConnectionSession(connection);
-            connectionSession.start();
+            try {
+                connectionSession.start();
+            } catch (ConnectionException ex) {
+                removeConnection(connection);
+                server.removeSession(this);
+            }
         }
     }
 
@@ -80,8 +86,10 @@ public class ServerGameSession extends GameSession implements Runnable {
             for (Connection connection : connections) {
                 int[] ids = new int[3];
                 ids[0] = connection.getPlayer().getId();
-                ids[1] = gameController.getOpponentPlayer().getId();
+                ids[1] = gameController.getAnotherPlayer(ids[0]).getId();
                 ids[2] = gameController.getCurrentPlayer().getId();
+                System.out.println(Arrays.toString(ids));
+                System.out.println("\n SENDING START GAME MESSAGES");
                 connection.sendMessage(messageGenerator.createMessage(GAME_START, ids));
             }
         } else {

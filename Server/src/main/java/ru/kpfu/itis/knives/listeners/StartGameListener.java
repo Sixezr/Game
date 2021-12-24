@@ -26,6 +26,7 @@ public class StartGameListener extends AbstractMessageListener {
         }
         if((message.getData() == null) || (message.getData().length == 0)){
             try{
+                System.out.println("1 client accepted");
                 Message answer = messageGenerator.createEmptyMessage(SERVER_READY); //10
                 session.sendMessage(connectionFrom, answer);
                 connectionHashSet.add(connectionFrom);

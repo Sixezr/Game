@@ -2,6 +2,7 @@ package ru.kpfu.itis.knives.game;
 
 import ru.kpfu.itis.knives.entities.*;
 
+import java.util.List;
 import java.util.Random;
 
 import static ru.kpfu.itis.knives.Constants.*;
@@ -19,6 +20,19 @@ public class ServerGameController extends AbstractGameController implements Serv
     @Override
     public int getRandomPlayerId() {
         return Math.abs(new Random().nextInt(MAX_ID));
+    }
+
+    @Override
+    public Player getAnotherPlayer(int id) {
+        List<Player> players = session.getPlayers();
+        for (Player player : session.getPlayers()) {
+            if (player.getId() == id) {
+                players.remove(player);
+            }
+        }
+        System.out.println("PLAYERS: " + session.getPlayers().get(0).getId());
+        System.out.println(session.getPlayers().get(1).getId());
+        return players.get(0);
     }
 
     @Override
